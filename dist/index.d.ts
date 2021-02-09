@@ -11,5 +11,6 @@ import { useUpdateEffect } from "./hooks/useUpdateEffect";
 import { useWarnIfUnsavedChanges } from "./hooks/useWarnIfUnsavedChanges";
 import { FormView, IFormViewProps } from "./views/FormView";
 import { IFormProps } from "./interfaces/IFormProps";
-export type { IFormProps, IFormViewProps, FieldOption, FieldValidator, AlertState, BreakPoint };
+import { ISubFormProps } from "./interfaces/ISubFormProps";
+export type { IFormProps, ISubFormProps, IFormViewProps, FieldOption, FieldValidator, AlertState, BreakPoint };
 export { AlertDialog, AlertDialogButton, AutoField, AutoFreeField, CheckField, CustomTextField, RadioField, SwitchField, useUpdateEffect, useWarnIfUnsavedChanges, FormView };
