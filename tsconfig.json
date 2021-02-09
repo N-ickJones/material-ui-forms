@@ -12,7 +12,7 @@
       "isolatedModules": true,
       "declaration": true,
       "outDir": "./dist",
-      "jsx": "preserve",
+      "jsx": "react",
       
     },
     "include": [
