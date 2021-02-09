@@ -1,15 +1,38 @@
 {
-  "name": "material-ui-hooks",
-  "version": "1.0.0",
+  "_from": "material-ui-hooks",
+  "_id": "material-ui-hooks@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-gcQcNyzuPK8YZAjuDFFnjzOFMpxpU159xTy0TsWYpzTpkvMjLh825ETbFKpo8ETiLSY8bP8UGND4BDe/7TLUGQ==",
+  "_location": "/material-ui-hooks",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "material-ui-hooks",
+    "name": "material-ui-hooks",
+    "escapedName": "material-ui-hooks",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/material-ui-hooks/-/material-ui-hooks-1.0.0.tgz",
+  "_shasum": "38e1ad08776289aed8046560528838bdec4b59ca",
+  "_spec": "material-ui-hooks",
+  "_where": "C:\\Users\\armyj\\Documents\\GitHub\\BridgeHospice\\client",
+  "author": {
+    "name": "Nicholas Jones"
+  },
+  "bugs": {
+    "url": "https://github.com/N-ickJones/material-ui-hooks/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "A library that makes using material ui components easier and quick to use. Contains common use cases.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/N-ickJones/material-ui-hooks.git"
-  },
+  "homepage": "https://github.com/N-ickJones/material-ui-hooks#readme",
   "keywords": [
     "material-ui",
     "react",
@@ -17,10 +40,16 @@
     "forms",
     "input"
   ],
-  "author": "Nicholas Jones",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/N-ickJones/material-ui-hooks/issues"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "name": "material-ui-hooks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N-ickJones/material-ui-hooks.git"
   },
-  "homepage": "https://github.com/N-ickJones/material-ui-hooks#readme"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
 }
