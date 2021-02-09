@@ -1,11 +1,33 @@
-import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
-import { Autocomplete, createFilterOptions } from "@material-ui/lab";
-import { useUpdateEffect } from "..";
-export function AutoFreeField(props) {
-    const [value, setValue] = useState(props.value);
-    const [error, setError] = useState("");
-    useUpdateEffect(() => {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AutoFreeField = void 0;
+const react_1 = __importStar(require("react"));
+const core_1 = require("@material-ui/core");
+const lab_1 = require("@material-ui/lab");
+const useUpdateEffect_1 = require("../hooks/useUpdateEffect");
+function AutoFreeField(props) {
+    const [value, setValue] = react_1.useState(props.value);
+    const [error, setError] = react_1.useState("");
+    useUpdateEffect_1.useUpdateEffect(() => {
         validate();
     }, [value]);
     function validate() {
@@ -42,8 +64,10 @@ export function AutoFreeField(props) {
                 break;
         }
     }
-    return (React.createElement("div", null,
-        React.createElement(Autocomplete, { placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: () => props.locked || false, renderInput: (params) => (React.createElement(TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error }))), filterOptions: createFilterOptions({
+    return (react_1.default.createElement("div", null,
+        react_1.default.createElement(lab_1.Autocomplete, { placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(core_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error }))), filterOptions: lab_1.createFilterOptions({
                 ignoreCase: true
             }) })));
 }
+exports.AutoFreeField = AutoFreeField;
+//# sourceMappingURL=AutoFreeField.js.map

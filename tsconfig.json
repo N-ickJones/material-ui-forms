@@ -1,24 +1,31 @@
 {
     "compilerOptions": {
-      "target": "es2015",
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
+      "sourceMap": true,
+      "module": "CommonJs",
+      "target": "es2017",
       "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "declaration": true,
       "outDir": "./dist",
       "jsx": "react",
-      
+      "skipLibCheck": true,
+      "declaration": true,
+      "noEmit": false,
+      "allowSyntheticDefaultImports": true,
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowJs": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
     },
-    "include": [
-      "src/**/*"
-    ],
+    "include": ["src"],
     "exclude": [
-      "node_modules"
+      "node_modules",
+      "app",
+      "examples",
     ]
   }

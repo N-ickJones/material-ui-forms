@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { FieldOption, FieldValidator } from "..";
+import { FieldOption, FieldValidator } from "../types/types";
 export interface ICustomTextFieldProps {
     name: string;
     value: string | undefined;

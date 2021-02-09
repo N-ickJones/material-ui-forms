@@ -20,6 +20,7 @@ export const useWarnIfUnsavedChanges = (unsavedChanges: boolean) => {
         e.returnValue = message;
         return message;
       }
+      return "";
     };
 
     window.addEventListener('beforeunload', beforeUnload);

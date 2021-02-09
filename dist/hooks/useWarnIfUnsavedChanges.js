@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
-export const useWarnIfUnsavedChanges = (unsavedChanges) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useWarnIfUnsavedChanges = void 0;
+const react_1 = require("react");
+exports.useWarnIfUnsavedChanges = (unsavedChanges) => {
     const message = 'You currently have unsaved changes. Are you sure you want to leave before saving?';
-    useEffect(() => {
+    react_1.useEffect(() => {
         /*
         const routeChangeStart = (url: string) => {
           if (Router.asPath !== url && unsavedChanges && !confirm(message)) {
@@ -17,6 +20,7 @@ export const useWarnIfUnsavedChanges = (unsavedChanges) => {
                 e.returnValue = message;
                 return message;
             }
+            return "";
         };
         window.addEventListener('beforeunload', beforeUnload);
         //Router.events.on('routeChangeStart', routeChangeStart);
@@ -26,3 +30,4 @@ export const useWarnIfUnsavedChanges = (unsavedChanges) => {
         };
     }, [unsavedChanges]);
 };
+//# sourceMappingURL=useWarnIfUnsavedChanges.js.map

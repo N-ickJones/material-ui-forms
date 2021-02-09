@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { IFormProps } from '..';
+import { IFormProps } from '../interfaces/IFormProps';
 export interface IFormViewProps<T> {
     title: string;
     maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;

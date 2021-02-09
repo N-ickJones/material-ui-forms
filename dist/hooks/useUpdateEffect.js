@@ -1,7 +1,10 @@
-import { useRef, useEffect } from "react";
-export function useUpdateEffect(effect, dependencies = []) {
-    const isInitialMount = useRef(true);
-    useEffect(() => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useUpdateEffect = void 0;
+const react_1 = require("react");
+function useUpdateEffect(effect, dependencies = []) {
+    const isInitialMount = react_1.useRef(true);
+    react_1.useEffect(() => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         }
@@ -10,3 +13,5 @@ export function useUpdateEffect(effect, dependencies = []) {
         }
     }, dependencies);
 }
+exports.useUpdateEffect = useUpdateEffect;
+//# sourceMappingURL=useUpdateEffect.js.map

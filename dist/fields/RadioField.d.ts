@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { FieldOption } from "..";
+import { FieldOption } from "../types/types";
 export interface IRadioFieldProps {
     name: string;
     value: string | undefined;

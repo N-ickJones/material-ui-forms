@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState} from "react";
-import { MenuItem, TextField, Checkbox, FormControlLabel, FormControl,  FormLabel, Radio, RadioGroup, Switch } from "@material-ui/core";
-import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteInputChangeReason, createFilterOptions } from "@material-ui/lab";
-import { FieldOption, FieldValidator, useUpdateEffect } from "..";
+import { MenuItem, TextField } from "@material-ui/core";
+import { FieldOption, FieldValidator } from "../types/types";
+import { useUpdateEffect } from "../hooks/useUpdateEffect";
 
 
 export interface ICustomTextFieldProps {

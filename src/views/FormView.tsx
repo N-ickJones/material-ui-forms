@@ -3,8 +3,12 @@ import { Backdrop, Button, CircularProgress, Container, createStyles, Divider, G
 import { useReactToPrint } from 'react-to-print';
 import { Lock, LockOpen } from '@material-ui/icons';
 import { Alert, AlertProps } from '@material-ui/lab';
-import { AlertDialog, AlertDialogButton, AlertState, IFormProps, useWarnIfUnsavedChanges } from '..';
 import { sleep } from '../functions/functions';
+import { IFormProps } from '../interfaces/IFormProps';
+import { AlertState } from '../types/types';
+import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
+import { AlertDialog } from '../fields/AlertDialog';
+import { AlertDialogButton } from '../fields/AlertDialogButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +83,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
     setPrintMode(false);
   }
 
+  //Remove e
   const onChange = (e: ChangeEvent<HTMLInputElement | {}>, index: number, property: string, value: string | boolean) => {
     props.forms[index] = { ...props.forms[index], [property]: value }
     !pendingChanges && setPendingChanges(true);

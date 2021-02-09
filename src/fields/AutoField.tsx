@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState} from "react";
 import { TextField } from "@material-ui/core";
-import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason,  createFilterOptions } from "@material-ui/lab";
+import { Autocomplete, AutocompleteChangeReason,  createFilterOptions } from "@material-ui/lab";
+import { FieldOption } from "../types/types";
 
 export interface IAutoFieldProps {
     name: string;
@@ -22,7 +23,7 @@ export function AutoField(props: IAutoFieldProps) {
         event: React.ChangeEvent<{}>,
         value: FieldOption | null,
         reason: AutocompleteChangeReason,
-        details?: AutocompleteChangeDetails<FieldOption | null>
+        //details?: AutocompleteChangeDetails<FieldOption | null>
     ) => {
         if (props.locked) return;
         switch(reason) {
