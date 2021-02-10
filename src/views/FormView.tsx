@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Backdrop, Button, CircularProgress, Container, createStyles, Divider, Grid, makeStyles, Paper, Snackbar, SnackbarOrigin, Theme, Typography } from '@material-ui/core';
 import { useReactToPrint } from 'react-to-print';
 import { Lock, LockOpen } from '@material-ui/icons';
@@ -84,8 +84,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
     setPrintMode(false);
   }
 
-  //Remove e
-  const onChange = (e: ChangeEvent<HTMLInputElement | {}>, index: number, property: string, value: string | boolean) => {
+  const onChange = (index: number, property: string, value: string | boolean) => { //e: ChangeEvent<HTMLInputElement | {}>, 
     props.forms[index] = { ...props.forms[index], [property]: value }
     !pendingChanges && setPendingChanges(true);
   }

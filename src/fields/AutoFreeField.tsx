@@ -45,7 +45,6 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
     //Without Initial Load Check the value will be set to blank;
     const [initialLoad, setInitLoad] = useState(false);
     function onInputChange(event: React.ChangeEvent<{}>, inputValue: string, reason: AutocompleteInputChangeReason) {
-        console.log(reason)
         if (props.locked) return;
         switch (reason) {
             case "input":

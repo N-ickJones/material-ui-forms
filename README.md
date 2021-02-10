@@ -9,3 +9,4 @@
     Need to decouple next router from package
     Need to add documentation to modules and readme
     Remove unused event in FormView then modify tsconfig.json
+    Fully Test the print feature
