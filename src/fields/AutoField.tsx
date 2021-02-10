@@ -55,27 +55,25 @@ export function AutoField(props: IAutoFieldProps) {
     }
     
     return (
-        <div>
-            <Autocomplete
-                options={props.options ? props.options : []}
-                getOptionLabel={(option) => option.label}
-                fullWidth
-                getOptionSelected={handleOptionSelected}
-                onChange={onChange}
-                value={choiceValue || { label: "", value: "" }}
-                getOptionDisabled={() => props.locked || false}
-                renderInput={(params) => (
-                    <TextField {...params} 
-                        label={props.label}
-                        variant={props.variant || "outlined"}
-                        inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}
-                        required={props.required}
-                    />
-                )}
-                filterOptions={createFilterOptions({
-                    ignoreCase: true
-                })}
-            />
-        </div>
+        <Autocomplete
+            options={props.options ? props.options : []}
+            getOptionLabel={(option) => option.label}
+            fullWidth
+            getOptionSelected={handleOptionSelected}
+            onChange={onChange}
+            value={choiceValue || { label: "", value: "" }}
+            getOptionDisabled={() => props.locked || false}
+            renderInput={(params) => (
+                <TextField {...params} 
+                    label={props.label}
+                    variant={props.variant || "outlined"}
+                    inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}
+                    required={props.required}
+                />
+            )}
+            filterOptions={createFilterOptions({
+                ignoreCase: true
+            })}
+        />
     )
 }
