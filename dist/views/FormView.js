@@ -78,7 +78,6 @@ function FormView(props) {
         await functions_1.sleep(5000);
         setPrintMode(false);
     };
-    //Remove e
     const onChange = (e, index, property, value) => {
         props.forms[index] = Object.assign(Object.assign({}, props.forms[index]), { [property]: value });
         !pendingChanges && setPendingChanges(true);

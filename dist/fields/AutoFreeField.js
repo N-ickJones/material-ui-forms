@@ -49,7 +49,6 @@ function AutoFreeField(props) {
     //Without Initial Load Check the value will be set to blank;
     const [initialLoad, setInitLoad] = react_1.useState(false);
     function onInputChange(event, inputValue, reason) {
-        console.log(reason);
         if (props.locked)
             return;
         switch (reason) {
