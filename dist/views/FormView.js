@@ -73,21 +73,29 @@ function FormView(props) {
         content: () => printComponentRef.current || null,
     });
     const handlePrint = async () => {
+        if (locked)
+            return;
         setPrintMode(true);
         displayPrint && displayPrint();
         await functions_1.sleep(5000);
         setPrintMode(false);
     };
     const onChange = (e, index, property, value) => {
+        if (locked)
+            return;
         props.forms[index] = Object.assign(Object.assign({}, props.forms[index]), { [property]: value });
         !pendingChanges && setPendingChanges(true);
     };
     const onChangeList = async (index, listProperty, listIndex, property, value) => {
+        if (locked)
+            return;
         // @ts-ignore
         props.forms[index][listProperty][listIndex] = Object.assign(Object.assign({}, props.forms[index][listProperty][listIndex]), { [property]: value });
         !pendingChanges && setPendingChanges(true);
     };
     const handleAddList = async (index, listProperty) => {
+        if (locked)
+            return;
         // @ts-ignore
         let listIndex = props.forms[index][listProperty].length;
         // @ts-ignore
@@ -95,6 +103,8 @@ function FormView(props) {
         await handleChanges();
     };
     const handleDeleteList = async (index, listProperty, listIndex) => {
+        if (locked)
+            return;
         // @ts-ignore
         props.forms[index][listProperty] = props.forms[index][listProperty].filter((_, i) => i !== listIndex);
         await handleChanges();
@@ -104,6 +114,8 @@ function FormView(props) {
         setLocked(!locked);
     };
     const handleChanges = async () => {
+        if (locked)
+            return;
         if (props.handleSaveChanges && await props.handleSaveChanges()) {
             setAlert(Object.assign(Object.assign(Object.assign({}, alert), success), { message: "Successfully saved your changes locally." }));
             setPendingChanges(false);
@@ -138,10 +150,14 @@ function FormView(props) {
         setLoadLocal(false);
     };
     const handleLocalChanges = async () => {
+        if (locked)
+            return;
         localStorage.setItem(localStorageKey, JSON.stringify([...props.forms]));
         handleChanges();
     };
     const handleSubmit = async () => {
+        if (locked)
+            return;
         if (props.handleSubmit) {
             if (!await formValid()) {
                 setAlert(Object.assign(Object.assign(Object.assign({}, alert), error), { message: "A validation error was detected in the form" }));
@@ -183,6 +199,8 @@ function FormView(props) {
         return true;
     };
     const handleDelete = async (index) => {
+        if (locked)
+            return;
         if (props.handleDelete) {
             if (await props.handleDelete(index)) {
                 clearLocalStorage();
