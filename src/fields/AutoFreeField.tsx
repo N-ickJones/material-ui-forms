@@ -42,7 +42,10 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
         return null;
     }
 
+    //Without Initial Load Check the value will be set to blank;
+    const [initialLoad, setInitLoad] = useState(false);
     function onInputChange(event: React.ChangeEvent<{}>, inputValue: string, reason: AutocompleteInputChangeReason) {
+      console.log(reason)
         if (props.locked) return;
         switch (reason) {
             case "input":
@@ -50,23 +53,30 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
                 setValue(inputValue);
                 break;
             case "reset":
-                props.onChange(event, props.name, inputValue);
-                setValue(inputValue);
+                if (initialLoad) {
+                  props.onChange(event, props.name, inputValue);
+                  setValue(inputValue);
+                }
+                else {
+                  setInitLoad(true);
+                }
                 break;
             case "clear":
                 props.onChange(event, props.name, "");
-                setValue("");
+                setValue(inputValue);
                 break;
         }
     }
 
     return (
         <div>
+          {props.value || "test"} <br />
+          {value || "test"}
             <Autocomplete
+                fullWidth
                 placeholder={props.placeholder}
                 options={props.options ? props.options : []}
                 getOptionLabel={(option) => option.label}
-                fullWidth
                 freeSolo={true}
                 onInputChange={onInputChange}
                 inputValue={value || ""}
