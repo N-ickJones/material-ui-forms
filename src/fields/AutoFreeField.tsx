@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete, AutocompleteInputChangeReason, createFilterOptions } from "@material-ui/lab";
 import { FieldOption, FieldValidator } from "../types/types";
@@ -25,18 +25,18 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
         validate()
     }, [value])
 
-    function validate(){
+    function validate() {
         const error = runValidation();
-        if (error) 
+        if (error)
             setError(error);
-        else if (error !== "") 
+        else if (error !== "")
             setError("");
     }
 
     function runValidation(): string | null {
         if (!props.validators) return null;
-        for(let i = 0; i < props.validators.length; i++) {
-            if (!props.validators[i].pattern.test(value || '')) 
+        for (let i = 0; i < props.validators.length; i++) {
+            if (!props.validators[i].pattern.test(value || ''))
                 return props.validators[i].message;
         }
         return null;
@@ -45,7 +45,7 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
     //Without Initial Load Check the value will be set to blank;
     const [initialLoad, setInitLoad] = useState(false);
     function onInputChange(event: React.ChangeEvent<{}>, inputValue: string, reason: AutocompleteInputChangeReason) {
-      console.log(reason)
+        console.log(reason)
         if (props.locked) return;
         switch (reason) {
             case "input":
@@ -54,11 +54,11 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
                 break;
             case "reset":
                 if (initialLoad) {
-                  props.onChange(event, props.name, inputValue);
-                  setValue(inputValue);
+                    props.onChange(event, props.name, inputValue);
+                    setValue(inputValue);
                 }
                 else {
-                  setInitLoad(true);
+                    setInitLoad(true);
                 }
                 break;
             case "clear":
@@ -69,32 +69,28 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
     }
 
     return (
-        <div>
-          {props.value || "test"} <br />
-          {value || "test"}
-            <Autocomplete
-                fullWidth
-                placeholder={props.placeholder}
-                options={props.options ? props.options : []}
-                getOptionLabel={(option) => option.label}
-                freeSolo={true}
-                onInputChange={onInputChange}
-                inputValue={value || ""}
-                getOptionDisabled={() => props.locked || false}
-                renderInput={(params) => (
-                    <TextField {...params} 
-                        label={props.label}
-                        variant={props.variant || "outlined"}
-                        inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}
-                        required={props.required}
-                        helperText={error}
-                        error={!!error}
-                    />
-                )}
-                filterOptions={createFilterOptions({
-                    ignoreCase: true
-                })}
-            />
-        </div>
+        <Autocomplete
+            fullWidth
+            placeholder={props.placeholder}
+            options={props.options ? props.options : []}
+            getOptionLabel={(option) => option.label}
+            freeSolo={true}
+            onInputChange={onInputChange}
+            inputValue={value || ""}
+            getOptionDisabled={() => props.locked || false}
+            renderInput={(params) => (
+                <TextField {...params}
+                    label={props.label}
+                    variant={props.variant || "outlined"}
+                    inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}
+                    required={props.required}
+                    helperText={error}
+                    error={!!error}
+                />
+            )}
+            filterOptions={createFilterOptions({
+                ignoreCase: true
+            })}
+        />
     )
 }
