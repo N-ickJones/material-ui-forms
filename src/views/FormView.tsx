@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface IFormViewProps<T> {
   title: string;
+  defaultLocked?: boolean;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   maxNodes: number;
   FormElement: (props: IFormProps<T>) => JSX.Element;
@@ -38,7 +39,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
   const localStorageKey = props.title.replace(' ' , '');
   const classes = useStyles();
   const printComponentRef = useRef();
-  const [locked, setLocked] = useState(!true);
+  const [locked, setLocked] = useState(props.defaultLocked === undefined ? true : props.defaultLocked);
   const [printMode, setPrintMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState(false);
   const [loadLocal, setLoadLocal] = useState(false);

@@ -21,7 +21,7 @@ export function AutoField(props: IAutoFieldProps) {
     
     const onChange = (
         event: React.ChangeEvent<{}>,
-        value: FieldOption | null,
+        changeValue: FieldOption | null,
         reason: AutocompleteChangeReason,
         //details?: AutocompleteChangeDetails<FieldOption | null>
     ) => {
@@ -31,8 +31,8 @@ export function AutoField(props: IAutoFieldProps) {
                 console.log('Autocomplete create-option not implemented')
                 break;
             case "select-option":
-                props.onChange(event, props.name, value?.value || "");
-                value && setChoiceValue(value)
+                props.onChange(event, props.name, changeValue?.value || "");
+                changeValue && setChoiceValue(changeValue)
                 break;
             case "remove-option":
                 console.log('Autocomplete remove-option not implemented')

@@ -42,20 +42,20 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
         return null;
     }
 
-    function onInputChange(event: React.ChangeEvent<{}>, value: string, reason: AutocompleteInputChangeReason) {
+    function onInputChange(event: React.ChangeEvent<{}>, inputValue: string, reason: AutocompleteInputChangeReason) {
         if (props.locked) return;
         switch (reason) {
             case "input":
-                props.onChange(event, props.name, value);
-                setValue(value);
+                props.onChange(event, props.name, inputValue);
+                setValue(inputValue);
                 break;
             case "reset":
-                props.onChange(event, props.name, value);
-                setValue(value);
+                props.onChange(event, props.name, inputValue);
+                setValue(inputValue);
                 break;
             case "clear":
                 props.onChange(event, props.name, "");
-                setValue(value);
+                setValue("");
                 break;
         }
     }

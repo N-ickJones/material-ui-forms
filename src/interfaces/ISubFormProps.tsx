@@ -5,6 +5,6 @@ export interface ISubFormProps<T> {
     printMode?: boolean;
     listIndex: number;
     item: T;
-    handleChangeList: (listProperty: string, listIndex: number) => (e: ChangeEvent<HTMLInputElement>, property: string, value: string | boolean) => Promise<void>;
+    handleChangeList: (listProperty: string, listIndex: number) => (e: ChangeEvent<HTMLInputElement | {}>, property: string, value: string | boolean) => Promise<void>;
     handleDeleteList: (listProperty: string, listIndex: number, id?: number) => () => Promise<void>;
   }
