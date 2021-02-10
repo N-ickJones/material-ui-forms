@@ -39,7 +39,7 @@ function FormView(props) {
     const localStorageKey = props.title.replace(' ', '');
     const classes = useStyles();
     const printComponentRef = react_1.useRef();
-    const [locked, setLocked] = react_1.useState(!true);
+    const [locked, setLocked] = react_1.useState(props.defaultLocked === undefined ? true : props.defaultLocked);
     const [printMode, setPrintMode] = react_1.useState(false);
     const [pendingChanges, setPendingChanges] = react_1.useState(false);
     const [loadLocal, setLoadLocal] = react_1.useState(false);

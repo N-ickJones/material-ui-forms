@@ -11,6 +11,10 @@ const DialogActions_1 = __importDefault(require("@material-ui/core/DialogActions
 const DialogContent_1 = __importDefault(require("@material-ui/core/DialogContent"));
 const DialogContentText_1 = __importDefault(require("@material-ui/core/DialogContentText"));
 const DialogTitle_1 = __importDefault(require("@material-ui/core/DialogTitle"));
+/**
+ * Creates an Alert dialog prompt with back/foward options
+ * @props IAlertDialogProps
+ */
 function AlertDialog(props) {
     function handleClose(submit) {
         props.onSubmit(submit);
@@ -18,12 +22,12 @@ function AlertDialog(props) {
     ;
     return (react_1.default.createElement("div", { className: props.className },
         react_1.default.createElement(Dialog_1.default, { open: true, onClose: () => handleClose(!props.backOnOutsideClick || false), "aria-labelledby": `alert-${props.id}-title`, "aria-describedby": `alert-${props.id}-description` },
-            react_1.default.createElement(DialogTitle_1.default, { id: `alert-${props.id}-title` }, props === null || props === void 0 ? void 0 : props.title),
+            react_1.default.createElement(DialogTitle_1.default, { id: `alert-${props.id}-title` }, props.title || "Alert"),
             react_1.default.createElement(DialogContent_1.default, null,
-                react_1.default.createElement(DialogContentText_1.default, { id: `alert-${props.id}-description` }, props === null || props === void 0 ? void 0 : props.description)),
+                react_1.default.createElement(DialogContentText_1.default, { id: `alert-${props.id}-description` }, props.description || "Are you sure?")),
             react_1.default.createElement(DialogActions_1.default, null,
-                react_1.default.createElement(Button_1.default, { onClick: () => handleClose(false), color: props.color ? props.color : "primary" }, props === null || props === void 0 ? void 0 : props.backLabel),
-                react_1.default.createElement(Button_1.default, { onClick: () => handleClose(true), color: props.color ? props.color : "primary", autoFocus: true }, props === null || props === void 0 ? void 0 : props.forwardLabel)))));
+                react_1.default.createElement(Button_1.default, { onClick: () => handleClose(false), color: props.color ? props.color : "primary" }, props.backLabel || "Cancel"),
+                react_1.default.createElement(Button_1.default, { onClick: () => handleClose(true), color: props.color ? props.color : "primary", autoFocus: true }, (props === null || props === void 0 ? void 0 : props.forwardLabel) || "Continue")))));
 }
 exports.AlertDialog = AlertDialog;
 //# sourceMappingURL=AlertDialog.js.map

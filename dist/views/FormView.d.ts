@@ -2,6 +2,7 @@
 import { IFormProps } from '../interfaces/IFormProps';
 export interface IFormViewProps<T> {
     title: string;
+    defaultLocked?: boolean;
     maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
     maxNodes: number;
     FormElement: (props: IFormProps<T>) => JSX.Element;

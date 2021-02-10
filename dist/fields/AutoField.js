@@ -25,7 +25,7 @@ const core_1 = require("@material-ui/core");
 const lab_1 = require("@material-ui/lab");
 function AutoField(props) {
     const [choiceValue, setChoiceValue] = react_1.useState(props.options ? props.options.find(item => item.value === props.value) : { label: "", value: "" });
-    const onChange = (event, value, reason) => {
+    const onChange = (event, changeValue, reason) => {
         if (props.locked)
             return;
         switch (reason) {
@@ -33,8 +33,8 @@ function AutoField(props) {
                 console.log('Autocomplete create-option not implemented');
                 break;
             case "select-option":
-                props.onChange(event, props.name, (value === null || value === void 0 ? void 0 : value.value) || "");
-                value && setChoiceValue(value);
+                props.onChange(event, props.name, (changeValue === null || changeValue === void 0 ? void 0 : changeValue.value) || "");
+                changeValue && setChoiceValue(changeValue);
                 break;
             case "remove-option":
                 console.log('Autocomplete remove-option not implemented');
