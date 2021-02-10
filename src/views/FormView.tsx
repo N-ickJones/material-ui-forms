@@ -78,6 +78,8 @@ export function FormView<T>(props: IFormViewProps<T>) {
   });
 
   const handlePrint = async () => {
+    if (locked) return;
+    
     setPrintMode(true);
     displayPrint && displayPrint();
     await sleep(5000)
@@ -85,17 +87,22 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement | {}>, index: number, property: string, value: string | boolean) => {
+    if (locked) return;
+
     props.forms[index] = { ...props.forms[index], [property]: value }
     !pendingChanges && setPendingChanges(true);
   }
 
   const onChangeList = async (index: number, listProperty: string, listIndex: number, property: string, value: string | boolean) => {
+    if (locked) return;
+
     // @ts-ignore
     props.forms[index][listProperty][listIndex] = { ...props.forms[index][listProperty][listIndex], [property]: value }
     !pendingChanges && setPendingChanges(true);
   }
 
   const handleAddList = async (index: number, listProperty: string) => {
+    if (locked) return;
     // @ts-ignore
     let listIndex = props.forms[index][listProperty].length;
     // @ts-ignore
@@ -104,6 +111,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
 
   const handleDeleteList = async (index: number, listProperty: string, listIndex: number) => {
+    if (locked) return;
     // @ts-ignore
     props.forms[index][listProperty] = props.forms[index][listProperty].filter((_, i) => i !== listIndex);
     await handleChanges();
@@ -115,6 +123,8 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
 
   const handleChanges = async () => {
+    if (locked) return;
+
     if (props.handleSaveChanges && await props.handleSaveChanges()) {
       setAlert({ ...alert, ...success, message: "Successfully saved your changes locally." });
       setPendingChanges(false);
@@ -151,11 +161,15 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
 
   const handleLocalChanges = async () => {
+    if (locked) return;
+
     localStorage.setItem(localStorageKey, JSON.stringify([...props.forms]))
     handleChanges();
   }
 
   const handleSubmit = async () => {
+    if (locked) return;
+
     if (props.handleSubmit) {
       if (!await formValid()) {
         setAlert({ ...alert, ...error, message: "A validation error was detected in the form" })
@@ -201,6 +215,8 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
 
   const handleDelete = async (index: number) => {
+    if (locked) return;
+
     if (props.handleDelete) {
       if (await props.handleDelete(index)) {
         clearLocalStorage();
