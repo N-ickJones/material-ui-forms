@@ -280,23 +280,10 @@ export function AgencyForm(props: IFormProps<Agency>) {
 #### Usage Example: FormView with Subform
 
 ```ts
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import Grid from "@material-ui/core/Grid";
-import { Button, Typography } from "@material-ui/core";
-import JobApplication from '../../../../models/profile/jobApplication/JobApplication';
-import jobApplicationsController from '../../../../controllers/profile/jobApplication/JobApplicationsController';
-import availableJobsController from '../../../../controllers/availableJobs/AvailableJobsController';
-import { PreviousStateSubForm } from './PreviousStatesFormView';
-import previousStatesController from '../../../../controllers/profile/jobApplication/PreviousStatesController';
-import PreviousState from '../../../../models/profile/jobApplication/PreviousState';
-import Qualification from '../../../../models/profile/jobApplication/Qualification';
-import { QualificationSubForm } from './QualificationsFormView';
-import qualificationsController from '../../../../controllers/profile/jobApplication/QualificationsController';
+...
 import { AlertDialogButton, CheckField, CustomTextField, FieldOption, FormView, IFormProps, isValidId } from 'material-ui-forms';
 
-export interface IJobApplicationFormViewProps { }
-
-export default function JobApplicationFormView(props: IJobApplicationFormViewProps) {
+export default function JobApplicationFormView() {
   const [forms, setForms] = useState([] as JobApplication[]);
   const [uid, setUid] = useState(Number.MAX_SAFE_INTEGER);
 
@@ -305,6 +292,7 @@ export default function JobApplicationFormView(props: IJobApplicationFormViewPro
       setForms(data);
     }
     else {
+        //My API includes the PreviousState/Qualfication one-many relations automatically. You might need to do multiple calls for the sub form data.
       const jobApplications = await jobApplicationsController.getAll();
       if (!jobApplications) return false;
       setForms(jobApplications);
@@ -313,6 +301,7 @@ export default function JobApplicationFormView(props: IJobApplicationFormViewPro
   }
 
   const handleAddNewItem = async () => {
+      //Add Empty List for new form
     forms.push({ 
       jobApplicationId: uid, 
       previousStates: [] as PreviousState[], 
