@@ -280,7 +280,8 @@ export function AgencyForm(props: IFormProps<Agency>) {
 #### Usage Example: FormView with Subform
 
 ```ts
-...
+
+//... other imports here
 import { AlertDialogButton, CheckField, CustomTextField, FieldOption, FormView, IFormProps, isValidId } from 'material-ui-forms';
 
 export default function JobApplicationFormView() {
@@ -350,82 +351,8 @@ export default function JobApplicationFormView() {
     });
     return success;
   }
-
-  const handleSubmit_Qualfications = async (index: number, jobApplication: JobApplication) => {
-    if (!jobApplication.qualifications) return true;
-    let success = true;
-    jobApplication.qualifications.forEach(async qualification => {
-      if (qualification.qualificationId && isValidId(qualification.qualificationId)) {
-        console.log('update')
-        if(!await qualificationsController.update(qualification.qualificationId, qualification))
-          success = false;
-      }
-      else {
-        console.log('create')
-
-        if(!await qualificationsController.create({ ...qualification, jobApplicationId: forms[index].jobApplicationId }))
-          success = false;
-      }
-    });
-
-    return success;
-  }
-
-  const handleCreate = async (index: number, jobApplication: JobApplication): Promise<boolean> => {
-    const jobApplicationResponse = await jobApplicationsController.create({ ...jobApplication, jobApplicationId: undefined });
-    if (jobApplicationResponse) {
-      const tForms = forms;
-      tForms[index] = jobApplicationResponse
-      setForms([])
-      setForms(tForms);
-      return true;
-    }
-    return false;
-  }
-
-  const handleUpdate = async (id: number, jobApplication: JobApplication): Promise<boolean> => {
-    const response = await jobApplicationsController.update(id, jobApplication);
-    return response;
-  }
-
-  const handleDelete = async (index: number): Promise<boolean> => {
-    const jobApplicationId = forms[index].jobApplicationId;
-    if (jobApplicationId && isValidId(jobApplicationId)) {
-      const response = await jobApplicationsController.delete(jobApplicationId);
-      if (!response) { return false; }
-    }
-    if (forms.length >= index) {
-      setForms(forms.filter((_, i) => i !== index))
-    }
-    return true;
-  }
-
-  const handleSaveChanges = async (): Promise<boolean> => {
-    setForms([...forms]);
-    return true;
-  }
-
-  const handleGenerateKey = (item: JobApplication) => {
-    return `JobApplication${item.jobApplicationId}`;
-  }
-
-  return (
-    <FormView<JobApplication>
-      FormElement={JobApplicationForm}
-      title={"JobApplications"}
-      maxWidth={"md"}
-      maxNodes={3}
-      forms={forms}
-      handleLoad={handleLoad}
-      handleSubmit={handleSubmit}
-      handleAddNewItem={handleAddNewItem}
-      handleSaveChanges={handleSaveChanges}
-      handleDelete={handleDelete}
-      handleGenerateKey={handleGenerateKey}
-    />
-  )
-
-}
+//...etc everything else the same as no subforms example
+  
 
 export function JobApplicationForm(props: IFormProps<JobApplication>) {
   const { index, values, printMode, locked } = props;
@@ -548,11 +475,11 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
           >Add</Button>
         </Grid>
 
-   ...etc
+   //...etc the rest of your form
         
 ```
 
-#### SubForm example uses ISubFormProps<T>
+#### SubForm example uses ISubFormProps<T> interface
 ```ts 
 export function PreviousStateSubForm(props: ISubFormProps<PreviousState>) {
   return (
