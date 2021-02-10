@@ -450,6 +450,7 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
     props.handleDelete && props.handleDelete(index);
   }
 
+  //Example of Loading some fieldoptions used in the form...  
   //#region AvailableJobs
   const [availableJobs, setAvailableJobs] = useState([] as FieldOption[]);
   useEffect(() => {
@@ -467,7 +468,7 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
   }, []);
   //#endregion
 
-  //#region CRUD Subform 
+  //#region CRUD Subform operations required
   const handleAddList = (listProperty: string) => (e: any) => {
     props.handleAddList && props.handleAddList(index, listProperty);
   }
@@ -520,6 +521,8 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
             />
           </Grid>
         </Grid>
+
+        /* Loading option data from API */}
         <Grid item xs={props.printMode ? 12 : 12}>
         {availableJobs.length > 0 ? (
           <CustomTextField
@@ -535,70 +538,8 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
           />
           ) : <p>Loading available jobs</p>}
         </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="PreDrugTest"
-            name="preDrugTest"
-            onChange={handleChange}
-            value={values.preDrugTest}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="AnnualDrugTest"
-            name="annualDrugTest"
-            onChange={handleChange}
-            value={values.annualDrugTest}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="MedicalExclusion"
-            name="medicalExclusion"
-            onChange={handleChange}
-            value={values.medicalExclusion}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            type="date"
-            label="Start Date"
-            name="startDate"
-            onChange={handleChange}
-            value={values.startDate}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your work length"
-            label="Work Length"
-            name="workLength"
-            onChange={handleChange}
-            value={values.workLength}
-            validators={[
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your work schedule"
-            label="Work Schedule"
-            name="workSchedule"
-            onChange={handleChange}
-            value={values.workSchedule}
-            validators={[
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
 
+        {/*Insert this in place like a normal field inside your form */}
         {/* Previous States */}
         <Grid container item xs={props.printMode ? 12 : 12}>
           <Typography className="mb-3">Enter your previous states</Typography>
@@ -618,92 +559,11 @@ export function JobApplicationForm(props: IFormProps<JobApplication>) {
           >Add</Button>
         </Grid>
 
-        {/* Qualifications */}
-        <Grid container item xs={props.printMode ? 12 : 12}>
-          <Typography className="mb-3">Enter any additional qualfications</Typography>
-          {values.qualifications?.map((item: Qualification, listIndex: number) => (
-            <QualificationSubForm
-              key={`qualifications${listIndex}`}
-              locked={props.locked}
-              listIndex={listIndex}
-              item={item}
-              handleChangeList={handleChangeList}
-              handleDeleteList={handleDeleteList}
-            />
-          ))}
-          <Button 
-            className={values.qualifications && values.qualifications?.length < 3 ? "" : "d-none"} 
-            onClick={handleAddList('qualifications')}
-          >Add</Button>
-        </Grid>
-
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="RequirementsAware"
-            name="requirementsAware"
-            onChange={handleChange}
-            value={values.requirementsAware}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="RequirementsAble"
-            name="requirementsAble"
-            onChange={handleChange}
-            value={values.requirementsAble}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="NeedAccomidation"
-            name="needAccomidation"
-            onChange={handleChange}
-            value={values.needAccomidation}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your accomidation description"
-            label="Accomidation Needed"
-            name="accomidationNeeded"
-            onChange={handleChange}
-            value={values.accomidationNeeded}
-            validators={[
-
-            ]}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CheckField
-            label="Signiture"
-            name="signiture"
-            onChange={handleChange}
-            value={values.signiture}
-            locked={locked}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            type="date"
-            label="Last Updated"
-            name="lastUpdated"
-            onChange={handleChange}
-            value={values.lastUpdated}
-            locked={locked}
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  )
-}
+   ...etc
+        
 ```
 
-#### SubForm example
-
+#### SubForm example uses ISubFormProps<T>
 ```ts 
 export function PreviousStateSubForm(props: ISubFormProps<PreviousState>) {
   return (
@@ -734,6 +594,5 @@ export function PreviousStateSubForm(props: ISubFormProps<PreviousState>) {
     </Grid>
   )
 }
-
 
 ```
