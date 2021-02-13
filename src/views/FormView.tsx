@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Backdrop, Button, CircularProgress, Container, createStyles, Divider, Grid, makeStyles, Paper, Snackbar, SnackbarOrigin, Theme, Typography } from '@material-ui/core';
+import { Backdrop, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Snackbar, SnackbarOrigin, Theme, Typography } from '@material-ui/core';
 import { useReactToPrint } from 'react-to-print';
 import { Lock, LockOpen } from '@material-ui/icons';
 import { Alert, AlertProps } from '@material-ui/lab';
@@ -256,7 +256,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
   else {
     return (
-      <Container maxWidth={props.maxWidth}>
+      <>
         {/* Alert Snackbar */}
         <Snackbar
           open={alert.open}
@@ -384,7 +384,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
 
           </Grid>
         </Paper>
-      </Container>
+      </>
     );
   }
 }

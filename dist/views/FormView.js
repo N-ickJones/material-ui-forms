@@ -223,7 +223,7 @@ function FormView(props) {
             react_1.default.createElement(core_1.CircularProgress, { color: "primary" })));
     }
     else {
-        return (react_1.default.createElement(core_1.Container, { maxWidth: props.maxWidth },
+        return (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement(core_1.Snackbar, { open: alert.open, autoHideDuration: alert.autoHideDuration, onClose: () => { setAlert(Object.assign(Object.assign({}, alert), { open: false })); }, anchorOrigin: alert.origin },
                 react_1.default.createElement(lab_1.Alert, { severity: alert.severity }, alert.message || '')),
             react_1.default.createElement(core_1.Grid, { className: "d-flex flex-wrap" },
