@@ -7,8 +7,8 @@ import { sleep } from '../functions/functions';
 import { IFormProps } from '../interfaces/IFormProps';
 import { AlertState } from '../types/types';
 import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
-import { AlertDialog } from '../fields/AlertDialog';
-import { AlertDialogButton } from '../fields/AlertDialogButton';
+import { AlertDialog } from '../components/AlertDialog';
+import { AlertDialogButton } from '../components/AlertDialogButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export interface IFormViewProps<T> {
+  submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
+
+
   title: string;
   defaultLocked?: boolean;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
@@ -32,7 +35,6 @@ export interface IFormViewProps<T> {
   handleSaveChanges?: () => Promise<boolean>;
   handleDelete?: (index: number) => Promise<boolean>;
   handleGenerateKey: (item: T) => string;
-
 }
 
 export function FormView<T>(props: IFormViewProps<T>) {
@@ -364,8 +366,9 @@ export function FormView<T>(props: IFormViewProps<T>) {
             {/* Bottom Submit Button */}
             {!locked &&
               <Grid item xs={12}>
-                <Grid className="d-flex">
+                <Grid className={props.submitButtonRef ? "d-none" : "d-flex"}>
                   <AlertDialogButton
+                    ref={props.submitButtonRef}
                     id="saveForm"
                     className="mx-auto d-flex w-50 mb-3"
                     btnClass="w-100"

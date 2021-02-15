@@ -1,3 +1,4 @@
+export * from './components';
 export * from './fields';
 export * from './functions';
 export * from './hooks';

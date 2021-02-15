@@ -57,6 +57,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "react": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-to-print": "^2.11.0",
     "next": "^9.5.5"
   },
@@ -65,6 +66,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "react": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-to-print": "^2.11.0",
     "next": "^9.5.5"
   }

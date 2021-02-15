@@ -1,6 +1,7 @@
-/// <reference types="react" />
+import React from 'react';
 import { IFormProps } from '../interfaces/IFormProps';
 export interface IFormViewProps<T> {
+    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
     title: string;
     defaultLocked?: boolean;
     maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;

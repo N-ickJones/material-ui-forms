@@ -1,5 +1,4 @@
-import { AlertDialog } from "./AlertDialog";
-import { AlertDialogButton } from "./AlertDialogButton";
+
 import { AutoField } from "./AutoField";
 import { AutoFreeField } from "./AutoFreeField";
 import { CheckField } from "./CheckField";
@@ -9,8 +8,6 @@ import { SwitchField } from "./SwitchField";
 
 
 export {
-    AlertDialog,
-    AlertDialogButton,
     AutoField,
     AutoFreeField,
     CheckField,

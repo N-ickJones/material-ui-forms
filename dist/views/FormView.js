@@ -27,8 +27,8 @@ const icons_1 = require("@material-ui/icons");
 const lab_1 = require("@material-ui/lab");
 const functions_1 = require("../functions/functions");
 const useWarnIfUnsavedChanges_1 = require("../hooks/useWarnIfUnsavedChanges");
-const AlertDialog_1 = require("../fields/AlertDialog");
-const AlertDialogButton_1 = require("../fields/AlertDialogButton");
+const AlertDialog_1 = require("../components/AlertDialog");
+const AlertDialogButton_1 = require("../components/AlertDialogButton");
 const useStyles = core_1.makeStyles((theme) => core_1.createStyles({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
@@ -250,8 +250,8 @@ function FormView(props) {
                         react_1.default.createElement(core_1.Divider, { className: "my-3" })),
                     !locked &&
                         react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
-                            react_1.default.createElement(core_1.Grid, { className: "d-flex" },
-                                react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "saveForm", className: "mx-auto d-flex w-50 mb-3", btnClass: "w-100", label: "Submit", title: "You have selected to submit your information.", description: "This action will save this information to your user account.", color: "primary", backLabel: "Cancel", forwardLabel: "Submit", onSubmit: handleSubmit, disabled: props.handleSubmit === undefined })))))));
+                            react_1.default.createElement(core_1.Grid, { className: props.submitButtonRef ? "d-none" : "d-flex" },
+                                react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { ref: props.submitButtonRef, id: "saveForm", className: "mx-auto d-flex w-50 mb-3", btnClass: "w-100", label: "Submit", title: "You have selected to submit your information.", description: "This action will save this information to your user account.", color: "primary", backLabel: "Cancel", forwardLabel: "Submit", onSubmit: handleSubmit, disabled: props.handleSubmit === undefined })))))));
     }
 }
 exports.FormView = FormView;

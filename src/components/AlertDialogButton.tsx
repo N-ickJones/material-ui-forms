@@ -18,6 +18,8 @@ import { PropTypes } from '@material-ui/core';
  * @backOnOutsideClick
  */
 export interface IAlertDialogButtonProps {
+  ref?: React.MutableRefObject<HTMLButtonElement>;
+
   onSubmit?: () => Promise<void>;
   id?: string;
   btnClass?: string;
@@ -49,6 +51,7 @@ export function AlertDialogButton(props: IAlertDialogButtonProps) {
   return (
     <div className={props.className}>
       <Button
+        ref={props.ref}
         className={props.btnClass} 
         variant={props.variant || "outlined"} 
         color={props.color ? props.color : "primary"} 
