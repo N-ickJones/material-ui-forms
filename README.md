@@ -15,7 +15,7 @@
 ![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/next)
 
 ## Dependencies
-![npm (prod) dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/crypto-js)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/crypto-js)
 
 - [material-ui-forms](#material-ui-forms)
   - [Peer Dependencies](#peer-dependencies)

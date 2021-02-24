@@ -18,3 +18,9 @@ if ($cmd -eq "patch") {
     npm version patch                       #   npm version patch
     npm publish                             #   npm publish
 }
+
+if ($cmd -eq "push") {
+    git add .                               #   Add Git Changes
+    git commit -am 'patch update'           #   Commit Git Changes   TODO: add comment parameter
+    git push origin master                  #   Push to Master Branch
+}
