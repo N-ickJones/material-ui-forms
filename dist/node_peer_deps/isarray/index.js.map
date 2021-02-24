@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../node_peer_deps/isarray/index.js"],"names":[],"mappings":";AAAA,IAAI,QAAQ,GAAG,EAAE,CAAC,QAAQ,CAAC;AAE3B,MAAM,CAAC,OAAO,GAAG,KAAK,CAAC,OAAO,IAAI,UAAU,GAAG;IAC7C,OAAO,QAAQ,CAAC,IAAI,CAAC,GAAG,CAAC,IAAI,gBAAgB,CAAC;AAChD,CAAC,CAAC"}

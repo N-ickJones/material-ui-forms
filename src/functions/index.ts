@@ -1,4 +1,4 @@
-import { dateConvert, dateConvertVerbose, getRandomInt, isValidId, sleep } from "./functions";
+import { dateConvert, dateConvertVerbose, decrypt, encrypt, getOrdinal, getRandomInt, isValidId, sleep, uuidv4 } from "./functions";
 
 
 export {
@@ -6,5 +6,9 @@ export {
     sleep,
     dateConvert,
     dateConvertVerbose,
-    isValidId
+    isValidId,
+    uuidv4,
+    encrypt,
+    decrypt,
+    getOrdinal,
 }

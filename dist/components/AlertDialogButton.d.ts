@@ -11,7 +11,7 @@ import { PropTypes } from '@material-ui/core';
  * @backOnOutsideClick
  */
 export interface IAlertDialogButtonProps {
-    ref?: React.MutableRefObject<HTMLButtonElement>;
+    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
     onSubmit?: () => Promise<void>;
     id?: string;
     btnClass?: string;
@@ -24,5 +24,7 @@ export interface IAlertDialogButtonProps {
     disabled?: boolean;
     variant?: "text" | "outlined" | "contained" | undefined;
     className?: string;
+    allowSkip?: boolean;
+    pendingChanges?: boolean;
 }
 export declare function AlertDialogButton(props: IAlertDialogButtonProps): JSX.Element;

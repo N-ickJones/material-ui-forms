@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Autocomplete, AutocompleteChangeReason,  createFilterOptions } from "@material-ui/lab";
+import { Autocomplete, AutocompleteChangeReason, createFilterOptions } from "@material-ui/lab";
 import { FieldOption } from "../types/types";
 
 export interface IAutoFieldProps {
@@ -18,7 +18,7 @@ export function AutoField(props: IAutoFieldProps) {
     const [choiceValue, setChoiceValue] = useState(
         props.options ? props.options.find(item => item.value === props.value) : { label: "", value: "" } as FieldOption
     );
-    
+
     const onChange = (
         e: React.ChangeEvent<{}>,
         changeValue: FieldOption | null,
@@ -26,7 +26,7 @@ export function AutoField(props: IAutoFieldProps) {
         //details?: AutocompleteChangeDetails<FieldOption | null>
     ) => {
         if (props.locked) return;
-        switch(reason) {
+        switch (reason) {
             case "create-option":
                 console.log('Autocomplete create-option not implemented')
                 break;
@@ -46,14 +46,14 @@ export function AutoField(props: IAutoFieldProps) {
                 break;
         }
     }
-    
+
     const handleOptionSelected = (option: FieldOption, value: FieldOption) => {
         if (value.value === "")
             return true;
         else
             return value.value === option.value;
     }
-    
+
     return (
         <Autocomplete
             options={props.options ? props.options : []}
@@ -64,7 +64,7 @@ export function AutoField(props: IAutoFieldProps) {
             value={choiceValue || { label: "", value: "" }}
             getOptionDisabled={() => props.locked || false}
             renderInput={(params) => (
-                <TextField {...params} 
+                <TextField {...params}
                     label={props.label}
                     variant={props.variant || "outlined"}
                     inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}

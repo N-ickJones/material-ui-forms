@@ -1,0 +1,17 @@
+export var __esModule: boolean;
+export function isAnonymous(ident: any): boolean;
+export function getSectionMetadata(ast: any, name: any): undefined;
+export function getSectionMetadatas(ast: any, name: any): any[];
+export function sortSectionMetadata(m: any): void;
+export function orderedInsertNode(m: any, n: any): void;
+export function assertHasLoc(n: any): void;
+export function getEndOfSection(s: any): any;
+export function shiftLoc(node: any, delta: any): void;
+export function shiftSection(ast: any, node: any, delta: any): void;
+export function signatureForOpcode(object: any, name: any): any;
+export function getUniqueNameGenerator(): (...args: any[]) => string;
+export function getStartByteOffset(n: any): any;
+export function getEndByteOffset(n: any): any;
+export function getFunctionBeginingByteOffset(n: any): any;
+export function getEndBlockByteOffset(n: any): any;
+export function getStartBlockByteOffset(n: any): any;

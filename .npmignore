@@ -1,2 +1,4 @@
-tsconfig.json
+node_modules
+run.ps1
+*.tgz
 src

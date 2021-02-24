@@ -35,7 +35,6 @@ export interface IAlertDialogProps {
  * Creates an Alert dialog prompt with back/foward options
  * @props IAlertDialogProps
  */
-
 export function AlertDialog(props: IAlertDialogProps) {
   function handleClose(submit: boolean) {
     props.onSubmit(submit);

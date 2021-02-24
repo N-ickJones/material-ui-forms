@@ -1,0 +1,14 @@
+export declare const alnum: string;
+export declare const alpha: string;
+export declare const ascii: string;
+export declare const blank: string;
+export declare const cntrl: string;
+export declare const digit: string;
+export declare const graph: string;
+export declare const lower: string;
+export declare const print: string;
+export declare const punct: string;
+export declare const space: string;
+export declare const upper: string;
+export declare const word: string;
+export declare const xdigit: string;

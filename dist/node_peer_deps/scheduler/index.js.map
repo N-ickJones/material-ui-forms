@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../node_peer_deps/scheduler/index.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;AAEb,IAAI,OAAO,CAAC,GAAG,CAAC,QAAQ,KAAK,YAAY,EAAE;IACzC,MAAM,CAAC,OAAO,GAAG,OAAO,CAAC,mCAAmC,CAAC,CAAC;CAC/D;KAAM;IACL,MAAM,CAAC,OAAO,GAAG,OAAO,CAAC,gCAAgC,CAAC,CAAC;CAC5D"}

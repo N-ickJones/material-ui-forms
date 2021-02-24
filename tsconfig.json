@@ -1,31 +1,37 @@
 {
-    "compilerOptions": {
-      "sourceMap": true,
-      "module": "CommonJs",
-      "target": "es2017",
-      "moduleResolution": "node",
-      "outDir": "./dist",
-      "jsx": "react",
-      "skipLibCheck": true,
-      "declaration": true,
-      "noEmit": false,
-      "allowSyntheticDefaultImports": true,
-      "lib": ["dom", "dom.iterable", "esnext"],
-      "strict": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": false,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "allowJs": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "resolveJsonModule": true,
-      "isolatedModules": true
-    },
-    "include": ["src"],
-    "exclude": [
-      "node_modules",
-      "app",
-      "examples",
-    ]
-  }
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "CommonJs",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "declaration": true,
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "app",
+    "examples",
+  ]
+}

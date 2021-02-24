@@ -4,7 +4,7 @@ export interface IFormStepperProps {
     activeStep: number;
     handleNext: () => Promise<void>;
     handleBack: () => Promise<void>;
-    handleSubmit: () => Promise<void>;
     activeForm?: React.ReactNode;
+    hideDotsStepper?: boolean;
 }
 export declare function FormStepper(props: IFormStepperProps): JSX.Element;

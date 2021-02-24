@@ -22,11 +22,11 @@ export declare const workScheduleOptions: {
     label: string;
     value: string;
 }[];
-export declare const referenceOptions: {
+export declare const degreeOptions: {
     label: string;
     value: string;
 }[];
-export declare const referralSourceOptions: {
+export declare const referenceOptions: {
     label: string;
     value: string;
 }[];
@@ -54,11 +54,23 @@ export declare const yesOptions: {
     label: string;
     value: string;
 }[];
+export declare const referralOptions: {
+    label: string;
+    value: string;
+}[];
+export declare const addressOptions: {
+    label: string;
+    value: string;
+}[];
 export declare const usStateOptions: {
     label: string;
     value: string;
 }[];
 export declare const usCityOptions: {
+    label: string;
+    value: string;
+}[];
+export declare const countryOptions: {
     label: string;
     value: string;
 }[];

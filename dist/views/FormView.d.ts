@@ -1,18 +1,22 @@
 import React from 'react';
 import { IFormProps } from '../interfaces/IFormProps';
 export interface IFormViewProps<T> {
-    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
-    title: string;
+    title?: string;
+    forms?: T[];
     defaultLocked?: boolean;
-    maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
-    maxNodes: number;
-    FormElement: (props: IFormProps<T>) => JSX.Element;
-    forms: T[];
-    handleLoad: (local: boolean, data?: T[]) => Promise<boolean>;
+    maxNodes?: number;
+    minNodes?: number;
+    FormElement?: (props: IFormProps<T>) => JSX.Element;
+    handleLoad?: (local: boolean, data?: T[]) => Promise<boolean>;
+    handleGenerateKey?: (item: T) => string;
     handleSubmit?: () => Promise<boolean>;
     handleAddNewItem?: () => Promise<void>;
     handleSaveChanges?: () => Promise<boolean>;
     handleDelete?: (index: number) => Promise<boolean>;
-    handleGenerateKey: (item: T) => string;
+    onNext?: () => Promise<void>;
+    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
+    hideLockButton?: boolean;
+    hideSaveProgressButton?: boolean;
+    hidePrintButton?: boolean;
 }
 export declare function FormView<T>(props: IFormViewProps<T>): JSX.Element;

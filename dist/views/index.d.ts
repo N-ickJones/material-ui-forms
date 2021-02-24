@@ -1,2 +1,3 @@
 import { FormView } from "./FormView";
-export { FormView };
+import { StepperView } from "./StepperView";
+export { FormView, StepperView };

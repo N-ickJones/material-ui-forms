@@ -1,14 +1,36 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Backdrop, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Snackbar, SnackbarOrigin, Theme, Typography } from '@material-ui/core';
-import { useReactToPrint } from 'react-to-print';
 import { Lock, LockOpen } from '@material-ui/icons';
 import { Alert, AlertProps } from '@material-ui/lab';
-import { sleep } from '../functions/functions';
+import { decrypt, encrypt, uuidv4 } from '../functions/functions';
 import { IFormProps } from '../interfaces/IFormProps';
 import { AlertState } from '../types/types';
 import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
 import { AlertDialog } from '../components/AlertDialog';
 import { AlertDialogButton } from '../components/AlertDialogButton';
+import { PrintButton } from '../components';
+import { useMuiPrinting } from '../hooks';
+
+export interface IFormViewProps<T> {
+  title?: string;
+  forms?: T[];
+  defaultLocked?: boolean;
+  maxNodes?: number;
+  minNodes?: number;
+  FormElement?: (props: IFormProps<T>) => JSX.Element;
+  handleLoad?: (local: boolean, data?: T[]) => Promise<boolean>;
+  handleGenerateKey?: (item: T) => string;
+  handleSubmit?: () => Promise<boolean>;
+  handleAddNewItem?: () => Promise<void>;
+  handleSaveChanges?: () => Promise<boolean>;
+  handleDelete?: (index: number) => Promise<boolean>;
+  onNext?: () => Promise<void>;
+
+  submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
+  hideLockButton?: boolean;
+  hideSaveProgressButton?: boolean;
+  hidePrintButton?: boolean;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,44 +41,43 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export interface IFormViewProps<T> {
-  submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
-
-
-  title: string;
-  defaultLocked?: boolean;
-  maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
-  maxNodes: number;
-  FormElement: (props: IFormProps<T>) => JSX.Element;
-  forms: T[];
-  handleLoad: (local: boolean, data?: T[]) => Promise<boolean>;
-  handleSubmit?: () => Promise<boolean>;
-  handleAddNewItem?: () => Promise<void>;
-  handleSaveChanges?: () => Promise<boolean>;
-  handleDelete?: (index: number) => Promise<boolean>;
-  handleGenerateKey: (item: T) => string;
-}
-
 export function FormView<T>(props: IFormViewProps<T>) {
-  const localStorageKey = props.title.replace(' ' , '');
+  const localStorageKey = props.title ? props.title.replace(" " , "") : uuidv4();
   const classes = useStyles();
-  const printComponentRef = useRef();
-  const [locked, setLocked] = useState(props.defaultLocked === undefined ? true : props.defaultLocked);
-  const [printMode, setPrintMode] = useState(false);
+  //const printComponentRef = useRef();
+  const [locked, setLocked] = useState(
+    props.defaultLocked === undefined ? false : ( 
+      props.defaultLocked ? ( 
+        props.hideLockButton ? false : true 
+      ) : false 
+    )
+  );
+  //const [printMode, setPrintMode] = useState(false);
   const [pendingChanges, setPendingChanges] = useState(false);
   const [loadLocal, setLoadLocal] = useState(false);
   const [loadServer, setLoadServer] = useState(false);
-  const error = { open: true, severity: "error" as AlertProps['severity'], origin: { vertical: "bottom", horizontal: "left" } as SnackbarOrigin };
-  const success = { open: true, severity: "success" as AlertProps['severity'],  origin: { vertical: "bottom", horizontal: "right" } as SnackbarOrigin };
-
+  const autoHideDuration = 8000;
   const [alert, setAlert] = useState({
     open: false,
     message: "",
-    autoHideDuration: 3000,
-    origin: { horizontal: "right", vertical: "bottom" }
+    autoHideDuration: autoHideDuration,
+    origin: { vertical: "bottom", horizontal: "right" }
   } as AlertState);
+  const error = { 
+    open: true, 
+    autoHideDuration: autoHideDuration,
+    severity: "error" as AlertProps['severity'], 
+    origin: { vertical: "bottom", horizontal: "left" 
+  } as SnackbarOrigin };
+  const success = { 
+    open: true, 
+    autoHideDuration: autoHideDuration,
+    severity: "success" as AlertProps['severity'], 
+    origin: { vertical: "bottom", horizontal: "right" 
+  } as SnackbarOrigin };
 
   useWarnIfUnsavedChanges(pendingChanges);
+  const [ paperStyle, printComponentRef, printMode, displayPrint, handlePrintRef ] = useMuiPrinting();
 
   useEffect(() => {
     async function loadData() {
@@ -65,33 +86,17 @@ export function FormView<T>(props: IFormViewProps<T>) {
       }
       else {
         setLoadServer(true);
-        await props.handleLoad(false);
+        props.handleLoad && await props.handleLoad(false);
         setLoadServer(false);
       }
     }
     loadData();
   }, [])
 
-  const displayPrint = useReactToPrint({
-    bodyClass: "",
-    copyStyles: true,
-    documentTitle: `title`,
-    content: () => printComponentRef.current || null,
-  });
-
-  const handlePrint = async () => {
-    if (locked) return;
-    
-    setPrintMode(true);
-    displayPrint && displayPrint();
-    await sleep(5000)
-    setPrintMode(false);
-  }
-
   const onChange = (e: ChangeEvent<HTMLInputElement | {}>, index: number, property: string, value: string | boolean) => {
     if (locked) return;
-
-    props.forms[index] = { ...props.forms[index], [property]: value }
+    if (props.forms)
+      props.forms[index] = { ...props.forms[index], [property]: value }
     !pendingChanges && setPendingChanges(true);
   }
 
@@ -128,34 +133,37 @@ export function FormView<T>(props: IFormViewProps<T>) {
     if (locked) return;
 
     if (props.handleSaveChanges && await props.handleSaveChanges()) {
-      setAlert({ ...alert, ...success, message: "Successfully saved your changes locally." });
+      setAlert({ ...success, message: "Successfully saved your changes locally." });
       setPendingChanges(false);
     }
     else {
-      setAlert({ ...alert, ...success, message: "Unable to save your changes locally." });
+      setAlert({ ...success, message: "Unable to save your changes locally." });
     }
   }
 
   const handleLocalLoad = async (submit?: boolean) => {
     if (submit) {
-      var storage = localStorage.getItem(localStorageKey);
-      if (storage !== null) {
-        if (await props.handleLoad(true, JSON.parse(storage))) {
-          setAlert({ ...alert, ...success, message: "Successfully loaded previous changes." })
+      var cipherText = localStorage.getItem(localStorageKey);
+      if (cipherText !== null) {
+        const plainText = decrypt(cipherText, localStorageKey);
+        if (props.handleLoad && await props.handleLoad(true, JSON.parse(plainText))) {
+          setAlert({ ...success, message: "Successfully loaded previous changes." })
         }
         else {
-          setAlert({ ...alert, ...error, message: "Unable to load previous changes." })
+          setAlert({ ...error, message: "Unable to load previous changes." })
         }
+
+
       }
     }
     else {
       clearLocalStorage();
       setLoadServer(true);
-      if (await props.handleLoad(false)) {
-        setAlert({ ...alert, ...success, message: "Successfully loaded your information." })
+      if (props.handleLoad && await props.handleLoad(false)) {
+        setAlert({ ...success, message: "Successfully loaded your information." })
       }
       else {
-        setAlert({ ...alert, ...error, message: "Unable to load your information." })
+        setAlert({ ...error, message: "Unable to load your information." })
       }
       setLoadServer(false)
     }
@@ -164,24 +172,36 @@ export function FormView<T>(props: IFormViewProps<T>) {
 
   const handleLocalChanges = async () => {
     if (locked) return;
-
-    localStorage.setItem(localStorageKey, JSON.stringify([...props.forms]))
+    props.forms && localStorage.setItem(localStorageKey, encrypt(JSON.stringify([...props.forms]), localStorageKey))
     handleChanges();
   }
 
   const handleSubmit = async () => {
     if (locked) return;
 
+    if (!pendingChanges) {
+      if (props.forms && props.minNodes && props.forms.length >= props.minNodes) {
+        props.onNext && props.onNext();
+        return;
+      }
+    }
+
     if (props.handleSubmit) {
       if (!await formValid()) {
-        setAlert({ ...alert, ...error, message: "A validation error was detected in the form" })
+        setAlert({ ...error, message: "A validation error was detected in the form" })
       }
       else if (await props.handleSubmit()) {
-        clearLocalStorage();
-        setAlert({ ...alert, ...success, message: "Successfully sent changes to the server" })
+        if (props.minNodes && props.forms && props.forms.length < props.minNodes) {
+          setAlert({ ...error, message: props.minNodes <= 1 ? `${props.minNodes} submission is required` : `${props.minNodes} submissions are required` })
+        }
+        else {
+          clearLocalStorage();
+          setAlert({ ...success, message: "Successfully sent changes to the server" })
+          props.onNext && await props.onNext();
+        }
       }
       else {
-        setAlert({ ...alert, ...error, message: "Unsuccessfully sent changes to the server" })
+        setAlert({ ...error, message: "Unsuccessfully sent changes to the server" })
       }
     }
   }
@@ -222,10 +242,10 @@ export function FormView<T>(props: IFormViewProps<T>) {
     if (props.handleDelete) {
       if (await props.handleDelete(index)) {
         clearLocalStorage();
-        setAlert({ ...alert, ...success, message: "Successfully deleted the item." })
+        setAlert({ ...success, message: "Successfully deleted the item." })
       }
       else {
-        setAlert({ ...alert, ...error, message: "Unable to delete the item." })
+        setAlert({ ...error, message: "Unable to delete the item." })
       }
     }
   }
@@ -233,6 +253,13 @@ export function FormView<T>(props: IFormViewProps<T>) {
   function clearLocalStorage() {
     if (localStorage.getItem(localStorageKey) !== null)
       localStorage.removeItem(localStorageKey);
+  }
+
+  const handleCloseAlert = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlert({...alert, open: false});
   }
 
   if (loadLocal) {
@@ -258,24 +285,24 @@ export function FormView<T>(props: IFormViewProps<T>) {
   }
   else {
     return (
-      <>
+      <Grid>
         {/* Alert Snackbar */}
         <Snackbar
           open={alert.open}
           autoHideDuration={alert.autoHideDuration}
-          onClose={() => { setAlert({ ...alert, open: false }) }}
+          onClose={handleCloseAlert}
           anchorOrigin={alert.origin}
         >
-            <Alert severity={alert.severity}>
-                {alert.message || ''}
-            </Alert>
+          <Alert severity={alert.severity}>
+            {alert.message}
+          </Alert>
         </Snackbar>
 
         {/* Button Group */}
         <Grid className="d-flex flex-wrap">
           <AlertDialogButton
             id="refreshForm"
-            className="m-1"
+            className={props.hideLockButton ? "d-none" : "m-1"}
             label={locked ? <Lock color="primary" /> : <LockOpen color="primary" />}
             title={locked ? "Unlock this form" : "Lock this form"}
             description={locked ? "Unlocking this form will allow you to make changes." : "Lock this form to prevent unwanted changes."}
@@ -286,8 +313,8 @@ export function FormView<T>(props: IFormViewProps<T>) {
           />
           <AlertDialogButton
             id="saveForm"
-            className={!locked ? "m-1 ml-auto" : "d-none"}
-            label="Save"
+            className={locked || props.hideSaveProgressButton ? "d-none" : "m-1 ml-auto"}
+            label="Save Progress"
             title="You have selected to save your current process locally."
             description="Warning: If you have local storage disabled then your changes 
             will not be saved and deleting your local storage will erase this data."
@@ -297,20 +324,14 @@ export function FormView<T>(props: IFormViewProps<T>) {
             onSubmit={handleLocalChanges}
             disabled={props.handleSaveChanges === undefined}
           />
-          <AlertDialogButton
-            id="printForm"
-            className={!locked ? "m-1" : "d-none"}
-            label="Print"
-            title="You have selected to print the form."
-            description="This print feature was developed to work with Chrome and Microsoft Print to PDF. Other browsers and print method may not display correctly."
-            color="primary"
-            backLabel="Cancel"
-            forwardLabel="Print"
-            onSubmit={handlePrint}
+
+          <PrintButton 
+            className={locked || props.hidePrintButton ? "d-none" : "m-1"}
+            displayPrint={displayPrint}
           />
         </Grid>
 
-        <Paper className={"p-3 print-paper"} ref={printComponentRef}>
+        <Paper className={"p-3 print-paper"} ref={printComponentRef} style={paperStyle}>
           <Grid item xs={12}>
             <Typography variant="h3" className="text-center">{props.title}</Typography>
           </Grid>
@@ -320,37 +341,41 @@ export function FormView<T>(props: IFormViewProps<T>) {
           </Grid>
           <Grid container spacing={3} className="print-container">
 
-            {/* Form */}
+            {/* Forms */}
             <Grid item xs={12}>
-
-              {props.forms.map((item: any, index: number) => {
-                const key = props.handleGenerateKey(item);
-                return (
-                  <props.FormElement
-                    key={key}
-                    index={index}
-                    onChange={onChange}
-                    values={item}
-                    printMode={printMode}
-                    locked={locked}
-                    handleDelete={handleDelete}
-
-                    onChangeList={onChangeList}
-                    handleAddList={handleAddList}
-                    handleDeleteList={handleDeleteList}
-                  />
-                )
+              {props.forms && props.forms.map((item: any, index: number) => {
+                const key = props.handleGenerateKey ? props.handleGenerateKey(item) : `${localStorageKey}${index}`
+                if (props.FormElement) {
+                  return (
+                    <props.FormElement 
+                      key={key}
+                      index={index}
+                      locked={locked}
+                      printMode={printMode}
+                      values={item}
+                      handleAddList={handleAddList}
+                      handleDelete={handleDelete}
+                      handleDeleteList={handleDeleteList}
+                      handlePrintRef={handlePrintRef}
+                      onChangeList={onChangeList}
+                      onChange={onChange}
+                    />
+                  )
+                }
+                else {
+                  return (<></>)
+                }
               })}
-
-              {props.forms.length < 1 && 
+              {props.forms && props.forms.length < 1 && 
                 <Grid>
-                  <Typography className="text-center p-3">There are currently no forms avaiable to edit.</Typography>
+                  <Typography className="text-center p-3">There are currently no forms to edit.</Typography>
                 </Grid>
               }
-
+              {!props.FormElement && <Grid><Typography className="text-center p-3">Development Error: Form Element is not defined.</Typography></Grid>}
+              {!props.forms && <Grid><Typography className="text-center p-3">Development Error: Forms is not defined</Typography></Grid>}
             </Grid>
             <Grid item xs={12}>
-              {props.forms.length < props.maxNodes && (
+              {props.forms && props.forms.length < (props.maxNodes ? props.maxNodes : 1) && (
                 <Grid className="d-flex">
                   <Button
                     className={!locked ? "ml-auto" : "d-none"}
@@ -364,30 +389,30 @@ export function FormView<T>(props: IFormViewProps<T>) {
             </Grid>
             
             {/* Bottom Submit Button */}
-            {!locked &&
-              <Grid item xs={12}>
-                <Grid className={props.submitButtonRef ? "d-none" : "d-flex"}>
-                  <AlertDialogButton
-                    ref={props.submitButtonRef}
-                    id="saveForm"
-                    className="mx-auto d-flex w-50 mb-3"
-                    btnClass="w-100"
-                    label="Submit"
-                    title="You have selected to submit your information."
-                    description="This action will save this information to your user account."
-                    color="primary"
-                    backLabel="Cancel"
-                    forwardLabel="Submit"
-                    onSubmit={handleSubmit}
-                    disabled={props.handleSubmit === undefined}
-                  />
-                </Grid>
+            <Grid item xs={12} className={locked || props.submitButtonRef ? "d-none" : ""}>
+              <Grid className="d-flex">
+                <AlertDialogButton
+                  submitButtonRef={props.submitButtonRef}
+                  id="saveForm"
+                  className="mx-auto d-flex w-50 mb-3"
+                  btnClass="w-100"
+                  label="Submit"
+                  title="You have selected to submit your information."
+                  description="This action will save this information to your user account."
+                  color="primary"
+                  backLabel="Cancel"
+                  forwardLabel="Submit"
+                  onSubmit={handleSubmit}
+                  disabled={props.handleSubmit === undefined || locked}
+                  pendingChanges={pendingChanges}
+                  allowSkip={true}
+                />
               </Grid>
-            }
+            </Grid>
 
           </Grid>
         </Paper>
-      </>
+      </Grid>
     );
   }
 }

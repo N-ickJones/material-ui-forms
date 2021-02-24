@@ -1,0 +1,73 @@
+import { Typography } from "@material-ui/core";
+import React, { useEffect, useRef, useState } from "react";
+import { FormStepper } from "../components/FormStepper";
+import { decrypt, encrypt } from "../functions/functions";
+import { IStepperViewProps } from "../interfaces/IStepperViewProps";
+
+export function StepperView(props: IStepperViewProps) {
+    const [activeStep, setActiveStep] = useState(0);
+    const submitButtonRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
+
+    useEffect(() => {
+        if (props.localStorageKey && localStorage.getItem(props.localStorageKey)) {
+            const cipherText = localStorage.getItem(props.localStorageKey);
+            if (cipherText) {
+                const num = parseInt(decrypt(cipherText, props.localStorageKey));
+                if(!isNaN(num) && num !== 0)
+                    setActiveStep(num);
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        props.localStorageKey && localStorage.setItem(props.localStorageKey, encrypt(activeStep.toString(), props.localStorageKey));
+    }, [activeStep]);
+
+    const handleBack = async () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
+
+    const handleNext = async () => {
+        submitButtonRef.current.click();
+    }
+
+    function ActiveForm() {
+        const onNext = async () => {
+            if (activeStep < props.formsList.length - 1) {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1)
+            }
+            else if (activeStep === props.formsList.length - 1) {
+                props.handleSubmit && props.handleSubmit();
+            }
+        }
+
+        if (props.formsList[activeStep]) {
+            return (
+                props.formsList[activeStep]({
+                    onNext: onNext,
+                    submitButtonRef: submitButtonRef,
+                    defaultLocked: props.defaultLocked !== undefined ? props.defaultLocked : false,
+                    hideLockButton: props.hideLockButton !== undefined ? props.hideLockButton : true,
+                    hidePrintButton: props.hidePrintButton !== undefined ? props.hidePrintButton : true,
+                    hideSaveProgressButton: props.hideSaveProgressButton !== undefined ? props.hideSaveProgressButton : true
+                })
+            )
+        }
+        else {
+            return (
+                <Typography>Form Not Found</Typography>
+            )
+        }
+    }
+
+    return (
+        <FormStepper
+            steps={props.formsList.length}
+            activeStep={activeStep}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeForm={<ActiveForm />}
+            hideDotsStepper={props.hideDotsStepper}
+        />
+    )
+}

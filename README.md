@@ -1,514 +1,127 @@
 # material-ui-forms
+![npm](https://img.shields.io/npm/v/material-ui-forms)
+[![npm](https://img.shields.io/npm/dw/material-ui-forms)][npm-url]
+[![GitHub repo size][github-repo-size]][github-url]
+[![npm bundle size][npm-bundle-size]][npm-url]
+[![GitHub top language][github-top-language-shield]][github-url]
+![npm](https://img.shields.io/npm/l/material-ui-forms)
 
-## Author: Nicholas Jones
+## Peer Dependencies
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/react)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/@material-ui/core)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/@material-ui/icons)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/@material-ui/lab)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/react-to-print)
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/peer/next)
 
-#### App is still in development. 
-    It's not recommended to start using this package until it's first stable release.
+## Dependencies
+![npm (prod) dependency version](https://img.shields.io/npm/dependency-version/material-ui-forms/crypto-js)
 
-#### Current Issues
-    Need to decouple next router from package
-    Need to add documentation to modules and readme
-    Remove unused event in FormView then modify tsconfig.json
-    Fully Test the print feature
-    
-    
+- [material-ui-forms](#material-ui-forms)
+  - [Peer Dependencies](#peer-dependencies)
+  - [Dependencies](#dependencies)
+  - [About The Project](#about-the-project)
+    - [Built With](#built-with)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [Roadmap](#roadmap)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Contact](#contact)
+  - [Acknowledgements](#acknowledgements)
 
 
 
 
+## About The Project
+This projects goal is to make using material-ui to create webforms easy, fast, and fully featured. The features include: 
+* The ability to add locks to the form without much effort. Use case being role management, content management or similar.
+* The ability to save user progress, using local storage, allowing for a quick return.
+* The ability to print the forms with automatic page breaks conveniencing both the developer and end user.
+* Generic typeing to reduce coupling between form logic and controllers (api calls).
+* Simplification of complex components such as AutoComplete to reduce the amount of configuration is basic use cases.
+* Compiling helper functions, option lists, and hooks commonly used in material UI forms.
+* ...more descriptions in future releases
 
 
+### Built With
+* [React](https://reactjs.org/)
+* [Material UI](https://material-ui.com)
+* [NextJs](https://nextjs.org/)
+* [CryptoJS](https://www.npmjs.com/package/crypto-js)
+* [TypeScript](https://www.typescriptlang.org/)
+* [React to Print](https://www.npmjs.com/package/react-to-print)
 
-#### Usage Example - FormView without sub forms
-    The functions need to be modified to work with your api calls and data.
-```ts
-import React, { ChangeEvent, useState } from 'react';
-import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
-import { AlertDialogButton, AutoFreeField, CustomTextField, FormView, IFormProps, 
-    isText, isValidId, usCityOptions, usStateOptions } from 'material-ui-forms';
 
-//Custom Type for Agency Data
-import Agency from '../../../models/profile/Agency';
-//Controller that handles the Api Calls
-import agenciesController from '../../../controllers/profile/AgenciesController';
+## Getting Started
+To get started you'll need to [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html).
+I recommend using TypeScript to take full advantage of the types and interfaces defined in material-ui-forms but, it's not neccessary.
+For TypeScript create a project [--template typescript](https://create-react-app.dev/docs/adding-typescript).
 
-export interface IAgencyFormViewProps { }
 
-export default function AgencyFormView(props: IAgencyFormViewProps) {
-  const [forms, setForms] = useState([] as Agency[]);
-  
-  //Unique ID to use until a server generated id is created. 
-  //Since my server starts with the lowest integer number working up I start with the Highest working down.
-  const [uid, setUid] = useState(Number.MAX_SAFE_INTEGER);
+### Prerequisites
+This project is still in development and requires the following peer dependencies to use.
+  ```json
+  "@material-ui/core": "^4.11.0",
+  "@material-ui/icons": "^4.9.1",
+  "@material-ui/lab": "^4.0.0-alpha.56",
+  "react": "^16.13.1",
+  "react-dom": "^17.0.1",
+  "react-to-print": "^2.11.0",
+  "next": "^9.5.5"
+  ```
+The next (NextJs) dependency will be removed in a future release to allow developers to specify their router.
 
-  const handleLoad = async (local: boolean, data?: any): Promise<boolean> => {
-    if (local && data) {
-      setForms(data);
-    }
-    else {
-      const agencies = await agenciesController.getAll();
-      if (!agencies) return false;
-      setForms(agencies);
-    }
-    return true;
-  }
 
-  const handleAddNewItem = async () => {
-    forms.push({ agencyId: uid } as Agency);
-    setUid(uid - 1);
-    setForms([...forms]);
-  }
+### Installation
+  ```sh
+  npm install material-ui-forms
+  ```
 
-  const handleSubmit = async (): Promise<boolean> => {
-    let success = true;
-    forms.forEach(async (agency, index) => {
-      if (agency.agencyId && isValidId(agency.agencyId)) {
-        if (!await handleUpdate(agency.agencyId, agency)) {
-          success = false;
-        }
-      }
-      else {
-        if (!await handleCreate(index, agency)) {
-          success = false;
-        }
-      }
-    });
-    return success;
-  }
 
-  const handleCreate = async (index: number, agency: Agency): Promise<boolean> => {
-    const agencyResponse = await agenciesController.create({ ...agency, agencyId: undefined });
-    if (agencyResponse) {
-      //Flush Forms temp key for real key
-      const tForms = forms;
-      tForms[index] = agencyResponse
-      setForms([])
-      setForms(tForms);
-      return true;
-    }
-    return false;
-  }
+## Usage
+_Coming Soon: For more examples, please refer to the [Documentation](https://github.com/N-ickJones/material-ui-forms/examples)_
 
-  const handleUpdate = async (id: number, agency: Agency): Promise<boolean> => {
-    const response = await agenciesController.update(id, agency);
-    return response;
-  }
 
-  const handleDelete = async (index: number): Promise<boolean> => {
-    const agencyId = forms[index].agencyId;
-    if (agencyId && isValidId(agencyId)) {
-      const response = await agenciesController.delete(agencyId);
-      if (!response) { return false; }
-    }
-    if (forms.length >= index) {
-      setForms(forms.filter((_, i) => i !== index))
-    }
-    return true;
-  }
+## Roadmap
+See the [open issues][github-issues-url] for a list of proposed features (and known issues).
 
-  const handleSaveChanges = async (): Promise<boolean> => {
-    setForms([...forms]);
-    return true;
-  }
 
-  const handleGenerateKey = (item: Agency) => {
-    return `Agency${item.agencyId}`;
-  }
+## Contributing
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/HelpfulFeature`)
+3. Commit your Changes (`git commit -m 'Add a HelpfulFeature'`)
+4. Push to the Branch (`git push origin feature/HelpfulFeature`)
+5. Open a Pull Request
 
-  return (
-    <FormView<Agency>
-      FormElement={AgencyForm}
-      title={"Volunteer Agencies"}
-      maxWidth={"md"}
-      maxNodes={3}
-      forms={forms}
-      handleLoad={handleLoad}
-      handleSubmit={handleSubmit}
-      handleAddNewItem={handleAddNewItem}
-      handleSaveChanges={handleSaveChanges}
-      handleDelete={handleDelete}
-      handleGenerateKey={handleGenerateKey}
-    />
-  )
 
-}
+## License
+Distributed under the MIT License. See [License](https://en.wikipedia.org/wiki/MIT_License) for more information.
 
-//When creating the forms you must ensure that name and the generic object T (Agency in this case) fields match
-export function AgencyForm(props: IFormProps<Agency>) {
-  const title = "Agency";
-  const {
-    index,
-    values,
-    // use printMode to modify the look of material-ui when print is selected (using Grid breakpoints, chrome will use the xs value)
-    printMode,
-    locked,
-  } = props;
-  const handleChange = (e: ChangeEvent<HTMLInputElement | {}>, property: string, value: string | boolean) => {
-    props.onChange(e, props.index, property, value);
-  }
-  const handleDelete = async () => {
-    props.handleDelete && props.handleDelete(index);
-  }
-  return (
-    <React.Fragment>
-      <Grid container spacing={3}>
-        <Grid container item xs={12}>
-          <Grid>
-            <Typography variant="h5">{title} - {props.index + 1}</Typography>
-          </Grid>
-          <Grid className="ml-auto">
-            <AlertDialogButton
-              className={!locked ? "" : "d-none"}
-              id="deleteForm"
-              label="Delete"
-              title={`Are you sure you want to delete this ${title}?`}
-              description={`This will remove the ${title.toLowerCase()} from your profile.`}
-              color="secondary"
-              backLabel="Cancel"
-              forwardLabel="Delete"
-              onSubmit={handleDelete}
-              disabled={props.handleDelete === undefined}
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter a volunteer agency name"
-            label="Name"
-            
-            {/* For this to work the name="here" and the property values.[here] must match */}
-            name="name"
-            onChange={handleChange}
-            value={values.name}
-            
-            
-            validators={[
-              isText
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <AutoFreeField
-            placeholder="Enter a city"
-            label="City"
-            name="city"
-            onChange={handleChange}
-            value={values.city}
-            locked={locked}
-            options={usCityOptions}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <AutoField
-            label="State"
-            name="state"
-            onChange={handleChange}
-            value={values.state}
-            locked={locked}
-            options={usStateOptions}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter the duties performed"
-            label="Duties"
-            name="duties"
-            onChange={handleChange}
-            value={values.duties}
-            validators={[
-              isText
-            ]}
-            locked={locked}
-            multiline={true}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your supervisor's name"
-            label="Supervisor"
-            name="supervisor"
-            onChange={handleChange}
-            value={values.supervisor}
-            validators={[
-              isText
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your start date"
-            type="date"
-            label="Start Date"
-            name="startDate"
-            onChange={handleChange}
-            value={values.startDate}
-            validators={[
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
-        <Grid item xs={props.printMode ? 12 : 12}>
-          <CustomTextField
-            placeholder="Enter your end date"
-            type="date"
-            label="End Date"
-            name="endDate"
-            onChange={handleChange}
-            value={values.endDate}
-            validators={[
-            ]}
-            locked={locked}
-            required={true}
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  )
-}
 
-```
+## Contact
+* Name: Nicholas Jones
+* [Github](https://github.com/N-ickJones)
+* [LinkedIn](https://www.linkedin.com/in/nicholas-jones-bb2581a1/)
+* [StackOverFlow](https://stackoverflow.com/users/story/9173346)
 
-#### Usage Example: FormView with Subform
 
-```ts
+## Acknowledgements
+* [Img Shields](https://shields.io)
+* [Choose an Open Source License](https://choosealicense.com)
+* [Font Awesome](https://fontawesome.com)
 
-//... other imports here
-import { AlertDialogButton, CheckField, CustomTextField, FieldOption, FormView, IFormProps, isValidId } from 'material-ui-forms';
 
-export default function JobApplicationFormView() {
-  const [forms, setForms] = useState([] as JobApplication[]);
-  const [uid, setUid] = useState(Number.MAX_SAFE_INTEGER);
+<!-- SHIELDS -->
+[github-top-language-shield]: https://img.shields.io/github/languages/top/N-ickJones/material-ui-forms
+[npm-bundle-size]: https://img.shields.io/bundlephobia/min/material-ui-forms
+[github-repo-size]: https://img.shields.io/github/repo-size/N-ickJones/material-ui-forms
 
-  const handleLoad = async (local: boolean, data?: any): Promise<boolean> => {
-    if (local && data) {
-      setForms(data);
-    }
-    else {
-        //My API includes the PreviousState/Qualfication one-many relations automatically. You might need to do multiple calls for the sub form data.
-      const jobApplications = await jobApplicationsController.getAll();
-      if (!jobApplications) return false;
-      setForms(jobApplications);
-    }
-    return true;
-  }
 
-  const handleAddNewItem = async () => {
-      //Add Empty List for new form
-    forms.push({ 
-      jobApplicationId: uid, 
-      previousStates: [] as PreviousState[], 
-      qualifications: [] as Qualification[] 
-    } as JobApplication);
-    setUid(uid - 1);
-    setForms([...forms]);
-  }
-
-  const handleSubmit = async (): Promise<boolean> => {
-    let success = true;
-    forms.forEach(async (jobApplication, index) => {
-      if (jobApplication.jobApplicationId && isValidId(jobApplication.jobApplicationId)) {
-        if (!await handleUpdate(jobApplication.jobApplicationId, { ...jobApplication, previousStates: undefined })) {
-          success = false;
-        }
-        else {
-          if (success)
-            success = await handleSubmit_PreviousStates(index, jobApplication);
-          if (success)
-            success = await handleSubmit_Qualfications(index, jobApplication);
-        }
-      }
-      else {
-        if (!await handleCreate(index, jobApplication)) {
-          success = false;
-        }
-      }
-    });
-
-    return success;
-  }
-
-  const handleSubmit_PreviousStates = async (index: number, jobApplication: JobApplication) => {
-    if (!jobApplication.previousStates) return true;
-    let success = true;
-    jobApplication.previousStates.forEach(async previousState => {
-      if (previousState.previousStateId && isValidId(previousState.previousStateId)) {
-        if(!await previousStatesController.update(previousState.previousStateId, previousState))
-          success = false;
-      }
-      else {
-        if(!await previousStatesController.create({ ...previousState, jobApplicationId: forms[index].jobApplicationId }))
-          success = false;
-      }
-    });
-    return success;
-  }
-//...etc everything else the same as no subforms example
-  
-
-export function JobApplicationForm(props: IFormProps<JobApplication>) {
-  const { index, values, printMode, locked } = props;
-  const title = "JobApplication";
-  
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, property: string, value: string | boolean) => {
-    props.onChange(e, props.index, property, value);
-  }
-
-  const handleDelete = async () => {
-    props.handleDelete && props.handleDelete(index);
-  }
-
-  //Example of Loading some fieldoptions used in the form...  
-  //#region AvailableJobs
-  const [availableJobs, setAvailableJobs] = useState([] as FieldOption[]);
-  useEffect(() => {
-    const handleLoad = async () => {
-      const availableJobs = await availableJobsController.getAll();
-      if (!availableJobs) return false;
-      let choices = [] as FieldOption[];
-      availableJobs.forEach(job => {
-        if (job.title && job.availableJobId)
-          choices.push({ label: job.title, value: job.availableJobId?.toString() })
-      })
-      setAvailableJobs(choices);
-    }
-    handleLoad();
-  }, []);
-  //#endregion
-
-  //#region CRUD Subform operations required
-  const handleAddList = (listProperty: string) => (e: any) => {
-    props.handleAddList && props.handleAddList(index, listProperty);
-  }
-
-  const handleChangeList = (listProperty: string, listIndex: number) => async (e: ChangeEvent<HTMLInputElement | {}>, property: string, value: string | boolean) => {
-    props.onChangeList && props.onChangeList(index, listProperty, listIndex, property, value);
-  }
-  
-  const handleDeleteList = (listProperty: string, listIndex: number, id?: number) => async () => {
-    let success = true;
-    if (id) {
-      const switchResult = async (id: number) => {
-        switch(listProperty) {
-          case "previousStates":
-            return await previousStatesController.delete(id) !== null;
-          case "qualifications":
-            return await qualificationsController.delete(id) !== null;
-          default:
-            return false;
-        }
-      }
-      success = await switchResult(id);
-    }
-
-    if (success) {
-      props.handleDeleteList && props.handleDeleteList(index, listProperty, listIndex);
-    }
-  }
-  //#endregion
-
-  return (
-    <React.Fragment>
-      <Grid container spacing={3}>
-        <Grid container item xs={12}>
-          <Grid>
-            <Typography variant="h5">{title} - {props.index + 1}</Typography>
-          </Grid>
-          <Grid className="ml-auto">
-            <AlertDialogButton
-              className={!locked ? "" : "d-none"}
-              id="deleteForm"
-              label="Delete"
-              title={`Are you sure you want to delete this ${title}?`}
-              description={`This will remove the ${title.toLowerCase()} from your profile.`}
-              color="secondary"
-              backLabel="Cancel"
-              forwardLabel="Delete"
-              onSubmit={handleDelete}
-              disabled={props.handleDelete === undefined}
-            />
-          </Grid>
-        </Grid>
-
-        /* Loading option data from API */}
-        <Grid item xs={props.printMode ? 12 : 12}>
-        {availableJobs.length > 0 ? (
-          <CustomTextField
-            placeholder="Select an available job"
-            label="Job Position"
-            name="availableJobId"
-            onChange={handleChange}
-            value={values.availableJobId?.toString()}
-            locked={locked}
-            select={true}
-            options={availableJobs}
-            disableSelectNone={true}
-          />
-          ) : <p>Loading available jobs</p>}
-        </Grid>
-
-        {/*Insert this in place like a normal field inside your form */}
-        {/* Previous States */}
-        <Grid container item xs={props.printMode ? 12 : 12}>
-          <Typography className="mb-3">Enter your previous states</Typography>
-          {values.previousStates?.map((item: PreviousState, listIndex: number) => (
-            <PreviousStateSubForm
-              key={`previousState${listIndex}`}
-              locked={props.locked}
-              listIndex={listIndex}
-              item={item}
-              handleChangeList={handleChangeList}
-              handleDeleteList={handleDeleteList}
-            />
-          ))}
-          <Button 
-            className={values.previousStates && values.previousStates?.length < 3 ? "" : "d-none"} 
-            onClick={handleAddList('previousStates')}
-          >Add</Button>
-        </Grid>
-
-   //...etc the rest of your form
-        
-```
-
-#### SubForm example uses ISubFormProps<T> interface
-```ts 
-export function PreviousStateSubForm(props: ISubFormProps<PreviousState>) {
-  return (
-    <Grid className="d-flex mb-3 w-100">
-      <AutoField 
-          label="State"
-          name="name"
-          onChange={props.handleChangeList("previousStates", props.listIndex)}
-          value={props.item.name}
-          locked={props.locked}
-          options={usStateOptions}
-          required={true}
-      />
-      <AlertDialogButton
-        className={!props.locked ? "" : "d-none"}
-        variant="text"
-        btnClass="h-100"
-        id="deleteForm"
-        label="Delete"
-        title={`Are you sure you want to delete this previous state?`}
-        description={`This will remove the previous state from your job Application.`}
-        color="secondary"
-        backLabel="Cancel"
-        forwardLabel="Delete"
-        onSubmit={props.handleDeleteList("previousStates", props.listIndex, props.item.previousStateId)}
-        disabled={props.handleDeleteList === undefined}
-      />
-    </Grid>
-  )
-}
-
-```
+<!-- URLs -->
+[github-url]: https://github.com/N-ickJones/material-ui-forms
+[github-issues-url]: https://github.com/N-ickJones/material-ui-forms/issues
+[npm-url]: https://www.npmjs.com/package/material-ui-forms

@@ -20,3 +20,17 @@ export type FieldOption = {
     label: string;
     value: string;
 }
+
+export type PaperSize = {
+    ratio: number,
+    dpi: number,
+    height: number,
+    width: number
+}
+
+export type PaperMargin = {
+    top?: number,
+    bottom?: number,
+    left?: number,
+    right?: number,
+}

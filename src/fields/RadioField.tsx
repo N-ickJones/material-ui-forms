@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState} from "react";
-import { FormControlLabel, FormControl,  FormLabel, Radio, RadioGroup } from "@material-ui/core";
+import React, { ChangeEvent, useState } from "react";
+import { FormControlLabel, FormControl, FormLabel, Radio, RadioGroup } from "@material-ui/core";
 import { FieldOption } from "../types/types";
 
 export interface IRadioFieldProps {
@@ -21,30 +21,30 @@ export function RadioField(props: IRadioFieldProps) {
         }
     }
     return (
-        <FormControl 
-            component="fieldset" 
-            variant={props.variant || "outlined"} 
+        <FormControl
+            component="fieldset"
+            variant={props.variant || "outlined"}
             fullWidth
         >
-            <FormLabel 
+            <FormLabel
                 component="legend"
             >
                 {props.label}
             </FormLabel>
             <RadioGroup
                 aria-label={props.name}
-                name={props.name} 
-                value={value} 
+                name={props.name}
+                value={value}
                 onChange={onChange}
                 row={props.row}
             >
                 {props.options && props.options.map((item: FieldOption, id: number) => {
                     return (
-                        <FormControlLabel 
-                            key={`${item.value}_${id}`} 
-                            value={item.value} 
-                            control={<Radio  />} 
-                            label={item.label} 
+                        <FormControlLabel
+                            key={`${item.value}_${id}`}
+                            value={item.value}
+                            control={<Radio />}
+                            label={item.label}
                         />
                     )
                 })}

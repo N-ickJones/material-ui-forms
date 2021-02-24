@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
-
 
 export interface ICheckFieldProps {
     name: string;
@@ -32,4 +31,3 @@ export function CheckField(props: ICheckFieldProps) {
         />
     )
 }
-

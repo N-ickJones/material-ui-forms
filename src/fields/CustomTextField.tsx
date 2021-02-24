@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MenuItem, TextField } from "@material-ui/core";
 import { FieldOption, FieldValidator } from "../types/types";
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
-
 
 export interface ICustomTextFieldProps {
     name: string;
@@ -36,7 +35,7 @@ export function CustomTextField(props: ICustomTextFieldProps) {
     }, [value])
 
     function handleShrink() {
-        if(props.shrink || props.type === "date") {
+        if (props.shrink || props.type === "date") {
             return { shrink: true };
         }
         else {
@@ -44,18 +43,18 @@ export function CustomTextField(props: ICustomTextFieldProps) {
         }
     }
 
-    function validate(){
+    function validate() {
         const error = runValidation();
-        if (error) 
+        if (error)
             setError(error);
-        else if (error !== "") 
+        else if (error !== "")
             setError("");
     }
 
     function runValidation(): string | null {
         if (!props.validators) return null;
-        for(let i = 0; i < props.validators.length; i++) {
-            if (!props.validators[i].pattern.test(value || '')) 
+        for (let i = 0; i < props.validators.length; i++) {
+            if (!props.validators[i].pattern.test(value || ''))
                 return props.validators[i].message;
         }
         return null;
@@ -86,7 +85,7 @@ export function CustomTextField(props: ICustomTextFieldProps) {
             InputLabelProps={handleShrink()}
             required={props.required}
             select={props.select || false}
-            
+
         >
             {props.options && props.options.map((item: FieldOption, id: number) => {
                 return <MenuItem key={`${item.value}_${id}`} value={item.value}>{item.label}</MenuItem>;

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
 
 export interface ISwitchFieldProps {
@@ -30,5 +30,5 @@ export function SwitchField(props: ISwitchFieldProps) {
             }
         />
     )
-    
+
 }

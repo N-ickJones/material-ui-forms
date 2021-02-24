@@ -32,18 +32,25 @@ const DialogContentText_1 = __importDefault(require("@material-ui/core/DialogCon
 const DialogTitle_1 = __importDefault(require("@material-ui/core/DialogTitle"));
 function AlertDialogButton(props) {
     const [open, setOpen] = react_1.useState(false);
-    function handleOpen() {
-        setOpen(true);
+    async function handleClick() {
+        if (!props.pendingChanges && props.allowSkip) {
+            await handleSubmit();
+        }
+        else {
+            setOpen(true);
+        }
     }
     ;
-    function handleClose(submit) {
-        if (submit)
-            props.onSubmit && props.onSubmit();
+    async function handleClose(submit) {
+        submit && await handleSubmit();
         setOpen(false);
     }
     ;
+    async function handleSubmit() {
+        props.onSubmit && await props.onSubmit();
+    }
     return (react_1.default.createElement("div", { className: props.className },
-        react_1.default.createElement(Button_1.default, { ref: props.ref, className: props.btnClass, variant: props.variant || "outlined", color: props.color ? props.color : "primary", onClick: () => handleOpen(), disabled: props.disabled }, props === null || props === void 0 ? void 0 : props.label),
+        react_1.default.createElement(Button_1.default, { ref: props.submitButtonRef, className: props.btnClass, variant: props.variant || "outlined", color: props.color ? props.color : "primary", onClick: () => handleClick(), disabled: props.disabled }, props === null || props === void 0 ? void 0 : props.label),
         react_1.default.createElement(Dialog_1.default, { open: open, onClose: () => handleClose(), "aria-labelledby": `alert-${props.id}-title`, "aria-describedby": `alert-${props.id}-description` },
             react_1.default.createElement(DialogTitle_1.default, { id: `alert-${props.id}-title` }, props === null || props === void 0 ? void 0 : props.title),
             react_1.default.createElement(DialogContent_1.default, null,

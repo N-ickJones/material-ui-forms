@@ -18,7 +18,7 @@ import { PropTypes } from '@material-ui/core';
  * @backOnOutsideClick
  */
 export interface IAlertDialogButtonProps {
-  ref?: React.MutableRefObject<HTMLButtonElement>;
+  submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
 
   onSubmit?: () => Promise<void>;
   id?: string;
@@ -33,29 +33,40 @@ export interface IAlertDialogButtonProps {
   variant?: "text" | "outlined" | "contained" | undefined;
   className?: string;
 
+  allowSkip?: boolean
+  pendingChanges?: boolean;
+
 }
 
 export function AlertDialogButton(props: IAlertDialogButtonProps) {
   const [open, setOpen] = useState(false);
 
-  function handleOpen() {
-    setOpen(true);
+  async function handleClick() {
+    if (!props.pendingChanges && props.allowSkip) {
+      await handleSubmit();
+    }
+    else {
+      setOpen(true);
+    }
   };
 
-  function handleClose(submit?: boolean) {
-    if (submit)
-      props.onSubmit && props.onSubmit();
+  async function handleClose (submit?: boolean) {
+    submit && await handleSubmit();
     setOpen(false);
   };
+
+  async function handleSubmit() {
+    props.onSubmit && await props.onSubmit();
+  }
 
   return (
     <div className={props.className}>
       <Button
-        ref={props.ref}
+        ref={props.submitButtonRef}
         className={props.btnClass} 
         variant={props.variant || "outlined"} 
         color={props.color ? props.color : "primary"} 
-        onClick={() => handleOpen()}
+        onClick={() => handleClick()}
         disabled={props.disabled}
       >
         {props?.label}
