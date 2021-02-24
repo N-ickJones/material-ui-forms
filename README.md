@@ -82,7 +82,7 @@ The next (NextJs) dependency will be removed in a future release to allow develo
 
 
 ## Usage
-_Coming Soon: For more examples, please refer to the [Documentation](https://github.com/N-ickJones/material-ui-forms/examples)_
+_For more examples, please refer to the [Documentation](https://github.com/N-ickJones/material-ui-forms/tree/master/examples)_
 
 
 ## Roadmap
