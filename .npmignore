@@ -2,3 +2,4 @@ node_modules
 run.ps1
 *.tgz
 src
+examples
