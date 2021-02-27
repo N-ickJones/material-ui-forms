@@ -4,6 +4,7 @@ import { CheckField } from "./CheckField";
 import { CustomTextField } from "./CustomTextField";
 import { RadioField } from "./RadioField";
 import { SwitchField } from "./SwitchField";
+import { ViewField } from "./ViewField";
 
 export {
     AutoField,
@@ -11,5 +12,6 @@ export {
     CheckField,
     CustomTextField,
     RadioField,
-    SwitchField
+    SwitchField,
+    ViewField
 }

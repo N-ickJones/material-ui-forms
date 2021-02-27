@@ -197,6 +197,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
         else {
           clearLocalStorage();
           setAlert({ ...success, message: "Successfully sent changes to the server" })
+          setPendingChanges(false);
           props.onNext && await props.onNext();
         }
       }
@@ -331,7 +332,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
           />
         </Grid>
 
-        <Paper className={"p-3 print-paper"} ref={printComponentRef} style={paperStyle}>
+        <Paper className={printMode ? "" : "p-3"} ref={printComponentRef} style={printMode ? paperStyle : {}}>
           <Grid item xs={12}>
             <Typography variant="h3" className="text-center">{props.title}</Typography>
           </Grid>
@@ -339,7 +340,8 @@ export function FormView<T>(props: IFormViewProps<T>) {
           <Grid item xs={12}>
             <Divider className="my-3" />
           </Grid>
-          <Grid container spacing={3} className="print-container">
+
+          <Grid container spacing={3}>
 
             {/* Forms */}
             <Grid item xs={12}>

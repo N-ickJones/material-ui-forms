@@ -49,7 +49,7 @@ export function useMuiPrinting(paper?: PaperSize, margin?: PaperMargin): [
 
             if (location >= currentPageBottom - props.marginBottom) {
                 //Calculates the minimum between bottom margin and distance to bottom of the page then adds the margin top
-                const offsetMargin = Math.min(props.marginBottom, Math.abs(currentPageBottom - previousLocation)) + props.marginTop;
+                const offsetMargin = Math.max(props.marginBottom, Math.abs(currentPageBottom - previousLocation)) + props.marginTop;
                 if (i > 0) {
                     const prevElement = inputRefs.current[i - 1];
                     if (prevElement) {

@@ -1,13 +1,14 @@
 import { Typography } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FormStepper } from "../components/FormStepper";
-import { decrypt, encrypt } from "../functions/functions";
+//import { decrypt, encrypt } from "../functions/functions";
 import { IStepperViewProps } from "../interfaces/IStepperViewProps";
 
 export function StepperView(props: IStepperViewProps) {
     const [activeStep, setActiveStep] = useState(0);
     const submitButtonRef = useRef() as React.MutableRefObject<HTMLButtonElement>;
 
+    /* //Disabled until a future release that fixes multiple bugs
     useEffect(() => {
         if (props.localStorageKey && localStorage.getItem(props.localStorageKey)) {
             const cipherText = localStorage.getItem(props.localStorageKey);
@@ -22,6 +23,7 @@ export function StepperView(props: IStepperViewProps) {
     useEffect(() => {
         props.localStorageKey && localStorage.setItem(props.localStorageKey, encrypt(activeStep.toString(), props.localStorageKey));
     }, [activeStep]);
+    */
 
     const handleBack = async () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);

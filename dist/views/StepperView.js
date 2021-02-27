@@ -23,23 +23,25 @@ exports.StepperView = void 0;
 const core_1 = require("@material-ui/core");
 const react_1 = __importStar(require("react"));
 const FormStepper_1 = require("../components/FormStepper");
-const functions_1 = require("../functions/functions");
 function StepperView(props) {
     const [activeStep, setActiveStep] = react_1.useState(0);
     const submitButtonRef = react_1.useRef();
-    react_1.useEffect(() => {
+    /* //Disabled until a future release that fixes multiple bugs
+    useEffect(() => {
         if (props.localStorageKey && localStorage.getItem(props.localStorageKey)) {
             const cipherText = localStorage.getItem(props.localStorageKey);
             if (cipherText) {
-                const num = parseInt(functions_1.decrypt(cipherText, props.localStorageKey));
-                if (!isNaN(num) && num !== 0)
+                const num = parseInt(decrypt(cipherText, props.localStorageKey));
+                if(!isNaN(num) && num !== 0)
                     setActiveStep(num);
             }
         }
-    }, []);
-    react_1.useEffect(() => {
-        props.localStorageKey && localStorage.setItem(props.localStorageKey, functions_1.encrypt(activeStep.toString(), props.localStorageKey));
+    }, [])
+
+    useEffect(() => {
+        props.localStorageKey && localStorage.setItem(props.localStorageKey, encrypt(activeStep.toString(), props.localStorageKey));
     }, [activeStep]);
+    */
     const handleBack = async () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };

@@ -16,14 +16,18 @@ function FormStepper(props) {
         props.handleBack();
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        !props.hideDotsStepper &&
-            react_1.default.createElement(core_1.MobileStepper, { variant: "dots", steps: props.steps, position: "static", activeStep: props.activeStep, nextButton: react_1.default.createElement("div", null), backButton: react_1.default.createElement("div", null) }),
-        props.activeForm,
         react_1.default.createElement(core_1.MobileStepper, { variant: "progress", steps: props.steps, position: "static", activeStep: props.activeStep, nextButton: react_1.default.createElement(core_1.Button, { size: "small", onClick: handleNext, disabled: props.activeStep === props.steps },
                 props.activeStep === props.steps - 1 ? "Submit" : "Next",
                 theme.direction === "rtl" ? (react_1.default.createElement(icons_1.KeyboardArrowLeft, null)) : (react_1.default.createElement(icons_1.KeyboardArrowRight, null))), backButton: react_1.default.createElement(core_1.Button, { size: "small", onClick: handleBack, disabled: props.activeStep === 0 },
                 theme.direction === "rtl" ? (react_1.default.createElement(icons_1.KeyboardArrowRight, null)) : (react_1.default.createElement(icons_1.KeyboardArrowLeft, null)),
-                "Back") })));
+                "Back") }),
+        props.activeForm,
+        !props.hideDotsStepper &&
+            react_1.default.createElement(core_1.MobileStepper, { variant: "dots", steps: props.steps, position: "static", activeStep: props.activeStep, nextButton: react_1.default.createElement(core_1.Button, { size: "small", onClick: handleNext, disabled: props.activeStep === props.steps },
+                    props.activeStep === props.steps - 1 ? "Submit" : "Next",
+                    theme.direction === "rtl" ? (react_1.default.createElement(icons_1.KeyboardArrowLeft, null)) : (react_1.default.createElement(icons_1.KeyboardArrowRight, null))), backButton: react_1.default.createElement(core_1.Button, { size: "small", onClick: handleBack, disabled: props.activeStep === 0 },
+                    theme.direction === "rtl" ? (react_1.default.createElement(icons_1.KeyboardArrowRight, null)) : (react_1.default.createElement(icons_1.KeyboardArrowLeft, null)),
+                    "Back") })));
 }
 exports.FormStepper = FormStepper;
 //# sourceMappingURL=FormStepper.js.map

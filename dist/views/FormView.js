@@ -178,6 +178,7 @@ function FormView(props) {
                 else {
                     clearLocalStorage();
                     setAlert(Object.assign(Object.assign({}, success), { message: "Successfully sent changes to the server" }));
+                    setPendingChanges(false);
                     props.onNext && await props.onNext();
                 }
             }
@@ -251,12 +252,12 @@ function FormView(props) {
                 react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "refreshForm", className: props.hideLockButton ? "d-none" : "m-1", label: locked ? react_1.default.createElement(icons_1.Lock, { color: "primary" }) : react_1.default.createElement(icons_1.LockOpen, { color: "primary" }), title: locked ? "Unlock this form" : "Lock this form", description: locked ? "Unlocking this form will allow you to make changes." : "Lock this form to prevent unwanted changes.", color: "primary", backLabel: "Cancel", forwardLabel: locked ? "Unlock" : "Lock", onSubmit: handleLock }),
                 react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "saveForm", className: locked || props.hideSaveProgressButton ? "d-none" : "m-1 ml-auto", label: "Save Progress", title: "You have selected to save your current process locally.", description: "Warning: If you have local storage disabled then your changes \r\n            will not be saved and deleting your local storage will erase this data.", color: "primary", backLabel: "Cancel", forwardLabel: "Save Locally", onSubmit: handleLocalChanges, disabled: props.handleSaveChanges === undefined }),
                 react_1.default.createElement(components_1.PrintButton, { className: locked || props.hidePrintButton ? "d-none" : "m-1", displayPrint: displayPrint })),
-            react_1.default.createElement(core_1.Paper, { className: "p-3 print-paper", ref: printComponentRef, style: paperStyle },
+            react_1.default.createElement(core_1.Paper, { className: printMode ? "" : "p-3", ref: printComponentRef, style: printMode ? paperStyle : {} },
                 react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
                     react_1.default.createElement(core_1.Typography, { variant: "h3", className: "text-center" }, props.title)),
                 react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
                     react_1.default.createElement(core_1.Divider, { className: "my-3" })),
-                react_1.default.createElement(core_1.Grid, { container: true, spacing: 3, className: "print-container" },
+                react_1.default.createElement(core_1.Grid, { container: true, spacing: 3 },
                     react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
                         props.forms && props.forms.map((item, index) => {
                             const key = props.handleGenerateKey ? props.handleGenerateKey(item) : `${localStorageKey}${index}`;
