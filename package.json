@@ -1,35 +1,11 @@
 {
-  "_from": "material-ui-forms",
-  "_id": "material-ui-forms@1.0.0",
-  "_inBundle": false,
-  "_integrity": "sha512-gcQcNyzuPK8YZAjuDFFnjzOFMpxpU159xTy0TsWYpzTpkvMjLh825ETbFKpo8ETiLSY8bP8UGND4BDe/7TLUGQ==",
-  "_location": "/material-ui-forms",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "material-ui-forms",
-    "name": "material-ui-forms",
-    "escapedName": "material-ui-forms",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/material-ui-forms/-/material-ui-forms-1.0.0.tgz",
-  "_shasum": "38e1ad08776289aed8046560528838bdec4b59ca",
-  "_spec": "material-ui-forms",
-  "_where": "C:\\Users\\armyj\\Documents\\GitHub\\BridgeHospice\\client",
   "author": {
     "name": "Nicholas Jones"
   },
   "bugs": {
     "url": "https://github.com/N-ickJones/material-ui-forms/issues"
   },
-  "bundleDependencies": false,
+  "bundleDependencies": [],
   "deprecated": false,
   "description": "A library that makes using material ui components easier and quick to use. Contains common use cases.",
   "homepage": "https://github.com/N-ickJones/material-ui-forms#readme",
@@ -51,7 +27,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.11",
+  "version": "1.0.12",
   "peerDependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
