@@ -54,7 +54,7 @@ function AutoField(props) {
         else
             return value.value === option.value;
     };
-    return (react_1.default.createElement(lab_1.Autocomplete, { options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, getOptionSelected: handleOptionSelected, onChange: onChange, value: choiceValue || { label: "", value: "" }, getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(core_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required }))), filterOptions: lab_1.createFilterOptions({
+    return (react_1.default.createElement(lab_1.Autocomplete, { className: props.className, style: props.style, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, getOptionSelected: handleOptionSelected, onChange: onChange, value: choiceValue || { label: "", value: "" }, getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(core_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required }))), filterOptions: lab_1.createFilterOptions({
             ignoreCase: true
         }) }));
 }

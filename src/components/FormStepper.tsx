@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, MobileStepper, useTheme } from '@material-ui/core';
+import { Button, Grid, MobileStepper, useTheme } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 
 export interface IFormStepperProps {
@@ -9,6 +9,14 @@ export interface IFormStepperProps {
     handleBack: () => Promise<void>;
     activeForm?: React.ReactNode;
     hideDotsStepper?: boolean;
+
+    className?: string;
+    style?: React.CSSProperties;
+    upperClassName?: string;
+    upperStyle?: React.CSSProperties;
+    lowerClassName?: string;
+    lowerStyle?: React.CSSProperties;
+
 }
 
 export function FormStepper(props: IFormStepperProps) {
@@ -23,12 +31,10 @@ export function FormStepper(props: IFormStepperProps) {
     }
 
     return (
-        <>
-            
-
-            
-
+        <Grid className={props.className} style={props.style}>
             <MobileStepper
+                className={props.upperClassName} 
+                style={props.upperStyle}
                 variant={"progress"}
                 steps={props.steps}
                 position="static"
@@ -54,10 +60,13 @@ export function FormStepper(props: IFormStepperProps) {
                     </Button>
                 }
             />
+            
             {props.activeForm}
 
             {!props.hideDotsStepper &&
                 <MobileStepper
+                    className={props.lowerClassName} 
+                    style={props.lowerStyle}
                     variant={"dots"}
                     steps={props.steps}
                     position="static"
@@ -84,6 +93,6 @@ export function FormStepper(props: IFormStepperProps) {
                     }
                 />
             }
-        </>
+        </Grid>
     );
 }

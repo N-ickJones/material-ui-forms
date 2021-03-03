@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { FieldOption, FieldValidator } from "../types/types";
 export interface ICustomTextFieldProps {
     name: string;
@@ -18,5 +18,7 @@ export interface ICustomTextFieldProps {
     locked?: boolean;
     disableSelectNone?: boolean;
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
 export declare function CustomTextField(props: ICustomTextFieldProps): JSX.Element;

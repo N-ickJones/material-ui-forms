@@ -11,6 +11,14 @@ export interface IRadioFieldProps {
     options?: FieldOption[];
     row?: boolean;
     locked?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    outerClassName?: string;
+    outerStyle?: React.CSSProperties;
+    groupClassName?: string;
+    groupStyle?: React.CSSProperties;
+    labelClassName?: string;
+    labelStyle?: React.CSSProperties;
 }
 export function RadioField(props: IRadioFieldProps) {
     const [value, setValue] = useState(props.value || (props.options && props.options[0].value));
@@ -25,9 +33,13 @@ export function RadioField(props: IRadioFieldProps) {
             component="fieldset"
             variant={props.variant || "outlined"}
             fullWidth
+            className={props.outerClassName}
+            style={props.outerStyle}
         >
             <FormLabel
                 component="legend"
+                className={props.labelClassName}
+                style={props.labelStyle}
             >
                 {props.label}
             </FormLabel>
@@ -37,6 +49,8 @@ export function RadioField(props: IRadioFieldProps) {
                 value={value}
                 onChange={onChange}
                 row={props.row}
+                className={props.groupClassName}
+                style={props.groupStyle}
             >
                 {props.options && props.options.map((item: FieldOption, id: number) => {
                     return (
@@ -45,6 +59,8 @@ export function RadioField(props: IRadioFieldProps) {
                             value={item.value}
                             control={<Radio />}
                             label={item.label}
+                            className={props.className}
+                            style={props.style}
                         />
                     )
                 })}

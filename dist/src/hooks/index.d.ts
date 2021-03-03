@@ -1,3 +1,4 @@
+import { useMuiPrinting } from "../../examples/src/tests/components/useMuiPrinting";
 import { useUpdateEffect } from "./useUpdateEffect";
 import { useWarnIfUnsavedChanges } from "./useWarnIfUnsavedChanges";
-export { useUpdateEffect, useWarnIfUnsavedChanges };
+export { useMuiPrinting, useUpdateEffect, useWarnIfUnsavedChanges };

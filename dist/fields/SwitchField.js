@@ -30,7 +30,7 @@ function SwitchField(props) {
             setValue(checked);
         }
     }
-    return (react_1.default.createElement(core_1.FormControlLabel, { label: props.label, control: react_1.default.createElement(core_1.Switch, { name: props.name, checked: value, onChange: onChange, value: props.value }) }));
+    return (react_1.default.createElement(core_1.FormControlLabel, { label: props.label, className: props.labelClassName, style: props.labelStyle, control: react_1.default.createElement(core_1.Switch, { className: props.className, style: props.style, name: props.name, checked: value, onChange: onChange, value: props.value }) }));
 }
 exports.SwitchField = SwitchField;
 //# sourceMappingURL=SwitchField.js.map

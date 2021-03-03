@@ -16,3 +16,15 @@ export declare type FieldOption = {
     label: string;
     value: string;
 };
+export declare type PaperSize = {
+    ratio: number;
+    dpi: number;
+    height: number;
+    width: number;
+};
+export declare type PaperMargin = {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+};

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SwitchField = exports.RadioField = exports.CustomTextField = exports.CheckField = exports.AutoFreeField = exports.AutoField = void 0;
+exports.ViewField = exports.SwitchField = exports.RadioField = exports.CustomTextField = exports.CheckField = exports.AutoFreeField = exports.AutoField = void 0;
 const AutoField_1 = require("./AutoField");
 Object.defineProperty(exports, "AutoField", { enumerable: true, get: function () { return AutoField_1.AutoField; } });
 const AutoFreeField_1 = require("./AutoFreeField");
@@ -13,4 +13,6 @@ const RadioField_1 = require("./RadioField");
 Object.defineProperty(exports, "RadioField", { enumerable: true, get: function () { return RadioField_1.RadioField; } });
 const SwitchField_1 = require("./SwitchField");
 Object.defineProperty(exports, "SwitchField", { enumerable: true, get: function () { return SwitchField_1.SwitchField; } });
+const ViewField_1 = require("./ViewField");
+Object.defineProperty(exports, "ViewField", { enumerable: true, get: function () { return ViewField_1.ViewField; } });
 //# sourceMappingURL=index.js.map

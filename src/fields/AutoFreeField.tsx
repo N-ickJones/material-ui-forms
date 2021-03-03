@@ -15,6 +15,11 @@ export interface IAutoFreeFieldProps {
     options?: FieldOption[];
     locked?: boolean;
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+
+    inputClassName?: string;
+    inputStyle?: React.CSSProperties;
 }
 
 export function AutoFreeField(props: IAutoFreeFieldProps) {
@@ -69,6 +74,8 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
 
     return (
         <Autocomplete
+            className={props.className}
+            style={props.style}
             fullWidth
             placeholder={props.placeholder}
             options={props.options ? props.options : []}
@@ -85,6 +92,8 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
                     required={props.required}
                     helperText={error}
                     error={!!error}
+                    className={props.inputClassName}
+                    style={props.inputStyle}
                 />
             )}
             filterOptions={createFilterOptions({

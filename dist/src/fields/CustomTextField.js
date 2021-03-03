@@ -59,7 +59,7 @@ function CustomTextField(props) {
             setValue(e.target.value);
         }
     }
-    return (react_1.default.createElement(core_1.TextField, { name: props.name, placeholder: props.placeholder || '', variant: props.variant || "outlined", label: props.label, fullWidth: true, value: value || '', onChange: onChange, helperText: error, error: !!error, type: props.type && props.type, autoComplete: props.autoComplete && props.autoComplete, autoFocus: props.autoFocus && props.autoFocus, multiline: props.multiline || false, InputLabelProps: handleShrink(), required: props.required, select: props.select || false },
+    return (react_1.default.createElement(core_1.TextField, { className: props.className, style: props.style, name: props.name, placeholder: props.placeholder || '', variant: props.variant || "outlined", label: props.label, fullWidth: true, value: value || '', onChange: onChange, helperText: error, error: !!error, type: props.type && props.type, autoComplete: props.autoComplete && props.autoComplete, autoFocus: props.autoFocus && props.autoFocus, multiline: props.multiline || false, InputLabelProps: handleShrink(), required: props.required, select: props.select || false },
         props.options && props.options.map((item, id) => {
             return react_1.default.createElement(core_1.MenuItem, { key: `${item.value}_${id}`, value: item.value }, item.label);
         }),

@@ -11,7 +11,6 @@ export declare const hasUpperCase: FieldValidator;
 export declare const isDigit: FieldValidator;
 export declare const hasDigit: FieldValidator;
 export declare const hasSpecialCharacter: FieldValidator;
-export declare const isText: FieldValidator;
 export declare const isCity: FieldValidator;
 export declare const isZip: FieldValidator;
 export declare const isPhoneNumber: FieldValidator;

@@ -7,6 +7,10 @@ export interface ISwitchFieldProps {
     onChange: (e: ChangeEvent<HTMLInputElement>, property: string, value: boolean) => void;
     label: string;
     locked?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    labelClassName?: string;
+    labelStyle?: React.CSSProperties;
 }
 
 export function SwitchField(props: ISwitchFieldProps) {
@@ -20,8 +24,12 @@ export function SwitchField(props: ISwitchFieldProps) {
     return (
         <FormControlLabel
             label={props.label}
+            className={props.labelClassName}
+            style={props.labelStyle}
             control={
                 <Switch
+                    className={props.className}
+                    style={props.style}
                     name={props.name}
                     checked={value}
                     onChange={onChange}

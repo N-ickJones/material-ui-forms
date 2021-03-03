@@ -13,11 +13,18 @@ export interface IViewField {
     printRef?: (el: HTMLDivElement | null) => void;
     className?: string;
     style?: React.CSSProperties;
+    outerClassName?: string;
+    outerStyle?: React.CSSProperties;
   }
   
   export function ViewField(props: IViewField) {
     return (
-      <Grid item xs={props.xs || 12} ref={props.printRef}>
+      <Grid 
+        item xs={props.xs || 12} 
+        ref={props.printRef}
+        className={props.outerClassName}
+        style={props.outerStyle}
+      >
         <TextField
           className={props.className}
           style={props.style}

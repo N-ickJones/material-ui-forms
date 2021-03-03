@@ -9,4 +9,11 @@ export interface IStepperViewProps {
     hideSaveProgressButton?: boolean;
     localStorageKey?: string;
     handleSubmit?: () => Promise<void>;
+
+    className?: string;
+    style?: React.CSSProperties;
+    upperClassName?: string;
+    upperStyle?: React.CSSProperties;
+    lowerClassName?: string;
+    lowerStyle?: React.CSSProperties;
 }

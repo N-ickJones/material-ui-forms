@@ -7,6 +7,10 @@ export interface ICheckFieldProps {
     onChange: (e: ChangeEvent<HTMLInputElement>, property: string, value: boolean) => void;
     label: string;
     locked?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    labelClassName?: string;
+    labelStyle?: React.CSSProperties;
 }
 
 export function CheckField(props: ICheckFieldProps) {
@@ -20,8 +24,12 @@ export function CheckField(props: ICheckFieldProps) {
     return (
         <FormControlLabel
             label={props.label}
+            className={props.labelClassName}
+            style={props.labelStyle}
             control={
                 <Checkbox
+                    className={props.className}
+                    style={props.style}
                     name={props.name}
                     checked={value}
                     onChange={onChange}

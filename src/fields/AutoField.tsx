@@ -12,6 +12,8 @@ export interface IAutoFieldProps {
     options?: FieldOption[];
     locked?: boolean;
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 export function AutoField(props: IAutoFieldProps) {
@@ -56,6 +58,8 @@ export function AutoField(props: IAutoFieldProps) {
 
     return (
         <Autocomplete
+            className={props.className}
+            style={props.style}
             options={props.options ? props.options : []}
             getOptionLabel={(option) => option.label}
             fullWidth

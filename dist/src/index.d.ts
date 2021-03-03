@@ -3,7 +3,7 @@ export * from './fields';
 export * from './functions';
 export * from './hooks';
 export * from './interfaces';
-export * from './selectOptions';
+export * from './options';
 export * from './types';
 export * from './validators';
 export * from './views';

@@ -28,7 +28,7 @@
   },
   "include": [
     "src"
-  ],
+, "src/hooks/useMuiPrinting.tsx"  ],
   "exclude": [
     "node_modules",
     "app",

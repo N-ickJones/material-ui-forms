@@ -24,6 +24,8 @@ export interface ICustomTextFieldProps {
     disableSelectNone?: boolean;
 
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
 export function CustomTextField(props: ICustomTextFieldProps) {
@@ -69,6 +71,8 @@ export function CustomTextField(props: ICustomTextFieldProps) {
 
     return (
         <TextField
+            className={props.className}
+            style={props.style}
             name={props.name}
             placeholder={props.placeholder || ''}
             variant={props.variant || "outlined"}

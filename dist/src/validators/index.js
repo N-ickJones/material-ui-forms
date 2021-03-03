@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPhoneNumber = exports.isZip = exports.isCity = exports.isText = exports.hasSpecialCharacter = exports.hasDigit = exports.isDigit = exports.hasUpperCase = exports.hasLowerCase = exports.isOnlyNumbers = exports.isSocialSecurityNumber = exports.isEmail = exports.isOnlyUpperCase = exports.isOnlyLowerCase = exports.isUserName = exports.isRequired = void 0;
+exports.isPhoneNumber = exports.isZip = exports.isCity = exports.hasSpecialCharacter = exports.hasDigit = exports.isDigit = exports.hasUpperCase = exports.hasLowerCase = exports.isOnlyNumbers = exports.isSocialSecurityNumber = exports.isEmail = exports.isOnlyUpperCase = exports.isOnlyLowerCase = exports.isUserName = exports.isRequired = void 0;
 const validators_1 = require("./validators");
 Object.defineProperty(exports, "hasDigit", { enumerable: true, get: function () { return validators_1.hasDigit; } });
 Object.defineProperty(exports, "hasLowerCase", { enumerable: true, get: function () { return validators_1.hasLowerCase; } });
@@ -15,7 +15,6 @@ Object.defineProperty(exports, "isOnlyUpperCase", { enumerable: true, get: funct
 Object.defineProperty(exports, "isPhoneNumber", { enumerable: true, get: function () { return validators_1.isPhoneNumber; } });
 Object.defineProperty(exports, "isRequired", { enumerable: true, get: function () { return validators_1.isRequired; } });
 Object.defineProperty(exports, "isSocialSecurityNumber", { enumerable: true, get: function () { return validators_1.isSocialSecurityNumber; } });
-Object.defineProperty(exports, "isText", { enumerable: true, get: function () { return validators_1.isText; } });
 Object.defineProperty(exports, "isUserName", { enumerable: true, get: function () { return validators_1.isUserName; } });
 Object.defineProperty(exports, "isZip", { enumerable: true, get: function () { return validators_1.isZip; } });
 //# sourceMappingURL=index.js.map

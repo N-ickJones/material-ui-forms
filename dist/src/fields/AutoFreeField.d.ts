@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { FieldOption, FieldValidator } from "../types/types";
 export interface IAutoFreeFieldProps {
     name: string;
@@ -11,5 +11,9 @@ export interface IAutoFreeFieldProps {
     options?: FieldOption[];
     locked?: boolean;
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    inputClassName?: string;
+    inputStyle?: React.CSSProperties;
 }
-export declare function AutoFreeField(props: IAutoFreeFieldProps): any;
+export declare function AutoFreeField(props: IAutoFreeFieldProps): JSX.Element;

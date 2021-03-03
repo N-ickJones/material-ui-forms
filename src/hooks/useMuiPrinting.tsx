@@ -4,6 +4,7 @@ import { getPaperHeight, getPaperWidth, marginToPixels, PageBreakDiv, sleep } fr
 import { a4 } from '../options/paperOptions';
 import { PaperMargin, PaperSize } from '../types/types';
 
+
 export function useMuiPrinting(paper?: PaperSize, margin?: PaperMargin): [
     React.CSSProperties,
     React.MutableRefObject<HTMLDivElement | null>,

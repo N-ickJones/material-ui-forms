@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { FieldOption } from "../types/types";
 export interface IAutoFieldProps {
     name: string;
@@ -9,5 +9,7 @@ export interface IAutoFieldProps {
     options?: FieldOption[];
     locked?: boolean;
     required?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
-export declare function AutoField(props: IAutoFieldProps): any;
+export declare function AutoField(props: IAutoFieldProps): JSX.Element;

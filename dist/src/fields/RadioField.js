@@ -30,10 +30,10 @@ function RadioField(props) {
             setValue(value);
         }
     };
-    return (react_1.default.createElement(core_1.FormControl, { component: "fieldset", variant: props.variant || "outlined", fullWidth: true },
-        react_1.default.createElement(core_1.FormLabel, { component: "legend" }, props.label),
-        react_1.default.createElement(core_1.RadioGroup, { "aria-label": props.name, name: props.name, value: value, onChange: onChange, row: props.row }, props.options && props.options.map((item, id) => {
-            return (react_1.default.createElement(core_1.FormControlLabel, { key: `${item.value}_${id}`, value: item.value, control: react_1.default.createElement(core_1.Radio, null), label: item.label }));
+    return (react_1.default.createElement(core_1.FormControl, { component: "fieldset", variant: props.variant || "outlined", fullWidth: true, className: props.outerClassName, style: props.outerStyle },
+        react_1.default.createElement(core_1.FormLabel, { component: "legend", className: props.labelClassName, style: props.labelStyle }, props.label),
+        react_1.default.createElement(core_1.RadioGroup, { "aria-label": props.name, name: props.name, value: value, onChange: onChange, row: props.row, className: props.groupClassName, style: props.groupStyle }, props.options && props.options.map((item, id) => {
+            return (react_1.default.createElement(core_1.FormControlLabel, { key: `${item.value}_${id}`, value: item.value, control: react_1.default.createElement(core_1.Radio, null), label: item.label, className: props.className, style: props.style }));
         }))));
 }
 exports.RadioField = RadioField;

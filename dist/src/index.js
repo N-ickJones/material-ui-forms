@@ -15,7 +15,7 @@ __exportStar(require("./fields"), exports);
 __exportStar(require("./functions"), exports);
 __exportStar(require("./hooks"), exports);
 __exportStar(require("./interfaces"), exports);
-__exportStar(require("./selectOptions"), exports);
+__exportStar(require("./options"), exports);
 __exportStar(require("./types"), exports);
 __exportStar(require("./validators"), exports);
 __exportStar(require("./views"), exports);

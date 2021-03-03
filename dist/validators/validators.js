@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPhoneNumber = exports.isZip = exports.isCity = exports.isText = exports.hasSpecialCharacter = exports.hasDigit = exports.isDigit = exports.hasUpperCase = exports.hasLowerCase = exports.isOnlyNumbers = exports.isSocialSecurityNumber = exports.isEmail = exports.isOnlyUpperCase = exports.isOnlyLowerCase = exports.isUserName = exports.isRequired = void 0;
+exports.isPhoneNumber = exports.isZip = exports.isCity = exports.hasSpecialCharacter = exports.hasDigit = exports.isDigit = exports.hasUpperCase = exports.hasLowerCase = exports.isOnlyNumbers = exports.isSocialSecurityNumber = exports.isEmail = exports.isOnlyUpperCase = exports.isOnlyLowerCase = exports.isUserName = exports.isRequired = void 0;
 exports.isRequired = {
     pattern: /^.+$/,
     message: "This field is required."
@@ -48,10 +48,6 @@ exports.hasDigit = {
 exports.hasSpecialCharacter = {
     pattern: /\W/,
     message: "This field requires a special character."
-};
-exports.isText = {
-    pattern: /^[a-zA-Z]{0,50}$/,
-    message: "Invalid Entry (Text only, 50 characters max)"
 };
 exports.isCity = {
     pattern: /^[a-zA-Z\s]{0,30}$/,

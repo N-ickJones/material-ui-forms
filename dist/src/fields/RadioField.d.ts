@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { FieldOption } from "../types/types";
 export interface IRadioFieldProps {
     name: string;
@@ -9,5 +9,13 @@ export interface IRadioFieldProps {
     options?: FieldOption[];
     row?: boolean;
     locked?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    outerClassName?: string;
+    outerStyle?: React.CSSProperties;
+    groupClassName?: string;
+    groupStyle?: React.CSSProperties;
+    labelClassName?: string;
+    labelStyle?: React.CSSProperties;
 }
-export declare function RadioField(props: IRadioFieldProps): any;
+export declare function RadioField(props: IRadioFieldProps): JSX.Element;

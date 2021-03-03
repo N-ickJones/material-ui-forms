@@ -60,11 +60,6 @@ export const hasSpecialCharacter = {
     message: "This field requires a special character."
 } as FieldValidator;
 
-export const isText = {
-    pattern: /^[a-zA-Z]{0,50}$/,
-    message: "Invalid Entry (Text only, 50 characters max)"
-} as FieldValidator;
-
 export const isCity = {
     pattern: /^[a-zA-Z\s]{0,30}$/,
     message: "Invalid City (Text only, 30 characters max)"

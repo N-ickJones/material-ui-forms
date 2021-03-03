@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isValidId = exports.dateConvertVerbose = exports.dateConvert = exports.sleep = exports.getRandomInt = void 0;
+exports.marginToPixels = exports.getPaperWidth = exports.getPaperHeight = exports.getOrdinal = exports.decrypt = exports.encrypt = exports.uuidv4 = exports.isValidId = exports.dateConvertVerbose = exports.dateConvert = exports.sleep = exports.getRandomInt = void 0;
+const crypto_js_1 = require("crypto-js");
+const paperOptions_1 = require("../options/paperOptions");
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -24,5 +26,46 @@ function dateConvertVerbose(date) {
 exports.dateConvertVerbose = dateConvertVerbose;
 exports.isValidId = (id) => {
     return id < (Number.MAX_SAFE_INTEGER - 1000);
+};
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+exports.uuidv4 = uuidv4;
+/**
+ * Obfuscation use only
+ * @param plainText
+ * @param key
+ */
+function encrypt(plainText, key) {
+    return crypto_js_1.AES.encrypt(plainText, key).toString();
+}
+exports.encrypt = encrypt;
+/**
+ * Obfuscation use only
+ * @param cipherText
+ * @param key
+ */
+function decrypt(cipherText, key) {
+    return crypto_js_1.AES.decrypt(cipherText, key).toString(crypto_js_1.enc.Utf8);
+}
+exports.decrypt = decrypt;
+function getOrdinal(n) {
+    var s = ["th", "st", "nd", "rd"];
+    var v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+exports.getOrdinal = getOrdinal;
+exports.getPaperHeight = (paper) => {
+    return paper ? paper.dpi * paper.height / paper.ratio : paperOptions_1.a4.dpi * paperOptions_1.a4.height / paperOptions_1.a4.ratio;
+};
+exports.getPaperWidth = (paper) => {
+    return paper ? paper.dpi * paper.width / paper.ratio : paperOptions_1.a4.dpi * paperOptions_1.a4.width / paperOptions_1.a4.ratio;
+    ;
+};
+exports.marginToPixels = (paper, margin) => {
+    return paper.dpi * (margin ? margin : 25) / paper.ratio;
 };
 //# sourceMappingURL=functions.js.map

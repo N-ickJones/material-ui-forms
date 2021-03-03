@@ -1,4 +1,4 @@
-import { hasDigit, hasLowerCase, hasSpecialCharacter, hasUpperCase, isCity, isDigit, isEmail, isOnlyLowerCase, isOnlyNumbers, isOnlyUpperCase, isPhoneNumber, isRequired, isSocialSecurityNumber, isText, isUserName, isZip } from "./validators";
+import { hasDigit, hasLowerCase, hasSpecialCharacter, hasUpperCase, isCity, isDigit, isEmail, isOnlyLowerCase, isOnlyNumbers, isOnlyUpperCase, isPhoneNumber, isRequired, isSocialSecurityNumber, isUserName, isZip } from "./validators";
 
 export {
     isRequired,
@@ -13,7 +13,6 @@ export {
     isDigit,
     hasDigit,
     hasSpecialCharacter,
-    isText,
     isCity,
     isZip,
     isPhoneNumber,

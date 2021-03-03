@@ -70,6 +70,12 @@ export function StepperView(props: IStepperViewProps) {
             handleBack={handleBack}
             activeForm={<ActiveForm />}
             hideDotsStepper={props.hideDotsStepper}
+            className={props.className}
+            style={props.style}
+            upperClassName={props.upperClassName}
+            upperStyle={props.upperStyle}
+            lowerClassName={props.lowerClassName}
+            lowerStyle={props.lowerStyle}
         />
     )
 }
