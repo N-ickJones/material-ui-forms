@@ -1,2 +1,2 @@
-import { AlertState, BreakPoint, FieldOption, FieldValidator } from './types';
-export type { AlertState, BreakPoint, FieldOption, FieldValidator };
+import { AlertState, BreakPoint, FieldOption, FieldValidator, FormArgs, PaperMargin, PaperSize } from './types';
+export type { AlertState, BreakPoint, FieldOption, FieldValidator, FormArgs, PaperSize, PaperMargin };

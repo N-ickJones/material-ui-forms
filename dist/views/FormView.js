@@ -23,13 +23,13 @@ exports.FormView = void 0;
 const react_1 = __importStar(require("react"));
 const core_1 = require("@material-ui/core");
 const icons_1 = require("@material-ui/icons");
-const lab_1 = require("@material-ui/lab");
 const functions_1 = require("../functions/functions");
 const useWarnIfUnsavedChanges_1 = require("../hooks/useWarnIfUnsavedChanges");
 const AlertDialog_1 = require("../components/AlertDialog");
 const AlertDialogButton_1 = require("../components/AlertDialogButton");
 const components_1 = require("../components");
 const hooks_1 = require("../hooks");
+const SnackBarComponent_1 = require("../components/SnackBarComponent");
 const useStyles = core_1.makeStyles((theme) => core_1.createStyles({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
@@ -67,29 +67,7 @@ function FormView(props) {
     const [pendingChanges, setPendingChanges] = react_1.useState(false);
     const [loadLocal, setLoadLocal] = react_1.useState(false);
     const [loadServer, setLoadServer] = react_1.useState(false);
-    const autoHideDuration = 8000;
-    const [alert, setAlert] = react_1.useState({
-        open: false,
-        message: "",
-        autoHideDuration: autoHideDuration,
-        origin: { vertical: "bottom", horizontal: "right" }
-    });
-    const error = {
-        open: true,
-        autoHideDuration: autoHideDuration,
-        severity: "error",
-        origin: {
-            vertical: "bottom", horizontal: "left"
-        }
-    };
-    const success = {
-        open: true,
-        autoHideDuration: autoHideDuration,
-        severity: "success",
-        origin: {
-            vertical: "bottom", horizontal: "right"
-        }
-    };
+    const snackbar = SnackBarComponent_1.SnackBarComponent(8000);
     useWarnIfUnsavedChanges_1.useWarnIfUnsavedChanges(pendingChanges);
     const [paperStyle, printComponentRef, printMode, displayPrint, handlePrintRef] = hooks_1.useMuiPrinting();
     react_1.useEffect(() => {
@@ -143,11 +121,11 @@ function FormView(props) {
         if (locked)
             return;
         if (props.handleSaveChanges && await props.handleSaveChanges()) {
-            setAlert(Object.assign(Object.assign({}, success), { message: "Successfully saved your changes locally." }));
+            snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Successfully saved your changes locally." }));
             setPendingChanges(false);
         }
         else {
-            setAlert(Object.assign(Object.assign({}, success), { message: "Unable to save your changes locally." }));
+            snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Unable to save your changes locally." }));
         }
     };
     const handleLocalLoad = async (submit) => {
@@ -156,10 +134,10 @@ function FormView(props) {
             if (cipherText !== null) {
                 const plainText = functions_1.decrypt(cipherText, localStorageKey);
                 if (props.handleLoad && await props.handleLoad(true, JSON.parse(plainText))) {
-                    setAlert(Object.assign(Object.assign({}, success), { message: "Successfully loaded previous changes." }));
+                    snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Successfully loaded previous changes." }));
                 }
                 else {
-                    setAlert(Object.assign(Object.assign({}, error), { message: "Unable to load previous changes." }));
+                    snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "Unable to load previous changes." }));
                 }
             }
         }
@@ -167,10 +145,10 @@ function FormView(props) {
             clearLocalStorage();
             setLoadServer(true);
             if (props.handleLoad && await props.handleLoad(false)) {
-                setAlert(Object.assign(Object.assign({}, success), { message: "Successfully loaded your information." }));
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Successfully loaded your information." }));
             }
             else {
-                setAlert(Object.assign(Object.assign({}, error), { message: "Unable to load your information." }));
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "Unable to load your information." }));
             }
             setLoadServer(false);
         }
@@ -193,15 +171,15 @@ function FormView(props) {
             }
         }
         if (props.handleSubmit) {
-            if (!await formValid()) {
-                setAlert(Object.assign(Object.assign({}, error), { message: "A validation error was detected in the form" }));
+            if (!await functions_1.formIsValid()) {
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "A validation error was detected in the form" }));
             }
             else if (await props.handleSubmit()) {
                 if (props.minNodes !== undefined && props.forms && props.forms.length < props.minNodes) {
-                    setAlert(Object.assign(Object.assign({}, error), { message: props.minNodes <= 1 ? `${props.minNodes} submission is required` : `${props.minNodes} submissions are required` }));
+                    snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: props.minNodes <= 1 ? `${props.minNodes} submission is required` : `${props.minNodes} submissions are required` }));
                 }
                 else {
-                    setAlert(Object.assign(Object.assign({}, success), { message: "Successfully sent changes to the server" }));
+                    snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Successfully sent changes to the server" }));
                     clearLocalStorage();
                     setPendingChanges(false);
                     //Let setPendingCHanges Fire
@@ -211,36 +189,9 @@ function FormView(props) {
                 }
             }
             else {
-                setAlert(Object.assign(Object.assign({}, error), { message: "Unsuccessfully sent changes to the server" }));
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "Unsuccessfully sent changes to the server" }));
             }
         }
-    };
-    const formValid = async () => {
-        var _a;
-        const inputs = document.getElementsByTagName('input');
-        for (let i = 0; i < inputs.length; i++) {
-            const input = inputs[i];
-            if (input.hasAttribute('aria-invalid') && input.getAttribute('aria-invalid') === "true") {
-                const parent = input.parentElement;
-                if (parent)
-                    parent.classList.add('Mui-focused');
-                return false;
-            }
-            if ((input.hasAttribute('required') && input.value === "")) {
-                const inputParent = input.parentElement;
-                //Outer Div
-                if (inputParent) {
-                    inputParent.classList.add('Mui-focused', 'Mui-error');
-                    //Outer Label
-                    const componentParent = inputParent.parentElement;
-                    if (componentParent) {
-                        (_a = componentParent.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.add('Mui-focused', 'Mui-error');
-                    }
-                }
-                return false;
-            }
-        }
-        return true;
     };
     const handleDelete = async (index) => {
         if (locked)
@@ -248,10 +199,10 @@ function FormView(props) {
         if (props.handleDelete) {
             if (await props.handleDelete(index)) {
                 clearLocalStorage();
-                setAlert(Object.assign(Object.assign({}, success), { message: "Successfully deleted the item." }));
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.success), { message: "Successfully deleted the item." }));
             }
             else {
-                setAlert(Object.assign(Object.assign({}, error), { message: "Unable to delete the item." }));
+                snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "Unable to delete the item." }));
             }
         }
     };
@@ -259,12 +210,6 @@ function FormView(props) {
         if (localStorage.getItem(localStorageKey) !== null)
             localStorage.removeItem(localStorageKey);
     }
-    const handleCloseAlert = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setAlert(Object.assign(Object.assign({}, alert), { open: false }));
-    };
     if (loadLocal) {
         return (react_1.default.createElement(AlertDialog_1.AlertDialog, { id: "loadingLocal", title: "Would you like to load your previous session?", description: "Selecting Cancel will remove your previous session.", color: "primary", backLabel: "Cancel", forwardLabel: "Continue", onSubmit: handleLocalLoad, backOnOutsideClick: false }));
     }
@@ -274,8 +219,7 @@ function FormView(props) {
     }
     else {
         return (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(core_1.Snackbar, { open: alert.open, autoHideDuration: alert.autoHideDuration, onClose: handleCloseAlert, anchorOrigin: alert.origin },
-                react_1.default.createElement(lab_1.Alert, { severity: alert.severity }, alert.message)),
+            react_1.default.createElement(snackbar.component, null),
             react_1.default.createElement(core_1.Box, { p: 1, display: "flex", flexWrap: "wrap", justifyContent: "space-between" },
                 react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "refreshForm", style: props.hideLockButton ? { display: "none" } : {}, label: locked ? react_1.default.createElement(icons_1.Lock, { color: "primary" }) : react_1.default.createElement(icons_1.LockOpen, { color: "primary" }), title: locked ? "Unlock this form" : "Lock this form", description: locked ? "Unlocking this form will allow you to make changes." : "Lock this form to prevent unwanted changes.", color: "primary", backLabel: "Cancel", forwardLabel: locked ? "Unlock" : "Lock", onSubmit: handleLock }),
                 react_1.default.createElement(core_1.Box, { display: "flex" },

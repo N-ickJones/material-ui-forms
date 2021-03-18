@@ -1,28 +1,27 @@
+import { IRepoController } from "material-ui-forms";
 import { MockApi } from "../mockApi/mockApi";
 import Residence from "../models/Residence";
-
-export interface IResidencesController {
-    getAll(): Promise<Residence[] | null>;
-    get(id: number): Promise<Residence | null>;
-    create(residence: Residence): Promise<Residence | null>;
-    update(id: number, residence: Residence): Promise<boolean>;
-    delete(id: number): Promise<Residence | null>;
-}
+import Axios, { AxiosInstance } from "axios";
 
 /**
  * ResidenceController: Common API Methods used for Web Forms
  * mockApi: Simulates an Axios API call to your server
  */
-
-export class ResidencesController implements IResidencesController {
-    controller = "/residences";
-    mockApi = new MockApi<Residence>("residenceId");
+ export class RepoController<T> implements IRepoController<T> {
+    constructor(props: { key: string, uri: string, api: AxiosInstance | MockApi<T> }) {
+        this.key = props.key;
+        this.controller = props.uri;
+        this.mockApi = props.api;
+    }
+    key: string;
+    controller: string;
+    mockApi: any;
 
     async getAll() {
         try {
             const response = await this.mockApi.get(`${this.controller}`);
             if (response.status === 200) 
-                return response.data as Residence[];
+                return response.data as T[];
         }
         catch (error) {
             console.log(error);
@@ -34,7 +33,7 @@ export class ResidencesController implements IResidencesController {
         try {
             const response = await this.mockApi.get(`${this.controller}/${id}`);
             if (response.status === 200) 
-                return response.data as Residence;
+                return response.data as T;
         }
         catch (error) {
             console.log(error);
@@ -42,11 +41,11 @@ export class ResidencesController implements IResidencesController {
         return null;
     }
 
-    async create(residence: Residence) {
+    async create(residence: T) {
         try {
             const response = await this.mockApi.post(`${this.controller}`, residence)
             if (response.status === 201)
-                return response.data as Residence;
+                return response.data as T;
         }
         catch(error) {
             console.log(error);
@@ -54,7 +53,7 @@ export class ResidencesController implements IResidencesController {
         return null;
     }
 
-    async update(id: number, residence: Residence) {
+    async update(id: number, residence: T) {
         try {
             const response = await this.mockApi.put(`${this.controller}/${id}`, residence)
             if (response.status === 204)
@@ -70,12 +69,37 @@ export class ResidencesController implements IResidencesController {
         try {
             const response = await this.mockApi.delete(`${this.controller}/${id}`)
             if (response.status === 200)
-                return response.data as Residence;
+                return response.data as T;
         }
         catch(error) {
             console.log(error);
         }
         return null;
+    }
+
+    getKey() {
+        return this.key;
+    }
+    
+    static get instance() { return residencesController }
+}
+
+//This is an example Only of what should be passed into the api variable.
+const exampleApi = Axios.create({
+    baseURL: "https://example.com",
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+});
+
+export class ResidencesController extends RepoController<Residence> {
+    constructor() { 
+        super({
+            key: "residenceId",
+            uri: "/residences",
+            api: new MockApi<Residence>("residenceId")
+        }); 
     }
     
     static get instance() { return residencesController }
@@ -84,3 +108,7 @@ export class ResidencesController implements IResidencesController {
 const residencesController = new ResidencesController();
 
 export default residencesController;
+
+
+
+//This can vary depending on API.. this is mostly just an example

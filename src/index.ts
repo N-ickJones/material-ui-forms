@@ -1,6 +1,7 @@
 export * from './components';
 export * from './fields';
 export * from './functions';
+export * from './handlers';
 export * from './hooks';
 export * from './interfaces';
 export * from './options';

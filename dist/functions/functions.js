@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.marginToPixels = exports.getPaperWidth = exports.getPaperHeight = exports.getOrdinal = exports.decrypt = exports.encrypt = exports.uuidv4 = exports.isValidId = exports.dateConvertVerbose = exports.dateConvert = exports.sleep = exports.getRandomInt = void 0;
+exports.onChange = exports.formIsValid = exports.marginToPixels = exports.getPaperWidth = exports.getPaperHeight = exports.getOrdinal = exports.decrypt = exports.encrypt = exports.uuidv4 = exports.isValidId = exports.dateConvertVerbose = exports.dateConvert = exports.sleep = exports.getRandomInt = void 0;
 const crypto_js_1 = require("crypto-js");
 const paperOptions_1 = require("../options/paperOptions");
 function getRandomInt(min, max) {
@@ -67,5 +67,35 @@ exports.getPaperWidth = (paper) => {
 };
 exports.marginToPixels = (paper, margin) => {
     return paper.dpi * (margin ? margin : 25) / paper.ratio;
+};
+exports.formIsValid = async () => {
+    var _a;
+    const inputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        if (input.hasAttribute('aria-invalid') && input.getAttribute('aria-invalid') === "true") {
+            const parent = input.parentElement;
+            if (parent)
+                parent.classList.add('Mui-focused');
+            return false;
+        }
+        if ((input.hasAttribute('required') && input.value === "")) {
+            const inputParent = input.parentElement;
+            //Outer Div
+            if (inputParent) {
+                inputParent.classList.add('Mui-focused', 'Mui-error');
+                //Outer Label
+                const componentParent = inputParent.parentElement;
+                if (componentParent) {
+                    (_a = componentParent.firstElementChild) === null || _a === void 0 ? void 0 : _a.classList.add('Mui-focused', 'Mui-error');
+                }
+            }
+            return false;
+        }
+    }
+    return true;
+};
+exports.onChange = (setState) => (e, property, value) => {
+    setState((current) => (Object.assign(Object.assign({}, current), { [property]: value })));
 };
 //# sourceMappingURL=functions.js.map

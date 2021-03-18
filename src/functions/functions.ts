@@ -1,4 +1,5 @@
 import { AES, enc } from "crypto-js";
+import React, { ChangeEvent } from "react";
 import { a4 } from "../options/paperOptions";
 import { PaperSize } from "../types/types";
 
@@ -75,3 +76,38 @@ export const getPaperWidth = (paper: PaperSize | undefined) => {
 export const marginToPixels = (paper: PaperSize, margin: number | undefined) => {
     return paper.dpi * ( margin ? margin : 25 ) / paper.ratio ;
 }
+
+export const formIsValid = async () => {
+    const inputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+
+      if (input.hasAttribute('aria-invalid') && input.getAttribute('aria-invalid') === "true") {
+        const parent = input.parentElement;
+        if (parent)
+          parent.classList.add('Mui-focused')
+        return false;
+      }
+
+      if ((input.hasAttribute('required') && input.value === "")) {
+        const inputParent = input.parentElement;
+        //Outer Div
+        if (inputParent) {
+          inputParent.classList.add('Mui-focused', 'Mui-error')
+          //Outer Label
+          const componentParent = inputParent.parentElement;
+          if (componentParent) {
+            componentParent.firstElementChild?.classList.add('Mui-focused', 'Mui-error')
+          }
+        }
+        return false;
+      }
+
+    }
+    return true;
+  }
+
+  export const onChange = (setState: React.Dispatch<React.SetStateAction<any>>) => (e: ChangeEvent<HTMLInputElement | {}>, property: string, value: string | boolean) => {
+    setState((current: any) => ({ ...current, [property]: value }))
+  }
+

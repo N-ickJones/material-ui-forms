@@ -8,7 +8,8 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@types/next": "^9.0.0",
     "@types/react": "^17.0.1",
-    "material-ui-forms": "file:..\\material-ui-forms-1.0.12.tgz",
+    "axios": "^0.21.1",
+    "material-ui-forms": "file:..\\material-ui-forms-1.0.13.tgz",
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -16,6 +17,7 @@
     "typescript": "^4.2.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "react-scripts": "^4.0.3"
   },
   "scripts": {

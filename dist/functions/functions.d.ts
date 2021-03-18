@@ -1,3 +1,4 @@
+import React, { ChangeEvent } from "react";
 import { PaperSize } from "../types/types";
 export declare function getRandomInt(min: number, max: number): number;
 export declare function sleep(milliseconds: number): Promise<unknown>;
@@ -25,3 +26,5 @@ export declare type PageBreakDiv = {
 export declare const getPaperHeight: (paper: PaperSize | undefined) => number;
 export declare const getPaperWidth: (paper: PaperSize | undefined) => number;
 export declare const marginToPixels: (paper: PaperSize, margin: number | undefined) => number;
+export declare const formIsValid: () => Promise<boolean>;
+export declare const onChange: (setState: React.Dispatch<React.SetStateAction<any>>) => (e: ChangeEvent<HTMLInputElement | {}>, property: string, value: string | boolean) => void;

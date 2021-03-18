@@ -1,6 +1,7 @@
+/// <reference types="react" />
 import { SnackbarOrigin } from "@material-ui/core";
 import { AlertProps } from "@material-ui/lab/Alert";
-export declare type BreakPoint = boolean | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto" | undefined;
+import { IRepoController } from "../interfaces";
 export declare type AlertState = {
     open: boolean;
     message?: string;
@@ -8,13 +9,18 @@ export declare type AlertState = {
     origin?: SnackbarOrigin;
     autoHideDuration?: number;
 };
+export declare type BreakPoint = boolean | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "auto" | undefined;
+export declare type FieldOption = {
+    label: string;
+    value: string;
+};
 export declare type FieldValidator = {
     pattern: RegExp;
     message: string;
 };
-export declare type FieldOption = {
-    label: string;
-    value: string;
+export declare type FormArgs<T> = {
+    controller: IRepoController<T>;
+    state: [T[], React.Dispatch<React.SetStateAction<T[]>>];
 };
 export declare type PaperSize = {
     ratio: number;

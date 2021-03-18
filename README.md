@@ -21,6 +21,8 @@
   - [Peer Dependencies](#peer-dependencies)
   - [Dependencies](#dependencies)
   - [About The Project](#about-the-project)
+  - [Recent Changes](#recent-changes)
+  - [Upcoming Changes](#upcoming-changes)
     - [Built With](#built-with)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -33,8 +35,6 @@
   - [Acknowledgements](#acknowledgements)
 
 
-
-
 ## About The Project
 This projects goal is to make using material-ui to create webforms easy, fast, and fully featured. The features include: 
 * The ability to add locks to the form without much effort. Use case being role management, content management or similar.
@@ -44,6 +44,20 @@ This projects goal is to make using material-ui to create webforms easy, fast, a
 * Simplification of complex components such as AutoComplete to reduce the amount of configuration is basic use cases.
 * Compiling helper functions, option lists, and hooks commonly used in material UI forms.
 * ...more descriptions in future releases
+  
+## Recent Changes
+There are not 2 new ways to use material-ui forms making it more simple with much less configuration.
+* 1. FormViewAuto -> Check out the code in the examples project inside the repo. It's located at http://localhost:3000/views/form-view-auto (view), /src/pages/views/form-view-auto.tsx (code)
+* 2. Added Helper functions for Simple Forms. See http://localhost:3000/simple-form (view), //src/components/SimpleForm.tsx (code)
+* 3. Removed all Bootstrap from the application
+* 4. Decouple react-to-print as a peer dependency. Thinking about using a PDF Generator instead.
+
+## Upcoming Changes
+* 1. Continuing the simplification and decoupling of parts of this project (as always)
+* 2. More Examples, full hosting of material-ui-forms of the example application, and documentation
+* 3. More Customization, Adding more ways to customize the FormView and FormViewAuto through overloading the props with some default templates
+* 4. Decouple nextJs router from material-ui-forms allowing for e.g. React Router Dom or no default
+
 
 
 ### Built With

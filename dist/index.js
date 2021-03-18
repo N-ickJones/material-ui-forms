@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./components"), exports);
 __exportStar(require("./fields"), exports);
 __exportStar(require("./functions"), exports);
+__exportStar(require("./handlers"), exports);
 __exportStar(require("./hooks"), exports);
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./options"), exports);

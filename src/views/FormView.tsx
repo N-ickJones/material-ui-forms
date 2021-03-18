@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Backdrop, Box, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Snackbar, SnackbarOrigin, Theme, Typography } from '@material-ui/core';
+import { Backdrop, Box, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
 import { Lock, LockOpen } from '@material-ui/icons';
-import { Alert, AlertProps } from '@material-ui/lab';
-import { decrypt, encrypt, uuidv4 } from '../functions/functions';
+import { decrypt, encrypt, formIsValid, uuidv4 } from '../functions/functions';
 import { IFormProps } from '../interfaces/IFormProps';
-import { AlertState } from '../types/types';
 import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
 import { AlertDialog } from '../components/AlertDialog';
 import { AlertDialogButton } from '../components/AlertDialogButton';
 import { PrintButton } from '../components';
 import { useMuiPrinting } from '../hooks';
+import { SnackBarComponent } from '../components/SnackBarComponent';
 
 export interface IFormViewProps<T> {
     title?: string;
@@ -79,29 +78,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
     const [pendingChanges, setPendingChanges] = useState(false);
     const [loadLocal, setLoadLocal] = useState(false);
     const [loadServer, setLoadServer] = useState(false);
-    const autoHideDuration = 8000;
-    const [alert, setAlert] = useState({
-        open: false,
-        message: "",
-        autoHideDuration: autoHideDuration,
-        origin: { vertical: "bottom", horizontal: "right" }
-    } as AlertState);
-    const error = {
-        open: true,
-        autoHideDuration: autoHideDuration,
-        severity: "error" as AlertProps['severity'],
-        origin: {
-            vertical: "bottom", horizontal: "left"
-        } as SnackbarOrigin
-    };
-    const success = {
-        open: true,
-        autoHideDuration: autoHideDuration,
-        severity: "success" as AlertProps['severity'],
-        origin: {
-            vertical: "bottom", horizontal: "right"
-        } as SnackbarOrigin
-    };
+    const snackbar = SnackBarComponent(8000);
 
     useWarnIfUnsavedChanges(pendingChanges);
     const [paperStyle, printComponentRef, printMode, displayPrint, handlePrintRef] = useMuiPrinting();
@@ -160,11 +137,11 @@ export function FormView<T>(props: IFormViewProps<T>) {
         if (locked) return;
 
         if (props.handleSaveChanges && await props.handleSaveChanges()) {
-            setAlert({ ...success, message: "Successfully saved your changes locally." });
+            snackbar.setAlert({ ...snackbar.success, message: "Successfully saved your changes locally." });
             setPendingChanges(false);
         }
         else {
-            setAlert({ ...success, message: "Unable to save your changes locally." });
+            snackbar.setAlert({ ...snackbar.success, message: "Unable to save your changes locally." });
         }
     }
 
@@ -174,10 +151,10 @@ export function FormView<T>(props: IFormViewProps<T>) {
             if (cipherText !== null) {
                 const plainText = decrypt(cipherText, localStorageKey);
                 if (props.handleLoad && await props.handleLoad(true, JSON.parse(plainText))) {
-                    setAlert({ ...success, message: "Successfully loaded previous changes." })
+                    snackbar.setAlert({ ...snackbar.success, message: "Successfully loaded previous changes." })
                 }
                 else {
-                    setAlert({ ...error, message: "Unable to load previous changes." })
+                    snackbar.setAlert({ ...snackbar.error, message: "Unable to load previous changes." })
                 }
             }
         }
@@ -185,10 +162,10 @@ export function FormView<T>(props: IFormViewProps<T>) {
             clearLocalStorage();
             setLoadServer(true);
             if (props.handleLoad && await props.handleLoad(false)) {
-                setAlert({ ...success, message: "Successfully loaded your information." })
+                snackbar.setAlert({ ...snackbar.success, message: "Successfully loaded your information." })
             }
             else {
-                setAlert({ ...error, message: "Unable to load your information." })
+                snackbar.setAlert({ ...snackbar.error, message: "Unable to load your information." })
             }
             setLoadServer(false)
         }
@@ -213,15 +190,15 @@ export function FormView<T>(props: IFormViewProps<T>) {
         }
 
         if (props.handleSubmit) {
-            if (!await formValid()) {
-                setAlert({ ...error, message: "A validation error was detected in the form" })
+            if (!await formIsValid()) {
+                snackbar.setAlert({ ...snackbar.error, message: "A validation error was detected in the form" })
             }
             else if (await props.handleSubmit()) {
                 if (props.minNodes !== undefined && props.forms && props.forms.length < props.minNodes) {
-                    setAlert({ ...error, message: props.minNodes <= 1 ? `${props.minNodes} submission is required` : `${props.minNodes} submissions are required` })
+                    snackbar.setAlert({ ...snackbar.error, message: props.minNodes <= 1 ? `${props.minNodes} submission is required` : `${props.minNodes} submissions are required` })
                 }
                 else {
-                    setAlert({ ...success, message: "Successfully sent changes to the server" })
+                    snackbar.setAlert({ ...snackbar.success, message: "Successfully sent changes to the server" })
 
                     clearLocalStorage();
                     setPendingChanges(false);
@@ -233,39 +210,9 @@ export function FormView<T>(props: IFormViewProps<T>) {
                 }
             }
             else {
-                setAlert({ ...error, message: "Unsuccessfully sent changes to the server" })
+                snackbar.setAlert({ ...snackbar.error, message: "Unsuccessfully sent changes to the server" })
             }
         }
-    }
-
-    const formValid = async () => {
-        const inputs = document.getElementsByTagName('input');
-        for (let i = 0; i < inputs.length; i++) {
-            const input = inputs[i];
-
-            if (input.hasAttribute('aria-invalid') && input.getAttribute('aria-invalid') === "true") {
-                const parent = input.parentElement;
-                if (parent)
-                    parent.classList.add('Mui-focused')
-                return false;
-            }
-
-            if ((input.hasAttribute('required') && input.value === "")) {
-                const inputParent = input.parentElement;
-                //Outer Div
-                if (inputParent) {
-                    inputParent.classList.add('Mui-focused', 'Mui-error')
-                    //Outer Label
-                    const componentParent = inputParent.parentElement;
-                    if (componentParent) {
-                        componentParent.firstElementChild?.classList.add('Mui-focused', 'Mui-error')
-                    }
-                }
-                return false;
-            }
-
-        }
-        return true;
     }
 
     const handleDelete = async (index: number) => {
@@ -274,10 +221,10 @@ export function FormView<T>(props: IFormViewProps<T>) {
         if (props.handleDelete) {
             if (await props.handleDelete(index)) {
                 clearLocalStorage();
-                setAlert({ ...success, message: "Successfully deleted the item." })
+                snackbar.setAlert({ ...snackbar.success, message: "Successfully deleted the item." })
             }
             else {
-                setAlert({ ...error, message: "Unable to delete the item." })
+                snackbar.setAlert({ ...snackbar.error, message: "Unable to delete the item." })
             }
         }
     }
@@ -285,13 +232,6 @@ export function FormView<T>(props: IFormViewProps<T>) {
     function clearLocalStorage() {
         if (localStorage.getItem(localStorageKey) !== null)
             localStorage.removeItem(localStorageKey);
-    }
-
-    const handleCloseAlert = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setAlert({ ...alert, open: false });
     }
 
     if (loadLocal) {
@@ -320,16 +260,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
         return (
             <>
                 {/* Alert Snackbar */}
-                <Snackbar
-                    open={alert.open}
-                    autoHideDuration={alert.autoHideDuration}
-                    onClose={handleCloseAlert}
-                    anchorOrigin={alert.origin}
-                >
-                    <Alert severity={alert.severity}>
-                        {alert.message}
-                    </Alert>
-                </Snackbar>
+                <snackbar.component />
 
                 {/* Button Group */}
                 <Box p={1} display="flex" flexWrap="wrap" justifyContent="space-between">
