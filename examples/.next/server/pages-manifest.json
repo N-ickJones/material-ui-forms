@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/simple-form": "pages/simple-form.js",
+  "/": "pages/index.js",
   "/views/form-view-auto": "pages/views/form-view-auto.js"
 }

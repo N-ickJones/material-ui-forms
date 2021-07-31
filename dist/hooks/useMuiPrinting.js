@@ -31,10 +31,10 @@ function useMuiPrinting(paper, margin) {
         let previousLocation = 0;
         for (let i = 0; i < inputRefs.current.length; i++) {
             const element = inputRefs.current[i];
-            const elementTop = element === null || element === void 0 ? void 0 : element.getBoundingClientRect().bottom;
+            const elementBottom = element === null || element === void 0 ? void 0 : element.getBoundingClientRect().bottom;
             let location = 0;
-            if (elementTop) {
-                location = Math.abs(elementTop - containerTop);
+            if (elementBottom) {
+                location = Math.abs(elementBottom - containerTop);
             }
             if (location >= currentPageBottom - props.marginBottom) {
                 //Calculates the minimum between bottom margin and distance to bottom of the page then adds the margin top

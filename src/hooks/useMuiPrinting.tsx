@@ -41,11 +41,11 @@ export function useMuiPrinting(paper?: PaperSize, margin?: PaperMargin): [
 
         for (let i = 0; i < inputRefs.current.length; i++) {
             const element = inputRefs.current[i];
-            const elementTop = element?.getBoundingClientRect().bottom;
+            const elementBottom = element?.getBoundingClientRect().bottom;
 
             let location = 0;
-            if (elementTop) {
-                location = Math.abs(elementTop - containerTop);
+            if (elementBottom) {
+                location = Math.abs(elementBottom - containerTop);
             }
 
             if (location >= currentPageBottom - props.marginBottom) {
