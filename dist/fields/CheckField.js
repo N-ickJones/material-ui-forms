@@ -21,7 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CheckField = void 0;
 const react_1 = __importStar(require("react"));
-const core_1 = require("@material-ui/core");
+const material_1 = require("@mui/material");
 function CheckField(props) {
     const [value, setValue] = react_1.useState(props.value || false);
     function onChange(e, checked) {
@@ -30,7 +30,7 @@ function CheckField(props) {
             setValue(checked);
         }
     }
-    return (react_1.default.createElement(core_1.FormControlLabel, { label: props.label, className: props.labelClassName, style: props.labelStyle, control: react_1.default.createElement(core_1.Checkbox, { className: props.className, style: props.style, name: props.name, checked: value, onChange: onChange, value: props.value }) }));
+    return (react_1.default.createElement(material_1.FormControlLabel, { label: props.label, className: props.labelClassName, style: props.labelStyle, control: react_1.default.createElement(material_1.Checkbox, { className: props.className, style: props.style, name: props.name, checked: value, onChange: onChange, value: props.value }) }));
 }
 exports.CheckField = CheckField;
 //# sourceMappingURL=CheckField.js.map

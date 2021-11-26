@@ -43,12 +43,12 @@ class FormHandler {
                 //@ts-ignore
                 if (object[this.key] !== undefined && functions_1.isValidId(object[this.key])) {
                     //@ts-ignore
-                    if (!await this.update(object[this.key], object)) {
+                    if (!(await this.update(object[this.key], object))) {
                         success = false;
                     }
                 }
                 else {
-                    if (!await this.create(index, object)) {
+                    if (!(await this.create(index, object))) {
                         success = false;
                     }
                 }

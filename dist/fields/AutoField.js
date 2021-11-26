@@ -21,22 +21,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AutoField = void 0;
 const react_1 = __importStar(require("react"));
-const core_1 = require("@material-ui/core");
-const lab_1 = require("@material-ui/lab");
+const material_1 = require("@mui/material");
+const material_2 = require("@mui/material");
+const useAutocomplete_1 = require("@mui/material/useAutocomplete");
 function AutoField(props) {
     const [choiceValue, setChoiceValue] = react_1.useState(props.options ? props.options.find(item => item.value === props.value) : { label: "", value: "" });
     const onChange = (e, changeValue, reason) => {
         if (props.locked)
             return;
         switch (reason) {
-            case "create-option":
+            case "createOption":
                 console.log('Autocomplete create-option not implemented');
                 break;
-            case "select-option":
+            case "selectOption":
                 props.onChange(e, props.name, (changeValue === null || changeValue === void 0 ? void 0 : changeValue.value) || "");
                 changeValue && setChoiceValue(changeValue);
                 break;
-            case "remove-option":
+            case "removeOption":
                 console.log('Autocomplete remove-option not implemented');
                 break;
             case "clear":
@@ -54,7 +55,7 @@ function AutoField(props) {
         else
             return value.value === option.value;
     };
-    return (react_1.default.createElement(lab_1.Autocomplete, { className: props.className, style: props.style, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, getOptionSelected: handleOptionSelected, onChange: onChange, value: choiceValue || { label: "", value: "" }, getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(core_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required }))), filterOptions: lab_1.createFilterOptions({
+    return (react_1.default.createElement(material_2.Autocomplete, { className: props.className, style: props.style, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, fullWidth: true, isOptionEqualToValue: handleOptionSelected, onChange: onChange, value: choiceValue || { label: "", value: "" }, getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(material_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required }))), filterOptions: useAutocomplete_1.createFilterOptions({
             ignoreCase: true
         }) }));
 }

@@ -1,6 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Backdrop, Box, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
-import { Lock, LockOpen } from '@material-ui/icons';
+import {
+    Backdrop,
+    Box,
+    Button,
+    CircularProgress,
+    Divider,
+    Grid,
+    Paper,
+    Theme,
+    Typography,
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import { Lock, LockOpen } from '@mui/icons-material';
 import { decrypt, encrypt, formIsValid, uuidv4 } from '../functions/functions';
 import { IFormProps } from '../interfaces/IFormProps';
 import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
@@ -90,7 +102,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
             }
             else {
                 setLoadServer(true);
-                props.handleLoad && await props.handleLoad(false);
+                props.handleLoad && (await props.handleLoad(false));
                 setLoadServer(false);
             }
         }
@@ -136,7 +148,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
     const handleChanges = async () => {
         if (locked) return;
 
-        if (props.handleSaveChanges && await props.handleSaveChanges()) {
+        if (props.handleSaveChanges && (await props.handleSaveChanges())) {
             snackbar.setAlert({ ...snackbar.success, message: "Successfully saved your changes locally." });
             setPendingChanges(false);
         }
@@ -150,7 +162,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
             var cipherText = localStorage.getItem(localStorageKey);
             if (cipherText !== null) {
                 const plainText = decrypt(cipherText, localStorageKey);
-                if (props.handleLoad && await props.handleLoad(true, JSON.parse(plainText))) {
+                if (props.handleLoad && (await props.handleLoad(true, JSON.parse(plainText)))) {
                     snackbar.setAlert({ ...snackbar.success, message: "Successfully loaded previous changes." })
                 }
                 else {
@@ -161,7 +173,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
         else {
             clearLocalStorage();
             setLoadServer(true);
-            if (props.handleLoad && await props.handleLoad(false)) {
+            if (props.handleLoad && (await props.handleLoad(false))) {
                 snackbar.setAlert({ ...snackbar.success, message: "Successfully loaded your information." })
             }
             else {
@@ -190,7 +202,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
         }
 
         if (props.handleSubmit) {
-            if (!await formIsValid()) {
+            if (!(await formIsValid())) {
                 snackbar.setAlert({ ...snackbar.error, message: "A validation error was detected in the form" })
             }
             else if (await props.handleSubmit()) {
@@ -205,7 +217,7 @@ export function FormView<T>(props: IFormViewProps<T>) {
 
                     //Let setPendingCHanges Fire
                     setTimeout(async () => {
-                        props.onNext && await props.onNext();
+                        props.onNext && (await props.onNext());
                     })
                 }
             }

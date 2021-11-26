@@ -54,12 +54,12 @@ export class FormHandler<T> implements IFormHandler<T> {
       //@ts-ignore
       if (object[this.key] !== undefined && isValidId(object[this.key])) {
         //@ts-ignore
-        if (!await this.update(object[this.key], object)) {
+        if (!(await this.update(object[this.key], object))) {
           success = false;
         }
       }
       else {
-        if (!await this.create(index, object)) {
+        if (!(await this.create(index, object))) {
           success = false;
         }
       }

@@ -1,4 +1,4 @@
-import { SnackbarOrigin } from "@material-ui/core";
+import { SnackbarOrigin } from "@mui/material";
 import React from "react";
 import { AlertState } from "../types/types";
 export declare function SnackBarComponent(autoHideDuration?: number, options?: {

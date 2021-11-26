@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import { TextField } from "@material-ui/core";
-import { Autocomplete, AutocompleteInputChangeReason, createFilterOptions } from "@material-ui/lab";
+import { TextField } from "@mui/material";
+import { Autocomplete } from '@mui/material';
+import { AutocompleteInputChangeReason, createFilterOptions } from '@mui/material/useAutocomplete';
 import { FieldOption, FieldValidator } from "../types/types";
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
 

@@ -18,11 +18,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormViewAuto = void 0;
 const react_1 = __importStar(require("react"));
-const core_1 = require("@material-ui/core");
-const icons_1 = require("@material-ui/icons");
+const material_1 = require("@mui/material");
+const createStyles_1 = __importDefault(require("@mui/styles/createStyles"));
+const makeStyles_1 = __importDefault(require("@mui/styles/makeStyles"));
+const icons_material_1 = require("@mui/icons-material");
 const functions_1 = require("../functions/functions");
 const useWarnIfUnsavedChanges_1 = require("../hooks/useWarnIfUnsavedChanges");
 const AlertDialog_1 = require("../components/AlertDialog");
@@ -30,7 +35,7 @@ const AlertDialogButton_1 = require("../components/AlertDialogButton");
 const components_1 = require("../components");
 const hooks_1 = require("../hooks");
 const SnackBarComponent_1 = require("../components/SnackBarComponent");
-const useStyles = core_1.makeStyles((theme) => core_1.createStyles({
+const useStyles = makeStyles_1.default((theme) => createStyles_1.default({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
@@ -171,7 +176,7 @@ function FormViewAuto(props) {
                 return;
             }
         }
-        if (!await functions_1.formIsValid()) {
+        if (!(await functions_1.formIsValid())) {
             snackbar.setAlert(Object.assign(Object.assign({}, snackbar.error), { message: "A validation error was detected in the form" }));
         }
         else if (await handler.current.submit()) {
@@ -184,7 +189,7 @@ function FormViewAuto(props) {
                 setPendingChanges(false);
                 //Let setPendingCHanges Fire
                 setTimeout(async () => {
-                    props.onNext && await props.onNext();
+                    props.onNext && (await props.onNext());
                 });
             }
         }
@@ -211,26 +216,26 @@ function FormViewAuto(props) {
         return (react_1.default.createElement(AlertDialog_1.AlertDialog, { id: "loadingLocal", title: "Would you like to load your previous session?", description: "Selecting Cancel will remove your previous session.", color: "primary", backLabel: "Cancel", forwardLabel: "Continue", onSubmit: handleLocalLoad, backOnOutsideClick: false }));
     }
     else if (loadServer) {
-        return (react_1.default.createElement(core_1.Backdrop, { className: classes.backdrop, open: true },
-            react_1.default.createElement(core_1.CircularProgress, { color: "primary" })));
+        return (react_1.default.createElement(material_1.Backdrop, { className: classes.backdrop, open: true },
+            react_1.default.createElement(material_1.CircularProgress, { color: "primary" })));
     }
     else {
         return (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement(snackbar.component, null),
-            react_1.default.createElement(core_1.Box, { p: 1, display: "flex", flexWrap: "wrap", justifyContent: "space-between" },
-                react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "refreshForm", style: props.hideLockButton ? { display: "none" } : {}, label: locked ? react_1.default.createElement(icons_1.Lock, { color: "primary" }) : react_1.default.createElement(icons_1.LockOpen, { color: "primary" }), title: locked ? "Unlock this form" : "Lock this form", description: locked ? "Unlocking this form will allow you to make changes." : "Lock this form to prevent unwanted changes.", color: "primary", backLabel: "Cancel", forwardLabel: locked ? "Unlock" : "Lock", onSubmit: handleLock }),
-                react_1.default.createElement(core_1.Box, { display: "flex" },
+            react_1.default.createElement(material_1.Box, { p: 1, display: "flex", flexWrap: "wrap", justifyContent: "space-between" },
+                react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "refreshForm", style: props.hideLockButton ? { display: "none" } : {}, label: locked ? react_1.default.createElement(icons_material_1.Lock, { color: "primary" }) : react_1.default.createElement(icons_material_1.LockOpen, { color: "primary" }), title: locked ? "Unlock this form" : "Lock this form", description: locked ? "Unlocking this form will allow you to make changes." : "Lock this form to prevent unwanted changes.", color: "primary", backLabel: "Cancel", forwardLabel: locked ? "Unlock" : "Lock", onSubmit: handleLock }),
+                react_1.default.createElement(material_1.Box, { display: "flex" },
                     react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { id: "saveForm", style: locked || props.hideSaveProgressButton ? { display: "none" } : {}, label: "Save Progress", title: "You have selected to save your current process locally.", description: "Warning: If you have local storage disabled then your changes \r\n                                will not be saved and deleting your local storage will erase this data.", color: "primary", backLabel: "Cancel", forwardLabel: "Save Locally", onSubmit: handleLocalChanges }),
-                    react_1.default.createElement(core_1.Box, { ml: 1 },
+                    react_1.default.createElement(material_1.Box, { ml: 1 },
                         react_1.default.createElement(components_1.PrintButton, { style: locked || props.hidePrintButton ? { display: "none" } : {}, displayPrint: displayPrint })))),
-            react_1.default.createElement(core_1.Paper, { ref: printComponentRef, style: printMode ? paperStyle : {} },
-                react_1.default.createElement(core_1.Box, { p: printMode ? 0 : 3 },
-                    react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
-                        react_1.default.createElement(core_1.Typography, { variant: "h3", align: "center" }, props.title)),
-                    react_1.default.createElement(core_1.Box, { width: "100%", my: 3 },
-                        react_1.default.createElement(core_1.Divider, null)),
-                    react_1.default.createElement(core_1.Grid, { container: true, spacing: 3 },
-                        react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
+            react_1.default.createElement(material_1.Paper, { ref: printComponentRef, style: printMode ? paperStyle : {} },
+                react_1.default.createElement(material_1.Box, { p: printMode ? 0 : 3 },
+                    react_1.default.createElement(material_1.Grid, { item: true, xs: 12 },
+                        react_1.default.createElement(material_1.Typography, { variant: "h3", align: "center" }, props.title)),
+                    react_1.default.createElement(material_1.Box, { width: "100%", my: 3 },
+                        react_1.default.createElement(material_1.Divider, null)),
+                    react_1.default.createElement(material_1.Grid, { container: true, spacing: 3 },
+                        react_1.default.createElement(material_1.Grid, { item: true, xs: 12 },
                             handler.current.forms && handler.current.forms.map((item, index) => {
                                 const key = handler.current.generateKey(item);
                                 if (props.FormElement) {
@@ -241,13 +246,13 @@ function FormViewAuto(props) {
                                 }
                             }),
                             " "),
-                        react_1.default.createElement(core_1.Grid, { item: true, xs: 12 },
-                            handler.current.forms && handler.current.forms.length < (props.maxNodes ? props.maxNodes : 1) && (react_1.default.createElement(core_1.Grid, { container: true },
-                                react_1.default.createElement(core_1.Button, { className: !locked ? classes.marginLeftAuto : classes.displayNone, variant: "contained", color: "primary", onClick: handler.current.addNew }, "Add New Item"))),
-                            react_1.default.createElement(core_1.Box, { width: "100%", my: 3 },
-                                react_1.default.createElement(core_1.Divider, null))),
-                        react_1.default.createElement(core_1.Grid, { item: true, xs: 12, style: locked || props.submitButtonRef ? { display: "none" } : {} },
-                            react_1.default.createElement(core_1.Grid, { container: true },
+                        react_1.default.createElement(material_1.Grid, { item: true, xs: 12 },
+                            handler.current.forms && handler.current.forms.length < (props.maxNodes ? props.maxNodes : 1) && (react_1.default.createElement(material_1.Grid, { container: true },
+                                react_1.default.createElement(material_1.Button, { className: !locked ? classes.marginLeftAuto : classes.displayNone, variant: "contained", color: "primary", onClick: handler.current.addNew }, "Add New Item"))),
+                            react_1.default.createElement(material_1.Box, { width: "100%", my: 3 },
+                                react_1.default.createElement(material_1.Divider, null))),
+                        react_1.default.createElement(material_1.Grid, { item: true, xs: 12, style: locked || props.submitButtonRef ? { display: "none" } : {} },
+                            react_1.default.createElement(material_1.Grid, { container: true },
                                 react_1.default.createElement(AlertDialogButton_1.AlertDialogButton, { submitButtonRef: props.submitButtonRef, id: "saveForm", style: {
                                         display: "flex",
                                         marginLeft: "auto",

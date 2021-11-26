@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Grid, MobileStepper, useTheme } from '@material-ui/core';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { Button, Grid, MobileStepper, useTheme } from '@mui/material';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
 export interface IFormStepperProps {
     steps: number;

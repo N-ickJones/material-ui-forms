@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import { TextField } from "@material-ui/core";
-import { Autocomplete, AutocompleteChangeReason, createFilterOptions } from "@material-ui/lab";
+import { TextField } from "@mui/material";
+import { Autocomplete } from '@mui/material';
+import { AutocompleteChangeReason, createFilterOptions } from '@mui/material/useAutocomplete';
 import { FieldOption } from "../types/types";
 
 export interface IAutoFieldProps {
@@ -29,14 +30,14 @@ export function AutoField(props: IAutoFieldProps) {
     ) => {
         if (props.locked) return;
         switch (reason) {
-            case "create-option":
+            case "createOption":
                 console.log('Autocomplete create-option not implemented')
                 break;
-            case "select-option":
+            case "selectOption":
                 props.onChange(e, props.name, changeValue?.value || "");
                 changeValue && setChoiceValue(changeValue)
                 break;
-            case "remove-option":
+            case "removeOption":
                 console.log('Autocomplete remove-option not implemented')
                 break;
             case "clear":
@@ -63,7 +64,7 @@ export function AutoField(props: IAutoFieldProps) {
             options={props.options ? props.options : []}
             getOptionLabel={(option) => option.label}
             fullWidth
-            getOptionSelected={handleOptionSelected}
+            isOptionEqualToValue={handleOptionSelected}
             onChange={onChange}
             value={choiceValue || { label: "", value: "" }}
             getOptionDisabled={() => props.locked || false}
@@ -79,5 +80,5 @@ export function AutoField(props: IAutoFieldProps) {
                 ignoreCase: true
             })}
         />
-    )
+    );
 }

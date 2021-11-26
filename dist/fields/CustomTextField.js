@@ -21,7 +21,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomTextField = void 0;
 const react_1 = __importStar(require("react"));
-const core_1 = require("@material-ui/core");
+const material_1 = require("@mui/material");
 const useUpdateEffect_1 = require("../hooks/useUpdateEffect");
 function CustomTextField(props) {
     const [value, setValue] = react_1.useState(props.value);
@@ -59,11 +59,11 @@ function CustomTextField(props) {
             setValue(e.target.value);
         }
     }
-    return (react_1.default.createElement(core_1.TextField, { className: props.className, style: props.style, name: props.name, placeholder: props.placeholder || '', variant: props.variant || "outlined", label: props.label, fullWidth: true, value: value || '', onChange: onChange, helperText: error, error: !!error, type: props.type && props.type, autoComplete: props.autoComplete && props.autoComplete, autoFocus: props.autoFocus && props.autoFocus, multiline: props.multiline || false, InputLabelProps: handleShrink(), required: props.required, select: props.select || false },
+    return (react_1.default.createElement(material_1.TextField, { className: props.className, style: props.style, name: props.name, placeholder: props.placeholder || '', variant: props.variant || "outlined", label: props.label, fullWidth: true, value: value || '', onChange: onChange, helperText: error, error: !!error, type: props.type && props.type, autoComplete: props.autoComplete && props.autoComplete, autoFocus: props.autoFocus && props.autoFocus, multiline: props.multiline || false, InputLabelProps: handleShrink(), required: props.required, select: props.select || false },
         props.options && props.options.map((item, id) => {
-            return react_1.default.createElement(core_1.MenuItem, { key: `${item.value}_${id}`, value: item.value }, item.label);
+            return react_1.default.createElement(material_1.MenuItem, { key: `${item.value}_${id}`, value: item.value }, item.label);
         }),
-        props.options && !props.disableSelectNone && react_1.default.createElement(core_1.MenuItem, { value: '' }, 'None')));
+        props.options && !props.disableSelectNone && react_1.default.createElement(material_1.MenuItem, { value: '' }, 'None')));
 }
 exports.CustomTextField = CustomTextField;
 //# sourceMappingURL=CustomTextField.js.map

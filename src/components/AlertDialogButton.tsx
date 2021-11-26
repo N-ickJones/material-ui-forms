@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Grid, PropTypes } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Grid, PropTypes } from '@mui/material';
 
 export interface IAlertDialogButtonProps {
   submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
@@ -41,12 +41,12 @@ export function AlertDialogButton(props: IAlertDialogButtonProps) {
   };
 
   async function handleClose (submit?: boolean) {
-    submit && await handleSubmit();
+    submit && (await handleSubmit());
     setOpen(false);
   };
 
   async function handleSubmit() {
-    props.onSubmit && await props.onSubmit();
+    props.onSubmit && (await props.onSubmit());
   }
 
   return (
@@ -56,7 +56,7 @@ export function AlertDialogButton(props: IAlertDialogButtonProps) {
         className={props.btnClass}
         style={props.btnStyle}
         variant={props.variant || "outlined"} 
-        color={props.color ? props.color : "primary"} 
+        sx={{ color: props.color ? props.color : "primary" }}
         onClick={() => handleClick()}
         disabled={props.disabled}
       >
@@ -77,10 +77,10 @@ export function AlertDialogButton(props: IAlertDialogButtonProps) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose()} color={props.color ? props.color : "primary"}>
+          <Button onClick={() => handleClose()} sx={{ color: props.color ? props.color : "primary" }}>
             {props?.backLabel}
           </Button>
-          <Button onClick={() => handleClose(true)} color={props.color ? props.color : "primary"} autoFocus>
+          <Button onClick={() => handleClose(true)} sx={{ color: props.color ? props.color : "primary" }} autoFocus>
             {props?.forwardLabel}
           </Button>
         </DialogActions>

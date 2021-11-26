@@ -1,6 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Backdrop, Box, Button, CircularProgress, createStyles, Divider, Grid, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
-import { Lock, LockOpen } from '@material-ui/icons';
+import {
+    Backdrop,
+    Box,
+    Button,
+    CircularProgress,
+    Divider,
+    Grid,
+    Paper,
+    Theme,
+    Typography,
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import { Lock, LockOpen } from '@mui/icons-material';
 import { decrypt, encrypt, formIsValid, uuidv4 } from '../functions/functions';
 import { IFormProps } from '../interfaces/IFormProps';
 import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
@@ -185,7 +197,7 @@ export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
             }
         }
 
-        if (!await formIsValid()) {
+        if (!(await formIsValid())) {
             snackbar.setAlert({ ...snackbar.error, message: "A validation error was detected in the form" })
         }
         else if (await handler.current.submit()) {
@@ -200,7 +212,7 @@ export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
 
                 //Let setPendingCHanges Fire
                 setTimeout(async () => {
-                    props.onNext && await props.onNext();
+                    props.onNext && (await props.onNext());
                 })
             }
         }

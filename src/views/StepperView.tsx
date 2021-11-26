@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { FormStepper } from "../components/FormStepper";
 //import { decrypt, encrypt } from "../functions/functions";

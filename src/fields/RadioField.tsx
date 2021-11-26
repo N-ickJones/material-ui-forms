@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { FormControlLabel, FormControl, FormLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControlLabel, FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
 import { FieldOption } from "../types/types";
 
 export interface IRadioFieldProps {

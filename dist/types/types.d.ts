@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { SnackbarOrigin } from "@material-ui/core";
-import { AlertProps } from "@material-ui/lab/Alert";
+import { SnackbarOrigin } from "@mui/material";
+import { AlertProps } from '@mui/material/Alert';
 import { IRepoController } from "../interfaces";
 export declare type AlertState = {
     open: boolean;

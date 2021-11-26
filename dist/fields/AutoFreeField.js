@@ -21,8 +21,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AutoFreeField = void 0;
 const react_1 = __importStar(require("react"));
-const core_1 = require("@material-ui/core");
-const lab_1 = require("@material-ui/lab");
+const material_1 = require("@mui/material");
+const material_2 = require("@mui/material");
+const useAutocomplete_1 = require("@mui/material/useAutocomplete");
 const useUpdateEffect_1 = require("../hooks/useUpdateEffect");
 function AutoFreeField(props) {
     const [value, setValue] = react_1.useState(props.value);
@@ -71,7 +72,7 @@ function AutoFreeField(props) {
                 break;
         }
     }
-    return (react_1.default.createElement(lab_1.Autocomplete, { className: props.className, style: props.style, fullWidth: true, placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(core_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error, className: props.inputClassName, style: props.inputStyle }))), filterOptions: lab_1.createFilterOptions({
+    return (react_1.default.createElement(material_2.Autocomplete, { className: props.className, style: props.style, fullWidth: true, placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(material_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error, className: props.inputClassName, style: props.inputStyle }))), filterOptions: useAutocomplete_1.createFilterOptions({
             ignoreCase: true
         }) }));
 }

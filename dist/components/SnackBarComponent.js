@@ -20,8 +20,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SnackBarComponent = void 0;
-const core_1 = require("@material-ui/core");
-const lab_1 = require("@material-ui/lab");
+const material_1 = require("@mui/material");
+const material_2 = require("@mui/material");
 const react_1 = __importStar(require("react"));
 function SnackBarComponent(autoHideDuration = 4000, options) {
     const [alert, setAlert] = react_1.useState((options === null || options === void 0 ? void 0 : options.initialAlert) || {
@@ -53,8 +53,8 @@ function SnackBarComponent(autoHideDuration = 4000, options) {
         setAlert(Object.assign(Object.assign({}, alert), { open: false }));
     };
     function component() {
-        return (react_1.default.createElement(core_1.Snackbar, { open: alert.open, autoHideDuration: alert.autoHideDuration, onClose: (options === null || options === void 0 ? void 0 : options.handleCloseAlert) || handleCloseAlert, anchorOrigin: alert.origin },
-            react_1.default.createElement(lab_1.Alert, { severity: alert.severity }, alert.message)));
+        return (react_1.default.createElement(material_1.Snackbar, { open: alert.open, autoHideDuration: alert.autoHideDuration, onClose: (options === null || options === void 0 ? void 0 : options.handleCloseAlert) || handleCloseAlert, anchorOrigin: alert.origin },
+            react_1.default.createElement(material_2.Alert, { severity: alert.severity }, alert.message)));
     }
     return {
         component: component,

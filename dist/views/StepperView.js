@@ -20,7 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StepperView = void 0;
-const core_1 = require("@material-ui/core");
+const material_1 = require("@mui/material");
 const react_1 = __importStar(require("react"));
 const FormStepper_1 = require("../components/FormStepper");
 function StepperView(props) {
@@ -68,7 +68,7 @@ function StepperView(props) {
             }));
         }
         else {
-            return (react_1.default.createElement(core_1.Typography, null, "Form Not Found"));
+            return (react_1.default.createElement(material_1.Typography, null, "Form Not Found"));
         }
     }
     return (react_1.default.createElement(FormStepper_1.FormStepper, { steps: props.formsList.length, activeStep: activeStep, handleNext: handleNext, handleBack: handleBack, activeForm: react_1.default.createElement(ActiveForm, null), hideDotsStepper: props.hideDotsStepper, className: props.className, style: props.style, upperClassName: props.upperClassName, upperStyle: props.upperStyle, lowerClassName: props.lowerClassName, lowerStyle: props.lowerStyle }));

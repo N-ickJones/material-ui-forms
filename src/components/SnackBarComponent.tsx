@@ -1,5 +1,6 @@
-import { Snackbar, SnackbarOrigin } from "@material-ui/core";
-import { Alert, AlertProps } from "@material-ui/lab";
+import { Snackbar, SnackbarOrigin } from "@mui/material";
+import { Alert } from '@mui/material';
+import { AlertProps } from '@mui/lab';
 import React, { useState } from "react";
 import { AlertState } from "../types/types";
 
