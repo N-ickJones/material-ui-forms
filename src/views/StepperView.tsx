@@ -1,8 +1,6 @@
 import { Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
-import { FormStepper } from "../components/FormStepper";
-//import { decrypt, encrypt } from "../functions/functions";
-import { IStepperViewProps } from "../interfaces/IStepperViewProps";
+import React, { useState, useRef } from "react";
+import { FormStepper, IStepperViewProps } from "..";
 
 export function StepperView(props: IStepperViewProps) {
     const [activeStep, setActiveStep] = useState(0);

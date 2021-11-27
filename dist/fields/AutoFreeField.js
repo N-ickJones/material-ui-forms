@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -20,19 +31,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AutoFreeField = void 0;
-const react_1 = __importStar(require("react"));
-const material_1 = require("@mui/material");
-const material_2 = require("@mui/material");
-const useAutocomplete_1 = require("@mui/material/useAutocomplete");
-const useUpdateEffect_1 = require("../hooks/useUpdateEffect");
+var material_1 = require("@mui/material");
+var react_1 = __importStar(require("react"));
+var useUpdateEffect_1 = require("../hooks/useUpdateEffect");
 function AutoFreeField(props) {
-    const [value, setValue] = react_1.useState(props.value);
-    const [error, setError] = react_1.useState("");
-    useUpdateEffect_1.useUpdateEffect(() => {
+    var _a = react_1.useState(props.value), value = _a[0], setValue = _a[1];
+    var _b = react_1.useState(""), error = _b[0], setError = _b[1];
+    useUpdateEffect_1.useUpdateEffect(function () {
         validate();
     }, [value]);
     function validate() {
-        const error = runValidation();
+        var error = runValidation();
         if (error)
             setError(error);
         else if (error !== "")
@@ -41,14 +50,14 @@ function AutoFreeField(props) {
     function runValidation() {
         if (!props.validators)
             return null;
-        for (let i = 0; i < props.validators.length; i++) {
+        for (var i = 0; i < props.validators.length; i++) {
             if (!props.validators[i].pattern.test(value || ''))
                 return props.validators[i].message;
         }
         return null;
     }
     //Without Initial Load Check the value will be set to blank;
-    const [initialLoad, setInitLoad] = react_1.useState(false);
+    var _c = react_1.useState(false), initialLoad = _c[0], setInitLoad = _c[1];
     function onInputChange(event, inputValue, reason) {
         if (props.locked)
             return;
@@ -72,7 +81,7 @@ function AutoFreeField(props) {
                 break;
         }
     }
-    return (react_1.default.createElement(material_2.Autocomplete, { className: props.className, style: props.style, fullWidth: true, placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: (option) => option.label, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: () => props.locked || false, renderInput: (params) => (react_1.default.createElement(material_1.TextField, Object.assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: Object.assign(Object.assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error, className: props.inputClassName, style: props.inputStyle }))), filterOptions: useAutocomplete_1.createFilterOptions({
+    return (react_1.default.createElement(material_1.Autocomplete, { className: props.className, style: props.style, fullWidth: true, placeholder: props.placeholder, options: props.options ? props.options : [], getOptionLabel: function (option) { return option.label; }, freeSolo: true, onInputChange: onInputChange, inputValue: value || "", getOptionDisabled: function () { return props.locked || false; }, renderInput: function (params) { return (react_1.default.createElement(material_1.TextField, __assign({}, params, { label: props.label, variant: props.variant || "outlined", inputProps: __assign(__assign({}, params.inputProps), { autoComplete: 'new-password' }), required: props.required, helperText: error, error: !!error, className: props.inputClassName, style: props.inputStyle }))); }, filterOptions: material_1.createFilterOptions({
             ignoreCase: true
         }) }));
 }

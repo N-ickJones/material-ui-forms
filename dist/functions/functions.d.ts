@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from "react";
-import { PaperSize } from "../types/types";
+import { ChangeEvent } from "react";
+import { PaperSize } from "..";
 export declare function getRandomInt(min: number, max: number): number;
 export declare function sleep(milliseconds: number): Promise<unknown>;
 export declare function dateConvert(date?: string): string | undefined;

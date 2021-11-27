@@ -1,5 +1,5 @@
 import React from "react";
-import { BreakPoint } from "../types/types";
+import { BreakPoint } from "..";
 export interface IViewField {
     type?: string;
     shrink?: boolean;

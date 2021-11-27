@@ -1,5 +1,5 @@
-import React from 'react';
-import { PropTypes } from '@mui/material';
+import { PropTypes } from "@mui/material";
+import React from "react";
 export interface IAlertDialogProps {
     onSubmit: (submit?: boolean) => void;
     id?: string;

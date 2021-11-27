@@ -1,7 +1,6 @@
+import { Grid, TextField } from "@mui/material";
 import React from "react";
-import Grid from "@mui/material/Grid/Grid";
-import TextField from "@mui/material/TextField/TextField";
-import { BreakPoint } from "../types/types";
+import { BreakPoint } from "..";
 
 export interface IViewField {
     type?: string;

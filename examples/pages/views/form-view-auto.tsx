@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import { FormViewAuto, FormHandler, IFormViewProps } from 'material-ui-forms';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { ResidencesController } from '../../controllers/ResidenceController';
 import Residence from '../../models/Residence';
-import Grid from "@mui/material/Grid";
 import { Box, Typography } from "@mui/material";
 import { AlertDialogButton, AutoField, AutoFreeField, countryOptions, CustomTextField, 
     getOrdinal, IFormProps, isZip, residenceOptions, usCityOptions, usStateOptions } from 'material-ui-forms';

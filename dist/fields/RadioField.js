@@ -20,11 +20,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RadioField = void 0;
-const react_1 = __importStar(require("react"));
-const material_1 = require("@mui/material");
+var material_1 = require("@mui/material");
+var react_1 = __importStar(require("react"));
 function RadioField(props) {
-    const [value, setValue] = react_1.useState(props.value || (props.options && props.options[0].value));
-    const onChange = (e, value) => {
+    var _a = react_1.useState(props.value || (props.options && props.options[0].value)), value = _a[0], setValue = _a[1];
+    var onChange = function (e, value) {
         if (!props.locked) {
             props.onChange(e, e.target.name, value);
             setValue(value);
@@ -32,8 +32,8 @@ function RadioField(props) {
     };
     return (react_1.default.createElement(material_1.FormControl, { component: "fieldset", variant: props.variant || "outlined", fullWidth: true, className: props.outerClassName, style: props.outerStyle },
         react_1.default.createElement(material_1.FormLabel, { component: "legend", className: props.labelClassName, style: props.labelStyle }, props.label),
-        react_1.default.createElement(material_1.RadioGroup, { "aria-label": props.name, name: props.name, value: value, onChange: onChange, row: props.row, className: props.groupClassName, style: props.groupStyle }, props.options && props.options.map((item, id) => {
-            return (react_1.default.createElement(material_1.FormControlLabel, { key: `${item.value}_${id}`, value: item.value, control: react_1.default.createElement(material_1.Radio, null), label: item.label, className: props.className, style: props.style }));
+        react_1.default.createElement(material_1.RadioGroup, { "aria-label": props.name, name: props.name, value: value, onChange: onChange, row: props.row, className: props.groupClassName, style: props.groupStyle }, props.options && props.options.map(function (item, id) {
+            return (react_1.default.createElement(material_1.FormControlLabel, { key: item.value + "_" + id, value: item.value, control: react_1.default.createElement(material_1.Radio, null), label: item.label, className: props.className, style: props.style }));
         }))));
 }
 exports.RadioField = RadioField;

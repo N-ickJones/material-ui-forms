@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import Grid from "@mui/material/Grid";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { AlertDialogButton, AutoField, AutoFreeField, countryOptions, CustomTextField, 
     getOrdinal, IFormProps, isZip, residenceOptions, usCityOptions, usStateOptions } from 'material-ui-forms';
 import Residence from '../../models/Residence';

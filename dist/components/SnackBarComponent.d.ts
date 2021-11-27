@@ -1,6 +1,6 @@
 import { SnackbarOrigin } from "@mui/material";
 import React from "react";
-import { AlertState } from "../types/types";
+import { AlertState } from "..";
 export declare function SnackBarComponent(autoHideDuration?: number, options?: {
     initialAlert?: AlertState;
     handleCloseAlert?: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void;
@@ -11,13 +11,13 @@ export declare function SnackBarComponent(autoHideDuration?: number, options?: {
     error: {
         open: boolean;
         autoHideDuration: number;
-        severity: "success" | "info" | "warning" | "error" | undefined;
+        severity: "error" | "success" | "info" | "warning" | undefined;
         origin: SnackbarOrigin;
     };
     success: {
         open: boolean;
         autoHideDuration: number;
-        severity: "success" | "info" | "warning" | "error" | undefined;
+        severity: "error" | "success" | "info" | "warning" | undefined;
         origin: SnackbarOrigin;
     };
 };

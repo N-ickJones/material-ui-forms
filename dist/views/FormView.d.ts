@@ -1,5 +1,5 @@
-import React from 'react';
-import { IFormProps } from '../interfaces/IFormProps';
+import React from "react";
+import { IFormProps } from "..";
 export interface IFormViewProps<T> {
     title?: string;
     forms?: T[];

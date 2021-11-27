@@ -1,8 +1,7 @@
+import { Autocomplete, AutocompleteChangeReason, createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
-import { TextField } from "@mui/material";
-import { Autocomplete } from '@mui/material';
-import { AutocompleteChangeReason, createFilterOptions } from '@mui/material/useAutocomplete';
-import { FieldOption } from "../types/types";
+import { FieldOption } from "..";
+
 
 export interface IAutoFieldProps {
     name: string;

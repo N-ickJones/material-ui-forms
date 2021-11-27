@@ -1,5 +1,5 @@
-import React from 'react';
-import { PropTypes } from '@mui/material';
+import { PropTypes } from "@mui/material";
+import React from "react";
 export interface IAlertDialogButtonProps {
     submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
     onSubmit?: () => Promise<void>;

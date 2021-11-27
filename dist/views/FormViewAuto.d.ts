@@ -1,6 +1,5 @@
-import React from 'react';
-import { IFormProps } from '../interfaces/IFormProps';
-import { FormHandler } from '../handlers/FormHandler';
+import React from "react";
+import { IFormProps, FormHandler } from "..";
 export interface IFormViewAutoProps<T> {
     title?: string;
     defaultLocked?: boolean;

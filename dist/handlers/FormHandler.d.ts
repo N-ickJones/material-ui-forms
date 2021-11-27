@@ -1,5 +1,4 @@
-import { IFormHandler } from "../interfaces/IFormHandler";
-import { FormArgs } from "../types/types";
+import { IFormHandler, FormArgs } from "..";
 export declare class FormHandler<T> implements IFormHandler<T> {
     constructor(args: FormArgs<T>);
     forms: T[];

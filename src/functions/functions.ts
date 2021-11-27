@@ -1,7 +1,6 @@
 import { AES, enc } from "crypto-js";
-import React, { ChangeEvent } from "react";
-import { a4 } from "../options/paperOptions";
-import { PaperSize } from "../types/types";
+import { ChangeEvent } from "react";
+import { PaperSize, a4 } from "..";
 
 export function getRandomInt(min: number, max: number): number {
     min = Math.ceil(min);

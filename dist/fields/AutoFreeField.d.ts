@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { FieldOption, FieldValidator } from "../types/types";
+import { FieldOption, FieldValidator } from "..";
 export interface IAutoFreeFieldProps {
     name: string;
     value: string | undefined;

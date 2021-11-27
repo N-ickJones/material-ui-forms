@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Grid, PropTypes } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, PropTypes } from "@mui/material";
+import React, { useState } from "react";
 
 export interface IAlertDialogButtonProps {
   submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;

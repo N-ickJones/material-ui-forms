@@ -1,27 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import {
-    Backdrop,
-    Box,
-    Button,
-    CircularProgress,
-    Divider,
-    Grid,
-    Paper,
-    Theme,
-    Typography,
-} from '@mui/material';
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { IFormProps, FormHandler, uuidv4, SnackBarComponent, useWarnIfUnsavedChanges, useMuiPrinting, decrypt, encrypt, formIsValid, AlertDialog, AlertDialogButton, PrintButton } from "..";
+import { Lock, LockOpen } from "@mui/icons-material";
+import { Backdrop, CircularProgress, Box, Paper, Grid, Typography, Divider, Button, Theme } from "@mui/material";
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { Lock, LockOpen } from '@mui/icons-material';
-import { decrypt, encrypt, formIsValid, uuidv4 } from '../functions/functions';
-import { IFormProps } from '../interfaces/IFormProps';
-import { useWarnIfUnsavedChanges } from '../hooks/useWarnIfUnsavedChanges';
-import { AlertDialog } from '../components/AlertDialog';
-import { AlertDialogButton } from '../components/AlertDialogButton';
-import { PrintButton } from '../components';
-import { useMuiPrinting } from '../hooks';
-import { SnackBarComponent } from '../components/SnackBarComponent';
-import { FormHandler } from '../handlers/FormHandler';
 
 export interface IFormViewAutoProps<T> {
     title?: string;

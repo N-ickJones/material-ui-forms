@@ -20,10 +20,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CheckField = void 0;
-const react_1 = __importStar(require("react"));
-const material_1 = require("@mui/material");
+var material_1 = require("@mui/material");
+var react_1 = __importStar(require("react"));
 function CheckField(props) {
-    const [value, setValue] = react_1.useState(props.value || false);
+    var _a = react_1.useState(props.value || false), value = _a[0], setValue = _a[1];
     function onChange(e, checked) {
         if (!props.locked) {
             props.onChange(e, e.target.name, checked);

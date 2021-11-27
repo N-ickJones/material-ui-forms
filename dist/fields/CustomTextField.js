@@ -20,13 +20,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomTextField = void 0;
-const react_1 = __importStar(require("react"));
-const material_1 = require("@mui/material");
-const useUpdateEffect_1 = require("../hooks/useUpdateEffect");
+var material_1 = require("@mui/material");
+var react_1 = __importStar(require("react"));
+var useUpdateEffect_1 = require("../hooks/useUpdateEffect");
 function CustomTextField(props) {
-    const [value, setValue] = react_1.useState(props.value);
-    const [error, setError] = react_1.useState("");
-    useUpdateEffect_1.useUpdateEffect(() => {
+    var _a = react_1.useState(props.value), value = _a[0], setValue = _a[1];
+    var _b = react_1.useState(""), error = _b[0], setError = _b[1];
+    useUpdateEffect_1.useUpdateEffect(function () {
         validate();
     }, [value]);
     function handleShrink() {
@@ -38,7 +38,7 @@ function CustomTextField(props) {
         }
     }
     function validate() {
-        const error = runValidation();
+        var error = runValidation();
         if (error)
             setError(error);
         else if (error !== "")
@@ -47,7 +47,7 @@ function CustomTextField(props) {
     function runValidation() {
         if (!props.validators)
             return null;
-        for (let i = 0; i < props.validators.length; i++) {
+        for (var i = 0; i < props.validators.length; i++) {
             if (!props.validators[i].pattern.test(value || ''))
                 return props.validators[i].message;
         }
@@ -60,8 +60,8 @@ function CustomTextField(props) {
         }
     }
     return (react_1.default.createElement(material_1.TextField, { className: props.className, style: props.style, name: props.name, placeholder: props.placeholder || '', variant: props.variant || "outlined", label: props.label, fullWidth: true, value: value || '', onChange: onChange, helperText: error, error: !!error, type: props.type && props.type, autoComplete: props.autoComplete && props.autoComplete, autoFocus: props.autoFocus && props.autoFocus, multiline: props.multiline || false, InputLabelProps: handleShrink(), required: props.required, select: props.select || false },
-        props.options && props.options.map((item, id) => {
-            return react_1.default.createElement(material_1.MenuItem, { key: `${item.value}_${id}`, value: item.value }, item.label);
+        props.options && props.options.map(function (item, id) {
+            return react_1.default.createElement(material_1.MenuItem, { key: item.value + "_" + id, value: item.value }, item.label);
         }),
         props.options && !props.disableSelectNone && react_1.default.createElement(material_1.MenuItem, { value: '' }, 'None')));
 }

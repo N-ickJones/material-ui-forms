@@ -1,8 +1,6 @@
-import { Snackbar, SnackbarOrigin } from "@mui/material";
-import { Alert } from '@mui/material';
-import { AlertProps } from '@mui/lab';
+import { Alert, AlertProps, Snackbar, SnackbarOrigin } from "@mui/material";
 import React, { useState } from "react";
-import { AlertState } from "../types/types";
+import { AlertState } from "..";
 
 export function SnackBarComponent(autoHideDuration = 4000, options?: {
   initialAlert?: AlertState,

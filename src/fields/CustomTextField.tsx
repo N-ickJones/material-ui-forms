@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
 import { MenuItem, TextField } from "@mui/material";
-import { FieldOption, FieldValidator } from "../types/types";
+import React, { ChangeEvent, useState } from "react";
+import { FieldValidator, FieldOption } from "..";
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
 
 export interface ICustomTextFieldProps {

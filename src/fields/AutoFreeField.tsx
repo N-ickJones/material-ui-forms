@@ -1,8 +1,6 @@
+import { Autocomplete, AutocompleteInputChangeReason, createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
-import { TextField } from "@mui/material";
-import { Autocomplete } from '@mui/material';
-import { AutocompleteInputChangeReason, createFilterOptions } from '@mui/material/useAutocomplete';
-import { FieldOption, FieldValidator } from "../types/types";
+import { FieldOption, FieldValidator } from "..";
 import { useUpdateEffect } from "../hooks/useUpdateEffect";
 
 export interface IAutoFreeFieldProps {

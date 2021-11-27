@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { useReactToPrint } from 'react-to-print';
-import { getPaperHeight, getPaperWidth, marginToPixels, PageBreakDiv, sleep } from '../functions/functions';
-import { a4 } from '../options/paperOptions';
-import { PaperMargin, PaperSize } from '../types/types';
+import { useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import { PaperSize, PaperMargin, sleep, a4 } from "..";
+import { PageBreakDiv, getPaperWidth, getPaperHeight, marginToPixels } from "../functions/functions";
 
 
 export function useMuiPrinting(paper?: PaperSize, margin?: PaperMargin): [

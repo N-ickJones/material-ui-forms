@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { FieldOption } from "../types/types";
+import { FieldOption } from "..";
 export interface IAutoFieldProps {
     name: string;
     value: string | undefined;

@@ -1,29 +1,37 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [ "dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "jsx": "preserve",
-
-    "outDir": "./dist",
-    "declaration": true,
     "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "declaration": true,
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
   },
-  "include": ["src", "src/hooks/useMuiPrinting.tsx"],
-  "exclude": ["node_modules", "examples",
+  "include": [
+    "src"
+, "src/hooks/useMuiPrinting.tsx"  ],
+  "exclude": [
+    "node_modules",
+    "app",
+    "examples",
   ]
 }

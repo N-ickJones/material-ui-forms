@@ -1,7 +1,4 @@
-import { isValidId } from "../functions/functions";
-import { IFormHandler } from "../interfaces/IFormHandler";
-import { IRepoController } from "../interfaces/IRepoController";
-import { FormArgs } from "../types/types";
+import { IFormHandler, FormArgs, IRepoController, isValidId } from "..";
 
 export class FormHandler<T> implements IFormHandler<T> {
   constructor(args: FormArgs<T>) {

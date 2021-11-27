@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
 import { FormControlLabel, Switch } from "@mui/material";
+import React, { ChangeEvent, useState } from "react";
+
 
 export interface ISwitchFieldProps {
     name: string;

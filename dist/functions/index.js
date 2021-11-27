@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onChange = exports.formIsValid = exports.getOrdinal = exports.decrypt = exports.encrypt = exports.uuidv4 = exports.isValidId = exports.dateConvertVerbose = exports.dateConvert = exports.sleep = exports.getRandomInt = void 0;
-const functions_1 = require("./functions");
+var functions_1 = require("./functions");
 Object.defineProperty(exports, "dateConvert", { enumerable: true, get: function () { return functions_1.dateConvert; } });
 Object.defineProperty(exports, "dateConvertVerbose", { enumerable: true, get: function () { return functions_1.dateConvertVerbose; } });
 Object.defineProperty(exports, "decrypt", { enumerable: true, get: function () { return functions_1.decrypt; } });

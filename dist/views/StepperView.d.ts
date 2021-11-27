@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import { IStepperViewProps } from "../interfaces/IStepperViewProps";
+import { IStepperViewProps } from "..";
 export declare function StepperView(props: IStepperViewProps): JSX.Element;

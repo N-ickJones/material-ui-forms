@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -20,17 +31,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SnackBarComponent = void 0;
-const material_1 = require("@mui/material");
-const material_2 = require("@mui/material");
-const react_1 = __importStar(require("react"));
-function SnackBarComponent(autoHideDuration = 4000, options) {
-    const [alert, setAlert] = react_1.useState((options === null || options === void 0 ? void 0 : options.initialAlert) || {
+var material_1 = require("@mui/material");
+var react_1 = __importStar(require("react"));
+function SnackBarComponent(autoHideDuration, options) {
+    if (autoHideDuration === void 0) { autoHideDuration = 4000; }
+    var _a = react_1.useState((options === null || options === void 0 ? void 0 : options.initialAlert) || {
         open: false,
         message: "",
         autoHideDuration: autoHideDuration,
         origin: { vertical: "bottom", horizontal: "right" }
-    });
-    const error = {
+    }), alert = _a[0], setAlert = _a[1];
+    var error = {
         open: true,
         autoHideDuration: autoHideDuration,
         severity: "error",
@@ -38,7 +49,7 @@ function SnackBarComponent(autoHideDuration = 4000, options) {
             vertical: "bottom", horizontal: "left"
         }
     };
-    const success = {
+    var success = {
         open: true,
         autoHideDuration: autoHideDuration,
         severity: "success",
@@ -46,15 +57,15 @@ function SnackBarComponent(autoHideDuration = 4000, options) {
             vertical: "bottom", horizontal: "right"
         }
     };
-    const handleCloseAlert = (event, reason) => {
+    var handleCloseAlert = function (event, reason) {
         if (reason === 'clickaway') {
             return;
         }
-        setAlert(Object.assign(Object.assign({}, alert), { open: false }));
+        setAlert(__assign(__assign({}, alert), { open: false }));
     };
     function component() {
         return (react_1.default.createElement(material_1.Snackbar, { open: alert.open, autoHideDuration: alert.autoHideDuration, onClose: (options === null || options === void 0 ? void 0 : options.handleCloseAlert) || handleCloseAlert, anchorOrigin: alert.origin },
-            react_1.default.createElement(material_2.Alert, { severity: alert.severity }, alert.message)));
+            react_1.default.createElement(material_1.Alert, { severity: alert.severity }, alert.message)));
     }
     return {
         component: component,
