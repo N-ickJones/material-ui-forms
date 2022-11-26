@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../node_peer_deps/is-extendable/index.js"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,YAAY,CAAC;AAEb,MAAM,CAAC,OAAO,GAAG,SAAS,YAAY,CAAC,GAAG;IACxC,OAAO,OAAO,GAAG,KAAK,WAAW,IAAI,GAAG,KAAK,IAAI;WAC5C,CAAC,OAAO,GAAG,KAAK,QAAQ,IAAI,OAAO,GAAG,KAAK,UAAU,CAAC,CAAC;AAC9D,CAAC,CAAC"}

@@ -25,7 +25,12 @@
     "url": "git+https://github.com/N-ickJones/material-ui-forms.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:esm && npm run build:cjs",
+    "watch": "npm run watch:esm && npm run watch:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "watch:esm": "tsc -w",
+    "watch:cjs": "tsc -w --module commonjs --outDir lib/cjs"
   },
   "version": "2.0.2",
   "peerDependencies": {
@@ -53,11 +58,10 @@
     "@types/react": "^17.0.37",
     "cross-env": "^7.0.3",
     "next": "^11.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "react-to-print": "^2.12.3"
   },
   "dependencies": {
-    "crypto-js": "^4.1.1"
+    "crypto-js": "^4.1.1",
+    "typescript": "^4.9.3"
   }
 }
