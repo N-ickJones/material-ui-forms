@@ -17,6 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "noEmit": false,
+    "isolatedModules": false,
     
     "allowJs": true,
     "strict": true,
@@ -24,7 +25,6 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "strictNullChecks": true,
   },
   "include": ["src"],

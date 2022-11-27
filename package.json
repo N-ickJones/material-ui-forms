@@ -5,7 +5,6 @@
   "bugs": {
     "url": "https://github.com/N-ickJones/material-ui-forms/issues"
   },
-  "bundleDependencies": [],
   "deprecated": false,
   "description": "A library that makes using material ui components easier and quick to use. Contains common use cases.",
   "homepage": "https://github.com/N-ickJones/material-ui-forms#readme",
@@ -27,42 +26,49 @@
   },
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
-    "watch": "npm run watch:esm && npm run watch:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "test": "jest testing --config jest.config.ts",
+    "watch": "npm run watch:esm && npm run watch:cjs",
     "watch:esm": "tsc -w",
     "watch:cjs": "tsc -w --module commonjs --outDir lib/cjs"
   },
-  "version": "2.0.3",
+  "version": "3.0.0",
   "peerDependencies": {
     "@emotion/react": ">=11.10.5",
     "@emotion/styled": ">=11.10.5",
     "@mui/icons-material": ">=5.10.15",
     "@mui/lab": ">=5.0.0-alpha.109",
     "@mui/material": ">=5.10.15",
-    "@types/crypto-js": ">=4.0.2",
-    "next": ">=13.0.5",
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0",
     "react-to-print": ">=2.12.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.15",
     "@mui/lab": "^5.0.0-alpha.109",
     "@mui/material": "^5.10.15",
     "@types/crypto-js": "^4.0.2",
+    "@types/jest": "^29.2.3",
     "@types/next": "^9.0.0",
     "@types/react": "^18.0.25",
+    "babel-jest": "^29.3.1",
     "cross-env": "^7.0.3",
+    "jest": "^29.3.1",
     "next": "^13.0.5",
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0",
-    "react-to-print": "^2.12.3"
+    "react-to-print": "^2.12.3",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "crypto-js": "^4.1.1",
-    "typescript": "^4.9.3"
+    "crypto-js": "^4.1.1"
   }
 }

@@ -1,18 +1,14 @@
-/// <reference types="react" />
+import { FormHandler } from "../handlers";
 import { IFormProps } from "./IFormProps";
-export interface IFormViewProps<T> {
+
+export interface IFormViewAutoProps<T> {
     title?: string;
-    forms?: T[];
     defaultLocked?: boolean;
     maxNodes?: number;
     minNodes?: number;
     FormElement?: (props: IFormProps<T>) => JSX.Element;
-    handleLoad?: (local: boolean, data?: T[]) => Promise<boolean>;
-    handleGenerateKey?: (item: T) => string;
-    handleSubmit?: () => Promise<boolean>;
-    handleAddNewItem?: () => Promise<void>;
-    handleSaveChanges?: () => Promise<boolean>;
-    handleDelete?: (index: number) => Promise<boolean>;
+
+    formHandlerRef: React.MutableRefObject<FormHandler<T>>
     onNext?: () => Promise<void>;
     submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
     hideLockButton?: boolean;

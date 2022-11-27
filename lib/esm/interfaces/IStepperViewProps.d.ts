@@ -1,8 +1,8 @@
 /// <reference types="react" />
-import { IFormViewProps } from "./IFormViewProps";
+import { IFormViewProps2 } from "./IFormViewProps2";
 export interface IStepperViewProps {
     defaultLocked?: boolean;
-    formsList: ((props: IFormViewProps) => JSX.Element)[];
+    formsList: ((props: IFormViewProps2) => JSX.Element)[];
     hideDotsStepper?: boolean;
     hideLockButton?: boolean;
     hidePrintButton?: boolean;

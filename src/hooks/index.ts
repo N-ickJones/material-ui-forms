@@ -6,5 +6,5 @@ import { useWarnIfUnsavedChanges } from "./useWarnIfUnsavedChanges";
 export {
     useMuiPrinting,
     useUpdateEffect,
-    useWarnIfUnsavedChanges
+    useWarnIfUnsavedChanges,
 }

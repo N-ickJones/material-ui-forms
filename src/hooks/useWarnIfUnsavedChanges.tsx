@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import Router from 'next/router';
 
-//TODO Need to decouple the router to allow disconntect next and allow multiple routers
 export const useWarnIfUnsavedChanges = (unsavedChanges: boolean) => {
   const message = 'You currently have unsaved changes. Are you sure you want to leave before saving?';
-
   useEffect(() => {
     const routeChangeStart = (url: string) => {
       if (Router.asPath !== url && unsavedChanges && !confirm(message)) {
@@ -32,3 +30,5 @@ export const useWarnIfUnsavedChanges = (unsavedChanges: boolean) => {
     };
   }, [unsavedChanges]);
 };
+
+

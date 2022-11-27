@@ -1,22 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { IFormProps, FormHandler, uuidv4, SnackBarComponent, useWarnIfUnsavedChanges, useMuiPrinting, decrypt, encrypt, formIsValid, AlertDialog, AlertDialogButton, PrintButton } from "..";
+import { uuidv4, SnackBarComponent, useWarnIfUnsavedChanges, useMuiPrinting, decrypt, encrypt, formIsValid, AlertDialog, AlertDialogButton, PrintButton } from "..";
 import { Lock, LockOpen } from "@mui/icons-material";
 import { Backdrop, CircularProgress, Box, Paper, Grid, Typography, Divider, Button, useTheme } from "@mui/material";
-
-export interface IFormViewAutoProps<T> {
-    title?: string;
-    defaultLocked?: boolean;
-    maxNodes?: number;
-    minNodes?: number;
-    FormElement?: (props: IFormProps<T>) => JSX.Element;
-
-    formHandlerRef: React.MutableRefObject<FormHandler<T>>
-    onNext?: () => Promise<void>;
-    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
-    hideLockButton?: boolean;
-    hideSaveProgressButton?: boolean;
-    hidePrintButton?: boolean;
-}
+import { IFormViewAutoProps } from "../interfaces/IFormViewAutoProps";
 
 export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
     const theme = useTheme();

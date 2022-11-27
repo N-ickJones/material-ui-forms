@@ -1,16 +1,3 @@
-import React from "react";
-import { IFormProps, FormHandler } from "..";
-export interface IFormViewAutoProps<T> {
-    title?: string;
-    defaultLocked?: boolean;
-    maxNodes?: number;
-    minNodes?: number;
-    FormElement?: (props: IFormProps<T>) => JSX.Element;
-    formHandlerRef: React.MutableRefObject<FormHandler<T>>;
-    onNext?: () => Promise<void>;
-    submitButtonRef?: React.MutableRefObject<HTMLButtonElement>;
-    hideLockButton?: boolean;
-    hideSaveProgressButton?: boolean;
-    hidePrintButton?: boolean;
-}
+/// <reference types="react" />
+import { IFormViewAutoProps } from "../interfaces/IFormViewAutoProps";
 export declare function FormViewAuto<T>(props: IFormViewAutoProps<T>): JSX.Element;
