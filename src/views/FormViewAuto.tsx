@@ -1,9 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { IFormProps, FormHandler, uuidv4, SnackBarComponent, useWarnIfUnsavedChanges, useMuiPrinting, decrypt, encrypt, formIsValid, AlertDialog, AlertDialogButton, PrintButton } from "..";
 import { Lock, LockOpen } from "@mui/icons-material";
-import { Backdrop, CircularProgress, Box, Paper, Grid, Typography, Divider, Button, Theme } from "@mui/material";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Backdrop, CircularProgress, Box, Paper, Grid, Typography, Divider, Button, useTheme } from "@mui/material";
 
 export interface IFormViewAutoProps<T> {
     title?: string;
@@ -20,42 +18,10 @@ export interface IFormViewAutoProps<T> {
     hidePrintButton?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        backdrop: {
-            zIndex: theme.zIndex.drawer + 1,
-            color: '#fff',
-        },
-        displayNone: {
-            display: "none"
-        },
-        marginOne: {
-            margin: "0.25em"
-        },
-        marginLeftAuto: {
-            marginLeft: "auto",
-        },
-        marginOneLeftAuto: {
-            margin: "0.25em 0.25em 0.25em auto"
-        },
-        paddingThree: {
-            padding: "1em"
-        },
-        marginYThree: {
-            marginTop: "1em",
-            marginBottom: "1em"
-        },
-
-        fullWidth: {
-            width: "100%"
-        }
-    }),
-);
-
 export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
+    const theme = useTheme();
     const handler = props.formHandlerRef;
     const localStorageKey = props.title ? props.title.replace(" ", "") : uuidv4();
-    const classes = useStyles();
     //const printComponentRef = useRef();
     const [locked, setLocked] = useState(
         props.defaultLocked === undefined ? false : (
@@ -237,7 +203,10 @@ export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
     }
     else if (loadServer) {
         return (
-            <Backdrop className={classes.backdrop} open={true}>
+            <Backdrop sx={{
+                zIndex: theme.zIndex.drawer + 1,
+                color: '#fff'
+            }} open={true}>
                 <CircularProgress color="primary" />
             </Backdrop>
         )
@@ -332,7 +301,7 @@ export function FormViewAuto<T>(props: IFormViewAutoProps<T>) {
                                 {handler.current.forms && handler.current.forms.length < (props.maxNodes ? props.maxNodes : 1) && (
                                     <Grid container>
                                         <Button
-                                            className={!locked ? classes.marginLeftAuto : classes.displayNone}
+                                            sx={!locked ? {margin: "0.25em 0.25em 0.25em auto"} : {display: "none"}}
                                             variant="contained"
                                             color="primary"
                                             onClick={handler.current.addNew}

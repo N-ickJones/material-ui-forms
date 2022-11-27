@@ -1,24 +1,13 @@
 import React from "react";
 import Drawer from "@mui/material/Drawer";
-import { Grid, List, Theme } from "@mui/material";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Grid, List} from "@mui/material";
 import { NavItem } from "./drawer/NavItem";
-import { Home, SubdirectoryArrowRight, ViewList } from "@mui/icons-material";
+import { Home, ViewList } from "@mui/icons-material";
 
 export type drawerElement = {
   element: JSX.Element;
   count: number;
 }
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  list: {
-    width: 250
-  },
-  fullList: {
-    width: "auto"
-  }
-}));
 
 export interface IDrawerComponent {
   closeDrawerHandler?: any;
@@ -26,11 +15,10 @@ export interface IDrawerComponent {
 }
 
 export default function DrawerComponent(props: IDrawerComponent) {
-    const classes = useStyles();
     return (
     <Drawer open={props.drawerOpened} onClose={props.closeDrawerHandler}>
         <Grid
-            className={classes.list}
+            sx={{width: 250}}
             role="presentation"
             onClick={props.closeDrawerHandler}
             onKeyDown={props.closeDrawerHandler}

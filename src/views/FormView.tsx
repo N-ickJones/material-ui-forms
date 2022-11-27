@@ -1,9 +1,8 @@
 import { Lock, LockOpen } from "@mui/icons-material";
-import { Backdrop, Box, Button, CircularProgress, Divider, Grid, Paper, Typography, Theme } from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, Divider, Grid, Paper, Typography } from "@mui/material";
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { IFormProps, uuidv4, SnackBarComponent, useWarnIfUnsavedChanges, useMuiPrinting, decrypt, encrypt, formIsValid, AlertDialog, AlertDialogButton, PrintButton } from "..";
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme } from '@mui/material/styles';
 
 export interface IFormViewProps<T> {
     title?: string;
@@ -26,41 +25,9 @@ export interface IFormViewProps<T> {
     hidePrintButton?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        backdrop: {
-            zIndex: theme.zIndex.drawer + 1,
-            color: '#fff',
-        },
-        displayNone: {
-            display: "none"
-        },
-        marginOne: {
-            margin: "0.25em"
-        },
-        marginLeftAuto: {
-            marginLeft: "auto",
-        },
-        marginOneLeftAuto: {
-            margin: "0.25em 0.25em 0.25em auto"
-        },
-        paddingThree: {
-            padding: "1em"
-        },
-        marginYThree: {
-            marginTop: "1em",
-            marginBottom: "1em"
-        },
-        
-        fullWidth: {
-            width: "100%"
-        }
-    }),
-);
-
 export function FormView<T>(props: IFormViewProps<T>) {
+    const theme = useTheme();
     const localStorageKey = props.title ? props.title.replace(" ", "") : uuidv4();
-    const classes = useStyles();
     //const printComponentRef = useRef();
     const [locked, setLocked] = useState(
         props.defaultLocked === undefined ? false : (
@@ -245,7 +212,10 @@ export function FormView<T>(props: IFormViewProps<T>) {
     }
     else if (loadServer) {
         return (
-            <Backdrop className={classes.backdrop} open={true}>
+            <Backdrop sx={{
+                zIndex: theme.zIndex.drawer + 1,
+                color: '#fff'
+            }}  open={true}>
                 <CircularProgress color="primary" />
             </Backdrop>
         )
@@ -334,17 +304,17 @@ export function FormView<T>(props: IFormViewProps<T>) {
                                 })}
                                 {props.forms && props.forms.length < 1 &&
                                     <Grid>
-                                        <Typography align="center" className={classes.paddingThree}>There are currently no forms to edit.</Typography>
+                                        <Typography align="center" sx={{padding: "1em"}}>There are currently no forms to edit.</Typography>
                                     </Grid>
                                 }
-                                {!props.FormElement && <Grid><Typography align="center" className={classes.paddingThree}>Development Error: Form Element is not defined.</Typography></Grid>}
-                                {!props.forms && <Grid><Typography align="center" className={classes.paddingThree}>Development Error: Forms is not defined</Typography></Grid>}
+                                {!props.FormElement && <Grid><Typography align="center" sx={{padding: "1em"}}>Development Error: Form Element is not defined.</Typography></Grid>}
+                                {!props.forms && <Grid><Typography align="center" sx={{padding: "1em"}}>Development Error: Forms is not defined</Typography></Grid>}
                             </Grid>
                             <Grid item xs={12}>
                                 {props.forms && props.forms.length < (props.maxNodes ? props.maxNodes : 1) && (
                                     <Grid container>
                                         <Button
-                                            className={!locked ? classes.marginLeftAuto : classes.displayNone}
+                                            sx={!locked ? {margin: "0.25em 0.25em 0.25em auto"} : {display: "none"}}
                                             variant="contained"
                                             color="primary"
                                             onClick={props.handleAddNewItem}

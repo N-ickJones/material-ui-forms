@@ -1,18 +1,17 @@
 import React from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { CssBaseline, Grid, ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
+import { CssBaseline, Grid, ThemeProvider, StyledEngineProvider } from '@mui/material';
 import Navigation from '../components/navigation/Navigation';
 import theme from '../theme';
 
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
+// declare module '@mui/styles/defaultTheme' {
+//   // eslint-disable-next-line @typescript-eslint/no-empty-interface
+//   interface DefaultTheme extends Theme {}
+// }
 
 export default function App({ Component, pageProps }: AppProps) {
+
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>

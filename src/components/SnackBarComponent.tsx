@@ -1,10 +1,10 @@
-import { Alert, AlertProps, Snackbar, SnackbarOrigin } from "@mui/material";
-import React, { useState } from "react";
+import { Alert, AlertProps, Snackbar, SnackbarCloseReason, SnackbarOrigin } from "@mui/material";
+import React, { SyntheticEvent, useState } from "react";
 import { AlertState } from "..";
 
 export function SnackBarComponent(autoHideDuration = 4000, options?: {
   initialAlert?: AlertState,
-  handleCloseAlert?: (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => void
+  handleCloseAlert?: (event: Event | SyntheticEvent<any, Event>, reason: SnackbarCloseReason) => void
 }) {
   const [alert, setAlert] = useState(options?.initialAlert || {
     open: false,
@@ -31,7 +31,7 @@ export function SnackBarComponent(autoHideDuration = 4000, options?: {
     } as SnackbarOrigin
   };
 
-  const handleCloseAlert = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+  const handleCloseAlert = (event: Event | SyntheticEvent<any, Event>, reason: SnackbarCloseReason) => {
       if (reason === 'clickaway') {
         return;
       }

@@ -78,7 +78,7 @@ export function AutoFreeField(props: IAutoFreeFieldProps) {
             fullWidth
             placeholder={props.placeholder}
             options={props.options ? props.options : []}
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(option) => typeof option === 'string' ? option : option.label}
             freeSolo={true}
             onInputChange={onInputChange}
             inputValue={value || ""}

@@ -10,7 +10,7 @@ export default function Index() {
       </Head>
       <Container maxWidth="lg">
         <Grid container>
-          <Typography></Typography>
+          <Typography>Index</Typography>
         </Grid>
       </Container>
     </Grid>
